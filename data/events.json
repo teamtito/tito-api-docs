@@ -1,0 +1,48 @@
+{
+  "attributes": {
+    "banner-url": {
+      "description": "A link to the event's banner image.",
+      "type": "url"
+    },
+    "currency": {
+      "description": "3 letter ISO currency code e.g. `USD`",
+      "type": "string"
+    },
+    "description": {
+      "description": null,
+      "type": "markdown"
+    },
+    "end-date": {
+      "description": null,
+      "type": "date"
+    },
+    "live": {
+      "description": "Is it visible to the public or not.",
+      "type": "boolean"
+    },
+    "location": {
+      "description": "The location of the event.",
+      "type": "string"
+    },
+    "logo-url": {
+      "description": "A link to the event's logo image.",
+      "type": "url"
+    },
+    "private": {
+      "description": "Is it to be listed on the event's account page or not.",
+      "type": "boolean"
+    },
+    "slug": {
+      "description": null,
+      "type": "string"
+    },
+    "start-date": {
+      "description": null,
+      "type": "date"
+    },
+    "title": {
+      "description": null,
+      "type": "string"
+    }
+  }
+}

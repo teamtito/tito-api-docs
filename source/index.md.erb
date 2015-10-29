@@ -1,0 +1,60 @@
+---
+title: API Reference
+
+language_tabs:
+  - shell
+  - ruby
+
+toc_footers:
+  - <a href='#'>Sign Up for a Developer Key</a>
+  - <a href='http://github.com/tripit/slate'>Documentation Powered by Slate</a>
+
+includes:
+  - events
+  - releases
+
+search: true
+---
+
+# Introduction
+
+Welcome to the Tito API!
+
+You can view code examples in the dark area to the right, and you can switch the programming language of the examples with the tabs in the top right.
+
+# Authentication
+
+> To authorize, use this code:
+
+```ruby
+require 'json'
+require 'net/http'
+require 'uri'
+
+url = URI("https://api.tito.io/...")
+
+http = Net::HTTP.new(url.host, url.port)
+http.use_ssl = true
+http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+
+request = Net::HTTP::Get.new(url)
+request['Accept']        = 'application/vnd.tito.v2'
+request['Authorization'] = 'Token token=secret-api-key'
+request['Content-Type']  = 'application/json'
+
+response = http.request(request)
+puts response.read_body
+```
+
+```shell
+curl --request GET \
+  --url 'https://api.tito.io/...' \
+  --header 'Authorization: Token token=secret-api-key' \
+  --header 'Accept: application/json,application/vnd.tito.v2' \
+```
+
+> Make sure to replace `secret-api-key` with your API key.
+
+Tito uses API keys to allow access to the API. You can find your API key by signing in at [https://api.tito.io](https://https://api.tito.io).
+
+Your API key needs to included in the `Authorization` header so your requests can be authenticated, see the examples to the right:
