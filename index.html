@@ -1,0 +1,1190 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>API Reference</title>
+
+    <link href="stylesheets/screen.css" rel="stylesheet" type="text/css" media="screen" />
+    <link href="stylesheets/print.css" rel="stylesheet" type="text/css" media="print" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+      <script src="javascripts/all.js" type="text/javascript"></script>
+
+      <script>
+        $(function() {
+          setupLanguages(["shell","ruby"]);
+        });
+      </script>
+  </head>
+
+  <body class="index">
+    <a href="#" id="nav-button">
+      <span>
+        NAV
+        <img src="images/navbar.png" />
+      </span>
+    </a>
+    <div class="tocify-wrapper">
+      <img src="images/logo.png" />
+        <div class="lang-selector">
+              <a href="#" data-language-name="shell">shell</a>
+              <a href="#" data-language-name="ruby">ruby</a>
+        </div>
+        <div class="search">
+          <input type="text" class="search" id="input-search" placeholder="Search">
+        </div>
+        <ul class="search-results"></ul>
+      <div id="toc">
+      </div>
+        <ul class="toc-footer">
+            <li><a href='#'>Sign Up for a Developer Key</a></li>
+            <li><a href='http://github.com/tripit/slate'>Documentation Powered by Slate</a></li>
+        </ul>
+    </div>
+    <div class="page-wrapper">
+      <div class="dark-box"></div>
+      <div class="content">
+        <h1 id="introduction">Introduction</h1>
+
+<p>Welcome to the Tito API!</p>
+
+<p>You can view code examples in the dark area to the right, and you can switch the programming language of the examples with the tabs in the top right.</p>
+
+<h1 id="authentication">Authentication</h1>
+
+<blockquote>
+<p>To authorize, use this code:</p>
+</blockquote>
+<pre class="highlight ruby"><code><span class="nb">require</span> <span class="s1">'json'</span>
+<span class="nb">require</span> <span class="s1">'net/http'</span>
+<span class="nb">require</span> <span class="s1">'uri'</span>
+
+<span class="n">url</span> <span class="o">=</span> <span class="no">URI</span><span class="p">(</span><span class="s2">"https://api.tito.io/..."</span><span class="p">)</span>
+
+<span class="n">http</span> <span class="o">=</span> <span class="no">Net</span><span class="o">::</span><span class="no">HTTP</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">url</span><span class="p">.</span><span class="nf">host</span><span class="p">,</span> <span class="n">url</span><span class="p">.</span><span class="nf">port</span><span class="p">)</span>
+<span class="n">http</span><span class="p">.</span><span class="nf">use_ssl</span> <span class="o">=</span> <span class="kp">true</span>
+<span class="n">http</span><span class="p">.</span><span class="nf">verify_mode</span> <span class="o">=</span> <span class="no">OpenSSL</span><span class="o">::</span><span class="no">SSL</span><span class="o">::</span><span class="no">VERIFY_NONE</span>
+
+<span class="n">request</span> <span class="o">=</span> <span class="no">Net</span><span class="o">::</span><span class="no">HTTP</span><span class="o">::</span><span class="no">Get</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+<span class="n">request</span><span class="p">[</span><span class="s1">'Accept'</span><span class="p">]</span>        <span class="o">=</span> <span class="s1">'application/vnd.tito.v2'</span>
+<span class="n">request</span><span class="p">[</span><span class="s1">'Authorization'</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'Token token=secret-api-key'</span>
+<span class="n">request</span><span class="p">[</span><span class="s1">'Content-Type'</span><span class="p">]</span>  <span class="o">=</span> <span class="s1">'application/json'</span>
+
+<span class="n">response</span> <span class="o">=</span> <span class="n">http</span><span class="p">.</span><span class="nf">request</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
+<span class="nb">puts</span> <span class="n">response</span><span class="p">.</span><span class="nf">read_body</span>
+</code></pre>
+<pre class="highlight shell"><code>curl --request GET <span class="se">\</span>
+  --url <span class="s1">'https://api.tito.io/...'</span> <span class="se">\</span>
+  --header <span class="s1">'Authorization: Token token=secret-api-key'</span> <span class="se">\</span>
+  --header <span class="s1">'Accept: application/json,application/vnd.tito.v2'</span> <span class="se">\</span>
+</code></pre>
+
+<blockquote>
+<p>Make sure to replace <code class="prettyprint">secret-api-key</code> with your API key.</p>
+</blockquote>
+
+<p>Tito uses API keys to allow access to the API. You can find your API key by signing in at <a href="https://api.tito.io">https://api.tito.io</a>.</p>
+
+<p>Your API key needs to included in the <code class="prettyprint">Authorization</code> header so your requests can be authenticated, see the examples to the right:</p>
+
+          <h1 id="events">Events</h1>
+
+<h2 id="attributes">Attributes</h2>
+
+<table><thead>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>banner-url</td>
+<td><code class="prettyprint">url</code></td>
+<td>A link to the event&rsquo;s banner image.</td>
+</tr>
+<tr>
+<td>currency</td>
+<td><code class="prettyprint">string</code></td>
+<td>3 letter ISO currency code e.g. <code class="prettyprint">USD</code></td>
+</tr>
+<tr>
+<td>description</td>
+<td><code class="prettyprint">markdown</code></td>
+<td>&mdash;</td>
+</tr>
+<tr>
+<td>end-date</td>
+<td><code class="prettyprint">date</code></td>
+<td>&mdash;</td>
+</tr>
+<tr>
+<td>live</td>
+<td><code class="prettyprint">boolean</code></td>
+<td>Is it visible to the public or not.</td>
+</tr>
+<tr>
+<td>location</td>
+<td><code class="prettyprint">string</code></td>
+<td>The location of the event.</td>
+</tr>
+<tr>
+<td>logo-url</td>
+<td><code class="prettyprint">url</code></td>
+<td>A link to the event&rsquo;s logo image.</td>
+</tr>
+<tr>
+<td>private</td>
+<td><code class="prettyprint">boolean</code></td>
+<td>Is it to be listed on the event&rsquo;s account page or not.</td>
+</tr>
+<tr>
+<td>slug</td>
+<td><code class="prettyprint">string</code></td>
+<td>&mdash;</td>
+</tr>
+<tr>
+<td>start-date</td>
+<td><code class="prettyprint">date</code></td>
+<td>&mdash;</td>
+</tr>
+<tr>
+<td>title</td>
+<td><code class="prettyprint">string</code></td>
+<td>&mdash;</td>
+</tr>
+</tbody></table>
+
+<h2 id="get-all-events">Get all Events</h2>
+
+<pre class="highlight ruby"><code><span class="nb">require</span> <span class="s1">'json'</span>
+<span class="nb">require</span> <span class="s1">'net/http'</span>
+<span class="nb">require</span> <span class="s1">'uri'</span>
+
+<span class="n">url</span> <span class="o">=</span> <span class="no">URI</span><span class="p">(</span><span class="s2">"https://api.tito.io/an-account/events"</span><span class="p">)</span>
+
+<span class="n">http</span> <span class="o">=</span> <span class="no">Net</span><span class="o">::</span><span class="no">HTTP</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">url</span><span class="p">.</span><span class="nf">host</span><span class="p">,</span> <span class="n">url</span><span class="p">.</span><span class="nf">port</span><span class="p">)</span>
+<span class="n">http</span><span class="p">.</span><span class="nf">use_ssl</span> <span class="o">=</span> <span class="kp">true</span>
+<span class="n">http</span><span class="p">.</span><span class="nf">verify_mode</span> <span class="o">=</span> <span class="no">OpenSSL</span><span class="o">::</span><span class="no">SSL</span><span class="o">::</span><span class="no">VERIFY_NONE</span>
+
+<span class="n">request</span> <span class="o">=</span> <span class="no">Net</span><span class="o">::</span><span class="no">HTTP</span><span class="o">::</span><span class="no">Get</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+<span class="n">request</span><span class="p">[</span><span class="s1">'Accept'</span><span class="p">]</span>        <span class="o">=</span> <span class="s1">'application/vnd.tito.v2'</span>
+<span class="n">request</span><span class="p">[</span><span class="s1">'Authorization'</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'Token token=secret-api-key'</span>
+<span class="n">request</span><span class="p">[</span><span class="s1">'Content-Type'</span><span class="p">]</span>  <span class="o">=</span> <span class="s1">'application/json'</span>
+
+<span class="n">response</span> <span class="o">=</span> <span class="n">http</span><span class="p">.</span><span class="nf">request</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
+<span class="nb">puts</span> <span class="n">response</span><span class="p">.</span><span class="nf">read_body</span>
+</code></pre>
+
+<pre class="highlight shell"><code>curl --request GET <span class="se">\</span>
+  --url <span class="s1">'https://api.tito.io/an-account/events'</span> <span class="se">\</span>
+  --header <span class="s1">'Authorization: Token token=secret-api-key'</span> <span class="se">\</span>
+  --header <span class="s1">'Accept: application/json,application/vnd.tito.v2'</span> <span class="se">\</span>
+</code></pre>
+
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="s2">"summer-conf"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"events"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"attributes"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="err">...</span><span class="w"> </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"self"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.tito.io/an-account/summer-conf"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"relationships"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"releases"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"related"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.tito.io/an-account/summer-conf/releases"</span><span class="w">
+          </span><span class="p">}</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="s2">"winter-conf"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"events"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"attributes"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="err">...</span><span class="w"> </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"self"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.tito.io/an-account/winter-conf"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"relationships"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"releases"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"related"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.tito.io/an-account/winter-conf/releases"</span><span class="w">
+          </span><span class="p">}</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>This endpoint retrieves all <code class="prettyprint">Events</code> for the given <code class="prettyprint">Account</code>.</p>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">GET https://api.tito.io/:account/events</code></p>
+
+<h3 id="query-parameters">Query Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>include</td>
+<td></td>
+<td>A comma separated list specify of related resources to include. Options: <code class="prettyprint">releases</code></td>
+</tr>
+</tbody></table>
+
+<aside class="notice">
+Note. The attributes for each Event have been removed from the example JSON response for readability.
+</aside>
+
+<h2 id="get-a-specific-event">Get a specific Event</h2>
+
+<pre class="highlight ruby"><code><span class="nb">require</span> <span class="s1">'json'</span>
+<span class="nb">require</span> <span class="s1">'net/http'</span>
+<span class="nb">require</span> <span class="s1">'uri'</span>
+
+<span class="n">url</span> <span class="o">=</span> <span class="no">URI</span><span class="p">(</span><span class="s2">"https://api.tito.io/an-account/awesome-conf"</span><span class="p">)</span>
+
+<span class="n">http</span> <span class="o">=</span> <span class="no">Net</span><span class="o">::</span><span class="no">HTTP</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">url</span><span class="p">.</span><span class="nf">host</span><span class="p">,</span> <span class="n">url</span><span class="p">.</span><span class="nf">port</span><span class="p">)</span>
+<span class="n">http</span><span class="p">.</span><span class="nf">use_ssl</span> <span class="o">=</span> <span class="kp">true</span>
+<span class="n">http</span><span class="p">.</span><span class="nf">verify_mode</span> <span class="o">=</span> <span class="no">OpenSSL</span><span class="o">::</span><span class="no">SSL</span><span class="o">::</span><span class="no">VERIFY_NONE</span>
+
+<span class="n">request</span> <span class="o">=</span> <span class="no">Net</span><span class="o">::</span><span class="no">HTTP</span><span class="o">::</span><span class="no">Get</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+<span class="n">request</span><span class="p">[</span><span class="s1">'Accept'</span><span class="p">]</span>        <span class="o">=</span> <span class="s1">'application/vnd.tito.v2'</span>
+<span class="n">request</span><span class="p">[</span><span class="s1">'Authorization'</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'Token token=secret-api-key'</span>
+<span class="n">request</span><span class="p">[</span><span class="s1">'Content-Type'</span><span class="p">]</span>  <span class="o">=</span> <span class="s1">'application/json'</span>
+
+<span class="n">response</span> <span class="o">=</span> <span class="n">http</span><span class="p">.</span><span class="nf">request</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
+<span class="nb">puts</span> <span class="n">response</span><span class="p">.</span><span class="nf">read_body</span>
+</code></pre>
+
+<pre class="highlight shell"><code>curl --request GET <span class="se">\</span>
+  --url <span class="s1">'https://api.tito.io/an-account/awesome-conf'</span> <span class="se">\</span>
+  --header <span class="s1">'Authorization: Token token=secret-api-key'</span> <span class="se">\</span>
+  --header <span class="s1">'Accept: application/json,application/vnd.tito.v2'</span> <span class="se">\</span>
+</code></pre>
+
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"awesome-conf"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"events"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"attributes"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"banner-url"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USD"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"end-date"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"live"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"location"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"logo-url"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"private"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"slug"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"start-date"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"title"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"self"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.tito.io/an-account/awesome-conf"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"relationships"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"releases"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"related"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.tito.io/an-account/awesome-conf/releases"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>This endpoint retrieves a specific <code class="prettyprint">Event</code> from the given <code class="prettyprint">Account</code>.</p>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">GET https://api.tito.io/:account/:event</code></p>
+
+<h2 id="creating-a-new-event">Creating a new Event</h2>
+
+<pre class="highlight ruby"><code><span class="nb">require</span> <span class="s1">'json'</span>
+<span class="nb">require</span> <span class="s1">'net/http'</span>
+<span class="nb">require</span> <span class="s1">'uri'</span>
+
+<span class="n">url</span> <span class="o">=</span> <span class="no">URI</span><span class="p">(</span><span class="s2">"https://api.tito.io/an-account/events"</span><span class="p">)</span>
+
+<span class="n">http</span> <span class="o">=</span> <span class="no">Net</span><span class="o">::</span><span class="no">HTTP</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">url</span><span class="p">.</span><span class="nf">host</span><span class="p">,</span> <span class="n">url</span><span class="p">.</span><span class="nf">port</span><span class="p">)</span>
+<span class="n">http</span><span class="p">.</span><span class="nf">use_ssl</span> <span class="o">=</span> <span class="kp">true</span>
+<span class="n">http</span><span class="p">.</span><span class="nf">verify_mode</span> <span class="o">=</span> <span class="no">OpenSSL</span><span class="o">::</span><span class="no">SSL</span><span class="o">::</span><span class="no">VERIFY_NONE</span>
+
+<span class="n">request</span> <span class="o">=</span> <span class="no">Net</span><span class="o">::</span><span class="no">HTTP</span><span class="o">::</span><span class="no">Post</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+<span class="n">request</span><span class="p">[</span><span class="s1">'Accept'</span><span class="p">]</span>        <span class="o">=</span> <span class="s1">'application/vnd.tito.v2'</span>
+<span class="n">request</span><span class="p">[</span><span class="s1">'Authorization'</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'Token token=secret-api-key'</span>
+<span class="n">request</span><span class="p">[</span><span class="s1">'Content-Type'</span><span class="p">]</span>  <span class="o">=</span> <span class="s1">'application/json'</span>
+<span class="n">request</span><span class="p">.</span><span class="nf">body</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s2">"data"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"events"</span><span class="p">,</span>
+    <span class="s2">"attributes"</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">"slug"</span><span class="p">:</span> <span class="s2">"Awesome-conf"</span><span class="p">,</span>
+      <span class="s2">"title"</span><span class="p">:</span> <span class="s2">"Awesome Conf"</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="n">response</span> <span class="o">=</span> <span class="n">http</span><span class="p">.</span><span class="nf">request</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
+<span class="nb">puts</span> <span class="n">response</span><span class="p">.</span><span class="nf">read_body</span>
+</code></pre>
+
+<pre class="highlight shell"><code>curl --request POST <span class="se">\</span>
+  --url <span class="s1">'https://api.tito.io/an-account/events'</span> <span class="se">\</span>
+  --header <span class="s1">'Authorization: Token token=secret-api-key'</span> <span class="se">\</span>
+  --header <span class="s1">'Accept: application/json,application/vnd.tito.v2'</span> <span class="se">\</span>
+  --data <span class="s1">'data%5Battributes%5D%5Bslug%5D=Awesome-conf&amp;data%5Battributes%5D%5Btitle%5D=Awesome+Conf&amp;data%5Btype%5D=events'</span>
+</code></pre>
+
+<p>This endpoint creates an <code class="prettyprint">Event</code> on the given <code class="prettyprint">Account</code>.</p>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">POST https://api.tito.io/:account/events</code></p>
+
+<h3 id="parameters">Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>currency</td>
+<td><code class="prettyprint">string</code></td>
+<td>3 letter ISO currency code e.g. <code class="prettyprint">USD</code></td>
+</tr>
+<tr>
+<td>description</td>
+<td><code class="prettyprint">markdown</code></td>
+<td></td>
+</tr>
+<tr>
+<td>end-date</td>
+<td><code class="prettyprint">date</code></td>
+<td></td>
+</tr>
+<tr>
+<td>live</td>
+<td><code class="prettyprint">boolean</code></td>
+<td>Is it visible to the public or not.</td>
+</tr>
+<tr>
+<td>location</td>
+<td><code class="prettyprint">string</code></td>
+<td>The location of the event.</td>
+</tr>
+<tr>
+<td>private</td>
+<td><code class="prettyprint">boolean</code></td>
+<td>Is it to be listed on the event&rsquo;s account page or not.</td>
+</tr>
+<tr>
+<td>slug</td>
+<td><code class="prettyprint">string</code></td>
+<td></td>
+</tr>
+<tr>
+<td>start-date</td>
+<td><code class="prettyprint">date</code></td>
+<td></td>
+</tr>
+<tr>
+<td>title</td>
+<td><code class="prettyprint">string</code></td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h2 id="updating-an-event">Updating an Event</h2>
+
+<pre class="highlight ruby"><code><span class="nb">require</span> <span class="s1">'json'</span>
+<span class="nb">require</span> <span class="s1">'net/http'</span>
+<span class="nb">require</span> <span class="s1">'uri'</span>
+
+<span class="n">url</span> <span class="o">=</span> <span class="no">URI</span><span class="p">(</span><span class="s2">"https://api.tito.io/an-account/awesome-conf"</span><span class="p">)</span>
+
+<span class="n">http</span> <span class="o">=</span> <span class="no">Net</span><span class="o">::</span><span class="no">HTTP</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">url</span><span class="p">.</span><span class="nf">host</span><span class="p">,</span> <span class="n">url</span><span class="p">.</span><span class="nf">port</span><span class="p">)</span>
+<span class="n">http</span><span class="p">.</span><span class="nf">use_ssl</span> <span class="o">=</span> <span class="kp">true</span>
+<span class="n">http</span><span class="p">.</span><span class="nf">verify_mode</span> <span class="o">=</span> <span class="no">OpenSSL</span><span class="o">::</span><span class="no">SSL</span><span class="o">::</span><span class="no">VERIFY_NONE</span>
+
+<span class="n">request</span> <span class="o">=</span> <span class="no">Net</span><span class="o">::</span><span class="no">HTTP</span><span class="o">::</span><span class="no">Patch</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+<span class="n">request</span><span class="p">[</span><span class="s1">'Accept'</span><span class="p">]</span>        <span class="o">=</span> <span class="s1">'application/vnd.tito.v2'</span>
+<span class="n">request</span><span class="p">[</span><span class="s1">'Authorization'</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'Token token=secret-api-key'</span>
+<span class="n">request</span><span class="p">[</span><span class="s1">'Content-Type'</span><span class="p">]</span>  <span class="o">=</span> <span class="s1">'application/json'</span>
+<span class="n">request</span><span class="p">.</span><span class="nf">body</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s2">"data"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"events"</span><span class="p">,</span>
+    <span class="s2">"id"</span><span class="p">:</span> <span class="s2">"awesome-conf"</span><span class="p">,</span>
+    <span class="s2">"attributes"</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">"location"</span><span class="p">:</span> <span class="s2">"Dublin, Ireland"</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="n">response</span> <span class="o">=</span> <span class="n">http</span><span class="p">.</span><span class="nf">request</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
+<span class="nb">puts</span> <span class="n">response</span><span class="p">.</span><span class="nf">read_body</span>
+</code></pre>
+
+<pre class="highlight shell"><code>curl --request PATCH <span class="se">\</span>
+  --url <span class="s1">'https://api.tito.io/an-account/awesome-conf'</span> <span class="se">\</span>
+  --header <span class="s1">'Authorization: Token token=secret-api-key'</span> <span class="se">\</span>
+  --header <span class="s1">'Accept: application/json,application/vnd.tito.v2'</span> <span class="se">\</span>
+  --data <span class="s1">'data%5Battributes%5D%5Blocation%5D=Dublin%2C+Ireland&amp;data%5Bid%5D=awesome-conf&amp;data%5Btype%5D=events'</span>
+</code></pre>
+
+<p>This endpoint updates an <code class="prettyprint">Event</code> on the given <code class="prettyprint">Account</code>.</p>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">PATCH https://api.tito.io/:account/:event</code></p>
+
+<h3 id="parameters">Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>currency</td>
+<td><code class="prettyprint">string</code></td>
+<td>3 letter ISO currency code e.g. <code class="prettyprint">USD</code></td>
+</tr>
+<tr>
+<td>description</td>
+<td><code class="prettyprint">markdown</code></td>
+<td></td>
+</tr>
+<tr>
+<td>end-date</td>
+<td><code class="prettyprint">date</code></td>
+<td></td>
+</tr>
+<tr>
+<td>live</td>
+<td><code class="prettyprint">boolean</code></td>
+<td>Is it visible to the public or not.</td>
+</tr>
+<tr>
+<td>location</td>
+<td><code class="prettyprint">string</code></td>
+<td>The location of the event.</td>
+</tr>
+<tr>
+<td>private</td>
+<td><code class="prettyprint">boolean</code></td>
+<td>Is it to be listed on the event&rsquo;s account page or not.</td>
+</tr>
+<tr>
+<td>slug</td>
+<td><code class="prettyprint">string</code></td>
+<td></td>
+</tr>
+<tr>
+<td>start-date</td>
+<td><code class="prettyprint">date</code></td>
+<td></td>
+</tr>
+<tr>
+<td>title</td>
+<td><code class="prettyprint">string</code></td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h2 id="deleting-an-event">Deleting an Event</h2>
+
+<pre class="highlight ruby"><code><span class="nb">require</span> <span class="s1">'json'</span>
+<span class="nb">require</span> <span class="s1">'net/http'</span>
+<span class="nb">require</span> <span class="s1">'uri'</span>
+
+<span class="n">url</span> <span class="o">=</span> <span class="no">URI</span><span class="p">(</span><span class="s2">"https://api.tito.io/an-account/awesome-conf"</span><span class="p">)</span>
+
+<span class="n">http</span> <span class="o">=</span> <span class="no">Net</span><span class="o">::</span><span class="no">HTTP</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">url</span><span class="p">.</span><span class="nf">host</span><span class="p">,</span> <span class="n">url</span><span class="p">.</span><span class="nf">port</span><span class="p">)</span>
+<span class="n">http</span><span class="p">.</span><span class="nf">use_ssl</span> <span class="o">=</span> <span class="kp">true</span>
+<span class="n">http</span><span class="p">.</span><span class="nf">verify_mode</span> <span class="o">=</span> <span class="no">OpenSSL</span><span class="o">::</span><span class="no">SSL</span><span class="o">::</span><span class="no">VERIFY_NONE</span>
+
+<span class="n">request</span> <span class="o">=</span> <span class="no">Net</span><span class="o">::</span><span class="no">HTTP</span><span class="o">::</span><span class="no">Delete</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+<span class="n">request</span><span class="p">[</span><span class="s1">'Accept'</span><span class="p">]</span>        <span class="o">=</span> <span class="s1">'application/vnd.tito.v2'</span>
+<span class="n">request</span><span class="p">[</span><span class="s1">'Authorization'</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'Token token=secret-api-key'</span>
+<span class="n">request</span><span class="p">[</span><span class="s1">'Content-Type'</span><span class="p">]</span>  <span class="o">=</span> <span class="s1">'application/json'</span>
+
+<span class="n">response</span> <span class="o">=</span> <span class="n">http</span><span class="p">.</span><span class="nf">request</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
+<span class="nb">puts</span> <span class="n">response</span><span class="p">.</span><span class="nf">read_body</span>
+</code></pre>
+
+<pre class="highlight shell"><code>curl --request DELETE <span class="se">\</span>
+  --url <span class="s1">'https://api.tito.io/an-account/awesome-conf'</span> <span class="se">\</span>
+  --header <span class="s1">'Authorization: Token token=secret-api-key'</span> <span class="se">\</span>
+  --header <span class="s1">'Accept: application/json,application/vnd.tito.v2'</span> <span class="se">\</span>
+</code></pre>
+
+<p>This endpoint deletes an <code class="prettyprint">Event</code> on the given <code class="prettyprint">Account</code>.</p>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">DELETE https://api.tito.io/:account/:event</code></p>
+
+          <h1 id="releases">Releases</h1>
+
+<h2 id="attributes">Attributes</h2>
+
+<table><thead>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>archived</td>
+<td><code class="prettyprint">boolean</code></td>
+<td>Is the release archived or not. Default: <code class="prettyprint">false</code></td>
+</tr>
+<tr>
+<td>default-quantity</td>
+<td><code class="prettyprint">integer</code></td>
+<td>The default number of tickets selected for this release on the event page. Default: <code class="prettyprint">0</code></td>
+</tr>
+<tr>
+<td>description</td>
+<td><code class="prettyprint">text</code></td>
+<td></td>
+</tr>
+<tr>
+<td>enable-super-combo-summary</td>
+<td><code class="prettyprint">boolean</code></td>
+<td>For combo releases only. Include a summary of a combo in the order summary or not. Default: <code class="prettyprint">true</code></td>
+</tr>
+<tr>
+<td>end-at</td>
+<td><code class="prettyprint">datetime</code></td>
+<td>The time when the release will go off sale.</td>
+</tr>
+<tr>
+<td>has-success-message</td>
+<td><code class="prettyprint">boolean</code></td>
+<td>Display the custom success message or not. Default: <code class="prettyprint">false</code></td>
+</tr>
+<tr>
+<td>max-tickets-per-person</td>
+<td><code class="prettyprint">integer</code></td>
+<td>The maximum number of tickets per registration.</td>
+</tr>
+<tr>
+<td>min-tickets-per-person</td>
+<td><code class="prettyprint">integer</code></td>
+<td>The minimum number of tickets per registration.</td>
+</tr>
+<tr>
+<td>not-a-ticket</td>
+<td><code class="prettyprint">boolean</code></td>
+<td>Disable issuing of PDF/Apple Wallet tickets or not. For example if this release is for merchandise rather than an actual ticket. Default <code class="prettyprint">false</code></td>
+</tr>
+<tr>
+<td>position</td>
+<td><code class="prettyprint">integer</code></td>
+<td>The position of the release in the list of all releases for the event.</td>
+</tr>
+<tr>
+<td>price</td>
+<td><code class="prettyprint">decimal</code></td>
+<td></td>
+</tr>
+<tr>
+<td>quantity</td>
+<td><code class="prettyprint">integer</code></td>
+<td>The number of tickets available.</td>
+</tr>
+<tr>
+<td>request-company-name</td>
+<td><code class="prettyprint">boolean</code></td>
+<td>Do registrations which include this release requrie a company name.</td>
+</tr>
+<tr>
+<td>request-vat-number</td>
+<td><code class="prettyprint">boolean</code></td>
+<td>Do registrations which include this release require a VAT number.</td>
+</tr>
+<tr>
+<td>require-billing-address</td>
+<td><code class="prettyprint">boolean</code></td>
+<td>Do registrations which include this release require a billing address.</td>
+</tr>
+<tr>
+<td>require-email</td>
+<td><code class="prettyprint">boolean</code></td>
+<td>Do tickets for this release require an email. Default: <code class="prettyprint">true</code></td>
+</tr>
+<tr>
+<td>require-name</td>
+<td><code class="prettyprint">boolean</code></td>
+<td>Do tickets for this release require a name. Default: <code class="prettyprint">false</code></td>
+</tr>
+<tr>
+<td>secret</td>
+<td><code class="prettyprint">boolean</code></td>
+<td>Is it only accessible via a secret link or is it visible to everyone on the event page. Default: <code class="prettyprint">false</code></td>
+</tr>
+<tr>
+<td>state</td>
+<td><code class="prettyprint">integer</code></td>
+<td><code class="prettyprint">100</code> : On sale<br /> <code class="prettyprint">404</code> : Off sale. Default: <code class="prettyprint">100</code></td>
+</tr>
+<tr>
+<td>start-at</td>
+<td><code class="prettyprint">datetime</code></td>
+<td>The time when the release will go on sale.</td>
+</tr>
+<tr>
+<td>success-message</td>
+<td><code class="prettyprint">text</code></td>
+<td>A custom message to be displayed to customers after a successful order of this release.</td>
+</tr>
+<tr>
+<td>title</td>
+<td><code class="prettyprint">string</code></td>
+<td></td>
+</tr>
+<tr>
+<td>waiting-list-enabled-during-sold-out</td>
+<td><code class="prettyprint">boolean</code></td>
+<td>Enable waiting list when this release sells out or not. Default: <code class="prettyprint">false</code></td>
+</tr>
+</tbody></table>
+
+<h2 id="get-all-releases">Get all Releases</h2>
+
+<pre class="highlight ruby"><code><span class="nb">require</span> <span class="s1">'json'</span>
+<span class="nb">require</span> <span class="s1">'net/http'</span>
+<span class="nb">require</span> <span class="s1">'uri'</span>
+
+<span class="n">url</span> <span class="o">=</span> <span class="no">URI</span><span class="p">(</span><span class="s2">"https://api.tito.io/an-account/awesome-conf/releases"</span><span class="p">)</span>
+
+<span class="n">http</span> <span class="o">=</span> <span class="no">Net</span><span class="o">::</span><span class="no">HTTP</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">url</span><span class="p">.</span><span class="nf">host</span><span class="p">,</span> <span class="n">url</span><span class="p">.</span><span class="nf">port</span><span class="p">)</span>
+<span class="n">http</span><span class="p">.</span><span class="nf">use_ssl</span> <span class="o">=</span> <span class="kp">true</span>
+<span class="n">http</span><span class="p">.</span><span class="nf">verify_mode</span> <span class="o">=</span> <span class="no">OpenSSL</span><span class="o">::</span><span class="no">SSL</span><span class="o">::</span><span class="no">VERIFY_NONE</span>
+
+<span class="n">request</span> <span class="o">=</span> <span class="no">Net</span><span class="o">::</span><span class="no">HTTP</span><span class="o">::</span><span class="no">Get</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+<span class="n">request</span><span class="p">[</span><span class="s1">'Accept'</span><span class="p">]</span>        <span class="o">=</span> <span class="s1">'application/vnd.tito.v2'</span>
+<span class="n">request</span><span class="p">[</span><span class="s1">'Authorization'</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'Token token=secret-api-key'</span>
+<span class="n">request</span><span class="p">[</span><span class="s1">'Content-Type'</span><span class="p">]</span>  <span class="o">=</span> <span class="s1">'application/json'</span>
+
+<span class="n">response</span> <span class="o">=</span> <span class="n">http</span><span class="p">.</span><span class="nf">request</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
+<span class="nb">puts</span> <span class="n">response</span><span class="p">.</span><span class="nf">read_body</span>
+</code></pre>
+
+<pre class="highlight shell"><code>curl --request GET <span class="se">\</span>
+  --url <span class="s1">'https://api.tito.io/an-account/awesome-conf/releases'</span> <span class="se">\</span>
+  --header <span class="s1">'Authorization: Token token=secret-api-key'</span> <span class="se">\</span>
+  --header <span class="s1">'Accept: application/json,application/vnd.tito.v2'</span> <span class="se">\</span>
+</code></pre>
+
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"early-bird-ticket"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"releases"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"attributes"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="err">...</span><span class="w"> </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"self"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.tito.io/an-account/awesome-conf/releases/early-bird-ticket"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"workshop-ticket"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"releases"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"attributes"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="err">...</span><span class="w"> </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"self"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.tito.io/an-account/awesome-conf/releases/workshop-ticket"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>This endpoint retrieves all <code class="prettyprint">Releases</code> for the given <code class="prettyprint">Event</code>.</p>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">GET https://api.tito.io/:account/:event/releases</code></p>
+
+<aside class="notice">
+Note. The attributes for each Release have been removed from the example JSON response for readability.
+</aside>
+
+<h2 id="get-a-specific-release">Get a specific Release</h2>
+
+<pre class="highlight ruby"><code><span class="nb">require</span> <span class="s1">'json'</span>
+<span class="nb">require</span> <span class="s1">'net/http'</span>
+<span class="nb">require</span> <span class="s1">'uri'</span>
+
+<span class="n">url</span> <span class="o">=</span> <span class="no">URI</span><span class="p">(</span><span class="s2">"https://api.tito.io/an-account/awesome-conf/releases/early-bird-ticket"</span><span class="p">)</span>
+
+<span class="n">http</span> <span class="o">=</span> <span class="no">Net</span><span class="o">::</span><span class="no">HTTP</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">url</span><span class="p">.</span><span class="nf">host</span><span class="p">,</span> <span class="n">url</span><span class="p">.</span><span class="nf">port</span><span class="p">)</span>
+<span class="n">http</span><span class="p">.</span><span class="nf">use_ssl</span> <span class="o">=</span> <span class="kp">true</span>
+<span class="n">http</span><span class="p">.</span><span class="nf">verify_mode</span> <span class="o">=</span> <span class="no">OpenSSL</span><span class="o">::</span><span class="no">SSL</span><span class="o">::</span><span class="no">VERIFY_NONE</span>
+
+<span class="n">request</span> <span class="o">=</span> <span class="no">Net</span><span class="o">::</span><span class="no">HTTP</span><span class="o">::</span><span class="no">Get</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+<span class="n">request</span><span class="p">[</span><span class="s1">'Accept'</span><span class="p">]</span>        <span class="o">=</span> <span class="s1">'application/vnd.tito.v2'</span>
+<span class="n">request</span><span class="p">[</span><span class="s1">'Authorization'</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'Token token=secret-api-key'</span>
+<span class="n">request</span><span class="p">[</span><span class="s1">'Content-Type'</span><span class="p">]</span>  <span class="o">=</span> <span class="s1">'application/json'</span>
+
+<span class="n">response</span> <span class="o">=</span> <span class="n">http</span><span class="p">.</span><span class="nf">request</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
+<span class="nb">puts</span> <span class="n">response</span><span class="p">.</span><span class="nf">read_body</span>
+</code></pre>
+
+<pre class="highlight shell"><code>curl --request GET <span class="se">\</span>
+  --url <span class="s1">'https://api.tito.io/an-account/awesome-conf/releases/early-bird-ticket'</span> <span class="se">\</span>
+  --header <span class="s1">'Authorization: Token token=secret-api-key'</span> <span class="se">\</span>
+  --header <span class="s1">'Accept: application/json,application/vnd.tito.v2'</span> <span class="se">\</span>
+</code></pre>
+
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"early-bird-ticket"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"releases"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"attributes"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"archived"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"default-quantity"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"enable-super-combo-summary"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"end-at"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"has-success-message"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"max-tickets-per-person"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"min-tickets-per-person"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"not-a-ticket"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"position"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"price"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"quantity"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"request-company-name"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"request-vat-number"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"require-billing-address"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"require-email"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"require-name"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"secret"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"state"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"start-at"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"success-message"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"title"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"waiting-list-enabled-during-sold-out"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"self"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.tito.io/an-account/free-event/releases/early-bird-ticket"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>This endpoint retrieves a specific <code class="prettyprint">Release</code>.</p>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">GET https://api.tito.io/:account/:event/releases/:release</code></p>
+
+<h2 id="creating-a-new-release">Creating a new Release</h2>
+
+<pre class="highlight ruby"><code><span class="nb">require</span> <span class="s1">'json'</span>
+<span class="nb">require</span> <span class="s1">'net/http'</span>
+<span class="nb">require</span> <span class="s1">'uri'</span>
+
+<span class="n">url</span> <span class="o">=</span> <span class="no">URI</span><span class="p">(</span><span class="s2">"https://api.tito.io/an-account/awesome-conf/releases"</span><span class="p">)</span>
+
+<span class="n">http</span> <span class="o">=</span> <span class="no">Net</span><span class="o">::</span><span class="no">HTTP</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">url</span><span class="p">.</span><span class="nf">host</span><span class="p">,</span> <span class="n">url</span><span class="p">.</span><span class="nf">port</span><span class="p">)</span>
+<span class="n">http</span><span class="p">.</span><span class="nf">use_ssl</span> <span class="o">=</span> <span class="kp">true</span>
+<span class="n">http</span><span class="p">.</span><span class="nf">verify_mode</span> <span class="o">=</span> <span class="no">OpenSSL</span><span class="o">::</span><span class="no">SSL</span><span class="o">::</span><span class="no">VERIFY_NONE</span>
+
+<span class="n">request</span> <span class="o">=</span> <span class="no">Net</span><span class="o">::</span><span class="no">HTTP</span><span class="o">::</span><span class="no">Post</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+<span class="n">request</span><span class="p">[</span><span class="s1">'Accept'</span><span class="p">]</span>        <span class="o">=</span> <span class="s1">'application/vnd.tito.v2'</span>
+<span class="n">request</span><span class="p">[</span><span class="s1">'Authorization'</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'Token token=secret-api-key'</span>
+<span class="n">request</span><span class="p">[</span><span class="s1">'Content-Type'</span><span class="p">]</span>  <span class="o">=</span> <span class="s1">'application/json'</span>
+<span class="n">request</span><span class="p">.</span><span class="nf">body</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s2">"slug"</span><span class="p">:</span> <span class="s2">"Awesome-conf"</span><span class="p">,</span>
+  <span class="s2">"title"</span><span class="p">:</span> <span class="s2">"Awesome Conf"</span>
+<span class="p">}</span>
+
+<span class="n">response</span> <span class="o">=</span> <span class="n">http</span><span class="p">.</span><span class="nf">request</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
+<span class="nb">puts</span> <span class="n">response</span><span class="p">.</span><span class="nf">read_body</span>
+</code></pre>
+
+<pre class="highlight shell"><code>curl --request POST <span class="se">\</span>
+  --url <span class="s1">'https://api.tito.io/an-account/awesome-conf/releases'</span> <span class="se">\</span>
+  --header <span class="s1">'Authorization: Token token=secret-api-key'</span> <span class="se">\</span>
+  --header <span class="s1">'Accept: application/json,application/vnd.tito.v2'</span> <span class="se">\</span>
+  --data <span class="s1">'slug=Awesome-conf&amp;title=Awesome+Conf'</span>
+</code></pre>
+
+<p>This endpoint creates a <code class="prettyprint">Release</code> on the given <code class="prettyprint">Event</code>.</p>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">POST https://api.tito.io/:account/:event/releases</code></p>
+
+<h3 id="parameters">Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>archived</td>
+<td><code class="prettyprint">boolean</code></td>
+<td>Is the release archived or not. Default: <code class="prettyprint">false</code></td>
+</tr>
+<tr>
+<td>default-quantity</td>
+<td><code class="prettyprint">integer</code></td>
+<td>The default number of tickets selected for this release on the event page. Default: <code class="prettyprint">0</code></td>
+</tr>
+<tr>
+<td>description</td>
+<td><code class="prettyprint">text</code></td>
+<td></td>
+</tr>
+<tr>
+<td>enable-super-combo-summary</td>
+<td><code class="prettyprint">boolean</code></td>
+<td>For combo releases only. Include a summary of a combo in the order summary or not. Default: <code class="prettyprint">true</code></td>
+</tr>
+<tr>
+<td>end-at</td>
+<td><code class="prettyprint">datetime</code></td>
+<td>The time when the release will go off sale.</td>
+</tr>
+<tr>
+<td>has-success-message</td>
+<td><code class="prettyprint">boolean</code></td>
+<td>Display the custom success message or not. Default: <code class="prettyprint">false</code></td>
+</tr>
+<tr>
+<td>max-tickets-per-person</td>
+<td><code class="prettyprint">integer</code></td>
+<td>The maximum number of tickets per registration.</td>
+</tr>
+<tr>
+<td>min-tickets-per-person</td>
+<td><code class="prettyprint">integer</code></td>
+<td>The minimum number of tickets per registration.</td>
+</tr>
+<tr>
+<td>not-a-ticket</td>
+<td><code class="prettyprint">boolean</code></td>
+<td>Disable issuing of PDF/Apple Wallet tickets or not. For example if this release is for merchandise rather than an actual ticket. Default <code class="prettyprint">false</code></td>
+</tr>
+<tr>
+<td>position</td>
+<td><code class="prettyprint">integer</code></td>
+<td>The position of the release in the list of all releases for the event.</td>
+</tr>
+<tr>
+<td>price</td>
+<td><code class="prettyprint">decimal</code></td>
+<td></td>
+</tr>
+<tr>
+<td>quantity</td>
+<td><code class="prettyprint">integer</code></td>
+<td>The number of tickets available.</td>
+</tr>
+<tr>
+<td>request-company-name</td>
+<td><code class="prettyprint">boolean</code></td>
+<td>Do registrations which include this release requrie a company name.</td>
+</tr>
+<tr>
+<td>request-vat-number</td>
+<td><code class="prettyprint">boolean</code></td>
+<td>Do registrations which include this release require a VAT number.</td>
+</tr>
+<tr>
+<td>require-billing-address</td>
+<td><code class="prettyprint">boolean</code></td>
+<td>Do registrations which include this release require a billing address.</td>
+</tr>
+<tr>
+<td>require-email</td>
+<td><code class="prettyprint">boolean</code></td>
+<td>Do tickets for this release require an email. Default: <code class="prettyprint">true</code></td>
+</tr>
+<tr>
+<td>require-name</td>
+<td><code class="prettyprint">boolean</code></td>
+<td>Do tickets for this release require a name. Default: <code class="prettyprint">false</code></td>
+</tr>
+<tr>
+<td>secret</td>
+<td><code class="prettyprint">boolean</code></td>
+<td>Is it only accessible via a secret link or is it visible to everyone on the event page. Default: <code class="prettyprint">false</code></td>
+</tr>
+<tr>
+<td>state</td>
+<td><code class="prettyprint">integer</code></td>
+<td><code class="prettyprint">100</code> : On sale<br /> <code class="prettyprint">404</code> : Off sale. Default: <code class="prettyprint">100</code></td>
+</tr>
+<tr>
+<td>start-at</td>
+<td><code class="prettyprint">datetime</code></td>
+<td>The time when the release will go on sale.</td>
+</tr>
+<tr>
+<td>success-message</td>
+<td><code class="prettyprint">text</code></td>
+<td>A custom message to be displayed to customers after a successful order of this release.</td>
+</tr>
+<tr>
+<td>title</td>
+<td><code class="prettyprint">string</code></td>
+<td></td>
+</tr>
+<tr>
+<td>waiting-list-enabled-during-sold-out</td>
+<td><code class="prettyprint">boolean</code></td>
+<td>Enable waiting list when this release sells out or not. Default: <code class="prettyprint">false</code></td>
+</tr>
+</tbody></table>
+
+<h2 id="updating-a-new-release">Updating a new Release</h2>
+
+<pre class="highlight ruby"><code><span class="nb">require</span> <span class="s1">'json'</span>
+<span class="nb">require</span> <span class="s1">'net/http'</span>
+<span class="nb">require</span> <span class="s1">'uri'</span>
+
+<span class="n">url</span> <span class="o">=</span> <span class="no">URI</span><span class="p">(</span><span class="s2">"https://api.tito.io/an-account/awesome-conf/workshop-ticket"</span><span class="p">)</span>
+
+<span class="n">http</span> <span class="o">=</span> <span class="no">Net</span><span class="o">::</span><span class="no">HTTP</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">url</span><span class="p">.</span><span class="nf">host</span><span class="p">,</span> <span class="n">url</span><span class="p">.</span><span class="nf">port</span><span class="p">)</span>
+<span class="n">http</span><span class="p">.</span><span class="nf">use_ssl</span> <span class="o">=</span> <span class="kp">true</span>
+<span class="n">http</span><span class="p">.</span><span class="nf">verify_mode</span> <span class="o">=</span> <span class="no">OpenSSL</span><span class="o">::</span><span class="no">SSL</span><span class="o">::</span><span class="no">VERIFY_NONE</span>
+
+<span class="n">request</span> <span class="o">=</span> <span class="no">Net</span><span class="o">::</span><span class="no">HTTP</span><span class="o">::</span><span class="no">Patch</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+<span class="n">request</span><span class="p">[</span><span class="s1">'Accept'</span><span class="p">]</span>        <span class="o">=</span> <span class="s1">'application/vnd.tito.v2'</span>
+<span class="n">request</span><span class="p">[</span><span class="s1">'Authorization'</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'Token token=secret-api-key'</span>
+<span class="n">request</span><span class="p">[</span><span class="s1">'Content-Type'</span><span class="p">]</span>  <span class="o">=</span> <span class="s1">'application/json'</span>
+<span class="n">request</span><span class="p">.</span><span class="nf">body</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s2">"data"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"releases"</span><span class="p">,</span>
+    <span class="s2">"id"</span><span class="p">:</span> <span class="s2">"workshop-ticket"</span><span class="p">,</span>
+    <span class="s2">"attributes"</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">"quantity"</span><span class="p">:</span> <span class="mi">25</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="n">response</span> <span class="o">=</span> <span class="n">http</span><span class="p">.</span><span class="nf">request</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
+<span class="nb">puts</span> <span class="n">response</span><span class="p">.</span><span class="nf">read_body</span>
+</code></pre>
+
+<pre class="highlight shell"><code>curl --request PATCH <span class="se">\</span>
+  --url <span class="s1">'https://api.tito.io/an-account/awesome-conf/workshop-ticket'</span> <span class="se">\</span>
+  --header <span class="s1">'Authorization: Token token=secret-api-key'</span> <span class="se">\</span>
+  --header <span class="s1">'Accept: application/json,application/vnd.tito.v2'</span> <span class="se">\</span>
+  --data <span class="s1">'data%5Battributes%5D%5Bquantity%5D=25&amp;data%5Bid%5D=workshop-ticket&amp;data%5Btype%5D=releases'</span>
+</code></pre>
+
+<p>This endpoint updates a <code class="prettyprint">Release</code> on the given <code class="prettyprint">Event</code>.</p>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">PATCH https://api.tito.io/:account/:event/:release</code></p>
+
+<h3 id="parameters">Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>archived</td>
+<td><code class="prettyprint">boolean</code></td>
+<td>Is the release archived or not. Default: <code class="prettyprint">false</code></td>
+</tr>
+<tr>
+<td>default-quantity</td>
+<td><code class="prettyprint">integer</code></td>
+<td>The default number of tickets selected for this release on the event page. Default: <code class="prettyprint">0</code></td>
+</tr>
+<tr>
+<td>description</td>
+<td><code class="prettyprint">text</code></td>
+<td></td>
+</tr>
+<tr>
+<td>enable-super-combo-summary</td>
+<td><code class="prettyprint">boolean</code></td>
+<td>For combo releases only. Include a summary of a combo in the order summary or not. Default: <code class="prettyprint">true</code></td>
+</tr>
+<tr>
+<td>end-at</td>
+<td><code class="prettyprint">datetime</code></td>
+<td>The time when the release will go off sale.</td>
+</tr>
+<tr>
+<td>has-success-message</td>
+<td><code class="prettyprint">boolean</code></td>
+<td>Display the custom success message or not. Default: <code class="prettyprint">false</code></td>
+</tr>
+<tr>
+<td>max-tickets-per-person</td>
+<td><code class="prettyprint">integer</code></td>
+<td>The maximum number of tickets per registration.</td>
+</tr>
+<tr>
+<td>min-tickets-per-person</td>
+<td><code class="prettyprint">integer</code></td>
+<td>The minimum number of tickets per registration.</td>
+</tr>
+<tr>
+<td>not-a-ticket</td>
+<td><code class="prettyprint">boolean</code></td>
+<td>Disable issuing of PDF/Apple Wallet tickets or not. For example if this release is for merchandise rather than an actual ticket. Default <code class="prettyprint">false</code></td>
+</tr>
+<tr>
+<td>position</td>
+<td><code class="prettyprint">integer</code></td>
+<td>The position of the release in the list of all releases for the event.</td>
+</tr>
+<tr>
+<td>price</td>
+<td><code class="prettyprint">decimal</code></td>
+<td></td>
+</tr>
+<tr>
+<td>quantity</td>
+<td><code class="prettyprint">integer</code></td>
+<td>The number of tickets available.</td>
+</tr>
+<tr>
+<td>request-company-name</td>
+<td><code class="prettyprint">boolean</code></td>
+<td>Do registrations which include this release requrie a company name.</td>
+</tr>
+<tr>
+<td>request-vat-number</td>
+<td><code class="prettyprint">boolean</code></td>
+<td>Do registrations which include this release require a VAT number.</td>
+</tr>
+<tr>
+<td>require-billing-address</td>
+<td><code class="prettyprint">boolean</code></td>
+<td>Do registrations which include this release require a billing address.</td>
+</tr>
+<tr>
+<td>require-email</td>
+<td><code class="prettyprint">boolean</code></td>
+<td>Do tickets for this release require an email. Default: <code class="prettyprint">true</code></td>
+</tr>
+<tr>
+<td>require-name</td>
+<td><code class="prettyprint">boolean</code></td>
+<td>Do tickets for this release require a name. Default: <code class="prettyprint">false</code></td>
+</tr>
+<tr>
+<td>secret</td>
+<td><code class="prettyprint">boolean</code></td>
+<td>Is it only accessible via a secret link or is it visible to everyone on the event page. Default: <code class="prettyprint">false</code></td>
+</tr>
+<tr>
+<td>state</td>
+<td><code class="prettyprint">integer</code></td>
+<td><code class="prettyprint">100</code> : On sale<br /> <code class="prettyprint">404</code> : Off sale. Default: <code class="prettyprint">100</code></td>
+</tr>
+<tr>
+<td>start-at</td>
+<td><code class="prettyprint">datetime</code></td>
+<td>The time when the release will go on sale.</td>
+</tr>
+<tr>
+<td>success-message</td>
+<td><code class="prettyprint">text</code></td>
+<td>A custom message to be displayed to customers after a successful order of this release.</td>
+</tr>
+<tr>
+<td>title</td>
+<td><code class="prettyprint">string</code></td>
+<td></td>
+</tr>
+<tr>
+<td>waiting-list-enabled-during-sold-out</td>
+<td><code class="prettyprint">boolean</code></td>
+<td>Enable waiting list when this release sells out or not. Default: <code class="prettyprint">false</code></td>
+</tr>
+</tbody></table>
+
+<h2 id="deleting-a-release">Deleting a Release</h2>
+
+<pre class="highlight ruby"><code><span class="nb">require</span> <span class="s1">'json'</span>
+<span class="nb">require</span> <span class="s1">'net/http'</span>
+<span class="nb">require</span> <span class="s1">'uri'</span>
+
+<span class="n">url</span> <span class="o">=</span> <span class="no">URI</span><span class="p">(</span><span class="s2">"https://api.tito.io/an-account/awesome-conf/workshop-ticket"</span><span class="p">)</span>
+
+<span class="n">http</span> <span class="o">=</span> <span class="no">Net</span><span class="o">::</span><span class="no">HTTP</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">url</span><span class="p">.</span><span class="nf">host</span><span class="p">,</span> <span class="n">url</span><span class="p">.</span><span class="nf">port</span><span class="p">)</span>
+<span class="n">http</span><span class="p">.</span><span class="nf">use_ssl</span> <span class="o">=</span> <span class="kp">true</span>
+<span class="n">http</span><span class="p">.</span><span class="nf">verify_mode</span> <span class="o">=</span> <span class="no">OpenSSL</span><span class="o">::</span><span class="no">SSL</span><span class="o">::</span><span class="no">VERIFY_NONE</span>
+
+<span class="n">request</span> <span class="o">=</span> <span class="no">Net</span><span class="o">::</span><span class="no">HTTP</span><span class="o">::</span><span class="no">Delete</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+<span class="n">request</span><span class="p">[</span><span class="s1">'Accept'</span><span class="p">]</span>        <span class="o">=</span> <span class="s1">'application/vnd.tito.v2'</span>
+<span class="n">request</span><span class="p">[</span><span class="s1">'Authorization'</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'Token token=secret-api-key'</span>
+<span class="n">request</span><span class="p">[</span><span class="s1">'Content-Type'</span><span class="p">]</span>  <span class="o">=</span> <span class="s1">'application/json'</span>
+
+<span class="n">response</span> <span class="o">=</span> <span class="n">http</span><span class="p">.</span><span class="nf">request</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
+<span class="nb">puts</span> <span class="n">response</span><span class="p">.</span><span class="nf">read_body</span>
+</code></pre>
+
+<pre class="highlight shell"><code>curl --request DELETE <span class="se">\</span>
+  --url <span class="s1">'https://api.tito.io/an-account/awesome-conf/workshop-ticket'</span> <span class="se">\</span>
+  --header <span class="s1">'Authorization: Token token=secret-api-key'</span> <span class="se">\</span>
+  --header <span class="s1">'Accept: application/json,application/vnd.tito.v2'</span> <span class="se">\</span>
+</code></pre>
+
+<p>This endpoint deletes a <code class="prettyprint">Release</code> on the given <code class="prettyprint">Event</code>.</p>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">DELETE https://api.tito.io/:account/:event/:release</code></p>
+
+      </div>
+      <div class="dark-box">
+          <div class="lang-selector">
+                <a href="#" data-language-name="shell">shell</a>
+                <a href="#" data-language-name="ruby">ruby</a>
+          </div>
+      </div>
+    </div>
+  </body>
+</html>
