@@ -1,0 +1,44 @@
+{
+  "attributes": {
+    "code": {
+      "description": "",
+      "type": "string"
+    },
+    "discount-code-type": {
+      "description": "`MoneyOffDiscountCode` : For a flat discount<br />`PercentOffDiscountCode` : For a percentage discount.",
+      "type": "string"
+    },
+    "end-at": {
+      "description": "The time when the discount code becomes unavailable.",
+      "type": "datetime"
+    },
+    "max-quantity-per-release": {
+      "description": "Discount only applies to a maxium of this number.",
+      "type": "integer"
+    },
+    "min-quantity-per-release": {
+      "description": "Discount only applies if this many tickets are selected.",
+      "type": "integer"
+    },
+    "only-show-attached": {
+      "description": "Only display tickets attached to this discount code when it is displayed or not e.g. display all publicly visible tickets. Default `false`",
+      "type": "boolean"
+    },
+    "quantity": {
+      "description": "The number of tickets that can avail of this discount code.",
+      "type": "integer"
+    },
+    "reveal-secret": {
+      "description": "Should secret tickets be revealed if this discount code is applied or not. Default `false`",
+      "type": "boolean"
+    },
+    "start-at": {
+      "description": "The time when the discount code becomes available.",
+      "type": "datetime"
+    },
+    "value": {
+      "description": "The amount off per ticket. A percentage or flat amount depending on the discount code type.",
+      "type": "decimal"
+    }
+  }
+}

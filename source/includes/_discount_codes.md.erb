@@ -1,0 +1,103 @@
+# Discount Codes
+
+## Attributes
+
+Attribute | Type | Description
+--------- | ---- | -----------
+<%- data.discount_codes.attributes.each do |name, attributes| -%>
+<%= name %> | `<%= attributes["type"] %>` | <%= attributes["description"] %>
+<%- end -%>
+
+## Get all Discount Codes
+
+<%= partial "includes/requests/get", locals: { url: "https://api.tito.io/v2/an-account/awesome-conf/discount_codes" } %>
+
+> The above command returns JSON structured like this:
+
+<%= partial 'includes/discount_codes/index' %>
+
+This endpoint retrieves all `Discount Codes` for the given `Event`.
+
+### HTTP Request
+
+`GET https://api.tito.io/v2/:account/:event/discount_codes`
+
+<aside class="notice">
+Note. The attributes for each Discount Code have been removed from the example JSON response for readability.
+</aside>
+
+## Get a specific Discount Code
+
+<%= partial "includes/requests/get", locals: { url: "https://api.tito.io/v2/an-account/awesome-conf/discount_codes/1000001" } %>
+
+> The above command returns JSON structured like this:
+
+<%= partial 'includes/discount_codes/show' %>
+
+This endpoint retrieves a specific `Discount Code`.
+
+### HTTP Request
+
+`GET https://api.tito.io/v2/:account/:event/discount_codes/:discount_code`
+
+## Creating a new Discount Code
+
+<%= partial "includes/requests/post", locals: {
+      url: "https://api.tito.io/v2/an-account/awesome-conf/discount_codes",
+      parameters: { code: 'DISCOUNTDRACULA', discount_code_type: 'PercentOffDiscountCode', value: '25.00' }
+    } %>
+
+This endpoint creates a `Discount Code` on the given `Event`.
+
+### HTTP Request
+
+`POST https://api.tito.io/v2/:account/:event/discount_codes`
+
+### Parameters
+
+Parameter | Type | Description
+--------- | ------- | -----------
+<%- data.discount_codes.attributes.each do |name, attributes| -%>
+<%= name %> | `<%= attributes["type"] %>` | <%= attributes["description"] %>
+<%- end -%>
+
+## Updating a Discount Code
+
+<%= partial "includes/requests/patch", locals: {
+      url: "https://api.tito.io/v2/an-account/awesome-conf/discount_codes/1000001",
+      parameters: {
+        data: {
+          type: "discount-codes",
+          id: "1000001",
+          attributes: {
+            quantity: 25
+          }
+        }
+      }
+    } %>
+
+This endpoint updates a `Discount Code` on the given `Event`.
+
+### HTTP Request
+
+`PATCH https://api.tito.io/v2/:account/:event/:discount_code`
+
+### Parameters
+
+Parameter | Type | Description
+--------- | ---- | -----------
+<%- data.discount_codes.attributes.each do |name, attributes| -%>
+<%= name %> | `<%= attributes["type"] %>` | <%= attributes["description"] %>
+<%- end -%>
+
+## Deleting a Discount Code
+
+<%= partial "includes/requests/delete", locals: {
+      url: "https://api.tito.io/v2/an-account/awesome-conf/discount_codes/1000001"
+    } %>
+
+This endpoint deletes a `Discount Code` on the given `Event`.
+
+### HTTP Request
+
+`DELETE https://api.tito.io/v2/:account/:event/:discount_code`
