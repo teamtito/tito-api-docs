@@ -29,7 +29,7 @@
       "waiting-list-enabled-during-sold-out": false
     },
     "links": {
-      "self": "https://api.tito.io/an-account/free-event/releases/early-bird-ticket"
+      "self": "https://api.tito.io/v2/an-account/free-event/releases/early-bird-ticket"
     }
   }
 }

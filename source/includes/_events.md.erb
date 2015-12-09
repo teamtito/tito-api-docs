@@ -10,7 +10,7 @@ Attribute | Type | Description
 
 ## Get all Events
 
-<%= partial "includes/requests/get", locals: { url: "https://api.tito.io/an-account/events" } %>
+<%= partial "includes/requests/get", locals: { url: "https://api.tito.io/v2/an-account/events" } %>
 
 > The above command returns JSON structured like this:
 
@@ -20,7 +20,7 @@ This endpoint retrieves all `Events` for the given `Account`.
 
 ### HTTP Request
 
-`GET https://api.tito.io/:account/events`
+`GET https://api.tito.io/v2/:account/events`
 
 ### Query Parameters
 
@@ -34,7 +34,7 @@ Note. The attributes for each Event have been removed from the example JSON resp
 
 ## Get a specific Event
 
-<%= partial "includes/requests/get", locals: { url: "https://api.tito.io/an-account/awesome-conf" } %>
+<%= partial "includes/requests/get", locals: { url: "https://api.tito.io/v2/an-account/awesome-conf" } %>
 
 > The above command returns JSON structured like this:
 
@@ -44,12 +44,12 @@ This endpoint retrieves a specific `Event` from the given `Account`.
 
 ### HTTP Request
 
-`GET https://api.tito.io/:account/:event`
+`GET https://api.tito.io/v2/:account/:event`
 
 ## Creating a new Event
 
 <%= partial "includes/requests/post", locals: {
-      url: "https://api.tito.io/an-account/events",
+      url: "https://api.tito.io/v2/an-account/events",
       parameters: {
         data: {
           type: "events",
@@ -65,7 +65,7 @@ This endpoint creates an `Event` on the given `Account`.
 
 ### HTTP Request
 
-`POST https://api.tito.io/:account/events`
+`POST https://api.tito.io/v2/:account/events`
 
 ### Parameters
 
@@ -78,7 +78,7 @@ Parameter | Type | Description
 ## Updating an Event
 
 <%= partial "includes/requests/patch", locals: {
-      url: "https://api.tito.io/an-account/awesome-conf",
+      url: "https://api.tito.io/v2/an-account/awesome-conf",
       parameters: {
         data: {
           type: "events",
@@ -94,7 +94,7 @@ This endpoint updates an `Event` on the given `Account`.
 
 ### HTTP Request
 
-`PATCH https://api.tito.io/:account/:event`
+`PATCH https://api.tito.io/v2/:account/:event`
 
 ### Parameters
 
@@ -107,11 +107,11 @@ Parameter | Type | Description
 ## Deleting an Event
 
 <%= partial "includes/requests/delete", locals: {
-      url: "https://api.tito.io/an-account/awesome-conf"
+      url: "https://api.tito.io/v2/an-account/awesome-conf"
     } %>
 
 This endpoint deletes an `Event` on the given `Account`.
 
 ### HTTP Request
 
-`DELETE https://api.tito.io/:account/:event`
+`DELETE https://api.tito.io/v2/:account/:event`

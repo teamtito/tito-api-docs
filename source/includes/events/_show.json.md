@@ -17,12 +17,12 @@
       "title": null
     },
     "links": {
-      "self": "https://api.tito.io/an-account/awesome-conf"
+      "self": "https://api.tito.io/v2/an-account/awesome-conf"
     },
     "relationships": {
       "releases": {
         "links": {
-          "related": "https://api.tito.io/an-account/awesome-conf/releases"
+          "related": "https://api.tito.io/v2/an-account/awesome-conf/releases"
         }
       }
     }

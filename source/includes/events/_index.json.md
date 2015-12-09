@@ -6,12 +6,12 @@
       "type": "events",
       "attributes": { ... },
       "links": {
-        "self": "https://api.tito.io/an-account/summer-conf"
+        "self": "https://api.tito.io/v2/an-account/summer-conf"
       },
       "relationships": {
         "releases": {
           "links": {
-            "related": "https://api.tito.io/an-account/summer-conf/releases"
+            "related": "https://api.tito.io/v2/an-account/summer-conf/releases"
           }
         }
       }
@@ -21,12 +21,12 @@
       "type": "events",
       "attributes": { ... },
       "links": {
-        "self": "https://api.tito.io/an-account/winter-conf"
+        "self": "https://api.tito.io/v2/an-account/winter-conf"
       },
       "relationships": {
         "releases": {
           "links": {
-            "related": "https://api.tito.io/an-account/winter-conf/releases"
+            "related": "https://api.tito.io/v2/an-account/winter-conf/releases"
           }
         }
       }
