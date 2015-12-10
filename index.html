@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <title>Tito API Reference</title>
+    <title>API Reference</title>
 
     <link href="stylesheets/screen.css" rel="stylesheet" type="text/css" media="screen" />
     <link href="stylesheets/print.css" rel="stylesheet" type="text/css" media="print" />
@@ -56,17 +56,32 @@
 <blockquote>
 <p>To authorize, use this code:</p>
 </blockquote>
-<pre class="highlight ruby"><code><span class="nb">require</span> <span class="s1">'tito'</span>
-<span class="no">Tito</span><span class="p">.</span><span class="nf">api_key</span> <span class="o">=</span> <span class="s1">'YOUR-API-KEY'</span>
+<pre class="highlight ruby"><code><span class="nb">require</span> <span class="s1">'json'</span>
+<span class="nb">require</span> <span class="s1">'net/http'</span>
+<span class="nb">require</span> <span class="s1">'uri'</span>
+
+<span class="n">url</span> <span class="o">=</span> <span class="no">URI</span><span class="p">(</span><span class="s2">"https://api.tito.io/..."</span><span class="p">)</span>
+
+<span class="n">http</span> <span class="o">=</span> <span class="no">Net</span><span class="o">::</span><span class="no">HTTP</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">url</span><span class="p">.</span><span class="nf">host</span><span class="p">,</span> <span class="n">url</span><span class="p">.</span><span class="nf">port</span><span class="p">)</span>
+<span class="n">http</span><span class="p">.</span><span class="nf">use_ssl</span> <span class="o">=</span> <span class="kp">true</span>
+<span class="n">http</span><span class="p">.</span><span class="nf">verify_mode</span> <span class="o">=</span> <span class="no">OpenSSL</span><span class="o">::</span><span class="no">SSL</span><span class="o">::</span><span class="no">VERIFY_NONE</span>
+
+<span class="n">request</span> <span class="o">=</span> <span class="no">Net</span><span class="o">::</span><span class="no">HTTP</span><span class="o">::</span><span class="no">Get</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+<span class="n">request</span><span class="p">[</span><span class="s1">'Accept'</span><span class="p">]</span>        <span class="o">=</span> <span class="s1">'application/vnd.tito.v2'</span>
+<span class="n">request</span><span class="p">[</span><span class="s1">'Authorization'</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'Token token=secret-api-key'</span>
+<span class="n">request</span><span class="p">[</span><span class="s1">'Content-Type'</span><span class="p">]</span>  <span class="o">=</span> <span class="s1">'application/json'</span>
+
+<span class="n">response</span> <span class="o">=</span> <span class="n">http</span><span class="p">.</span><span class="nf">request</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
+<span class="nb">puts</span> <span class="n">response</span><span class="p">.</span><span class="nf">read_body</span>
 </code></pre>
 <pre class="highlight shell"><code>curl --request GET <span class="se">\</span>
-  --url <span class="s1">'https://api.tito.io/v2/...'</span> <span class="se">\</span>
-  --header <span class="s1">'Authorization: Token token=YOUR-API-KEY'</span> <span class="se">\</span>
-  --header <span class="s1">'Accept: application/vnd.api+json'</span> <span class="se">\</span>
+  --url <span class="s1">'https://api.tito.io/...'</span> <span class="se">\</span>
+  --header <span class="s1">'Authorization: Token token=secret-api-key'</span> <span class="se">\</span>
+  --header <span class="s1">'Accept: application/json,application/vnd.tito.v2'</span> <span class="se">\</span>
 </code></pre>
 
 <blockquote>
-<p>Make sure to replace <code class="prettyprint">YOUR-API-KEY</code> with your API key.</p>
+<p>Make sure to replace <code class="prettyprint">secret-api-key</code> with your API key.</p>
 </blockquote>
 
 <p>Tito uses API keys to allow access to the API. You can find your API key by signing in at <a href="https://api.tito.io">https://api.tito.io</a>.</p>
@@ -138,10 +153,29 @@
 
 <h2 id="get-all-discount-codes">Get all Discount Codes</h2>
 
+<pre class="highlight ruby"><code><span class="nb">require</span> <span class="s1">'json'</span>
+<span class="nb">require</span> <span class="s1">'net/http'</span>
+<span class="nb">require</span> <span class="s1">'uri'</span>
+
+<span class="n">url</span> <span class="o">=</span> <span class="no">URI</span><span class="p">(</span><span class="s2">"https://api.tito.io/v2/an-account/awesome-conf/discount_codes"</span><span class="p">)</span>
+
+<span class="n">http</span> <span class="o">=</span> <span class="no">Net</span><span class="o">::</span><span class="no">HTTP</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">url</span><span class="p">.</span><span class="nf">host</span><span class="p">,</span> <span class="n">url</span><span class="p">.</span><span class="nf">port</span><span class="p">)</span>
+<span class="n">http</span><span class="p">.</span><span class="nf">use_ssl</span> <span class="o">=</span> <span class="kp">true</span>
+<span class="n">http</span><span class="p">.</span><span class="nf">verify_mode</span> <span class="o">=</span> <span class="no">OpenSSL</span><span class="o">::</span><span class="no">SSL</span><span class="o">::</span><span class="no">VERIFY_NONE</span>
+
+<span class="n">request</span> <span class="o">=</span> <span class="no">Net</span><span class="o">::</span><span class="no">HTTP</span><span class="o">::</span><span class="no">Get</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+<span class="n">request</span><span class="p">[</span><span class="s1">'Accept'</span><span class="p">]</span>        <span class="o">=</span> <span class="s1">'application/vnd.tito.v2'</span>
+<span class="n">request</span><span class="p">[</span><span class="s1">'Authorization'</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'Token token=secret-api-key'</span>
+<span class="n">request</span><span class="p">[</span><span class="s1">'Content-Type'</span><span class="p">]</span>  <span class="o">=</span> <span class="s1">'application/json'</span>
+
+<span class="n">response</span> <span class="o">=</span> <span class="n">http</span><span class="p">.</span><span class="nf">request</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
+<span class="nb">puts</span> <span class="n">response</span><span class="p">.</span><span class="nf">read_body</span>
+</code></pre>
+
 <pre class="highlight shell"><code>curl --request GET <span class="se">\</span>
   --url <span class="s1">'https://api.tito.io/v2/an-account/awesome-conf/discount_codes'</span> <span class="se">\</span>
-  --header <span class="s1">'Authorization: Token token=YOUR-API-KEY'</span> <span class="se">\</span>
-  --header <span class="s1">'Accept: application/vnd.api+json'</span> <span class="se">\</span>
+  --header <span class="s1">'Authorization: Token token=secret-api-key'</span> <span class="se">\</span>
+  --header <span class="s1">'Accept: application/json,application/vnd.tito.v2'</span> <span class="se">\</span>
 </code></pre>
 
 <blockquote>
@@ -182,10 +216,29 @@ Note. The attributes for each Discount Code have been removed from the example J
 
 <h2 id="get-a-specific-discount-code">Get a specific Discount Code</h2>
 
+<pre class="highlight ruby"><code><span class="nb">require</span> <span class="s1">'json'</span>
+<span class="nb">require</span> <span class="s1">'net/http'</span>
+<span class="nb">require</span> <span class="s1">'uri'</span>
+
+<span class="n">url</span> <span class="o">=</span> <span class="no">URI</span><span class="p">(</span><span class="s2">"https://api.tito.io/v2/an-account/awesome-conf/discount_codes/1000001"</span><span class="p">)</span>
+
+<span class="n">http</span> <span class="o">=</span> <span class="no">Net</span><span class="o">::</span><span class="no">HTTP</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">url</span><span class="p">.</span><span class="nf">host</span><span class="p">,</span> <span class="n">url</span><span class="p">.</span><span class="nf">port</span><span class="p">)</span>
+<span class="n">http</span><span class="p">.</span><span class="nf">use_ssl</span> <span class="o">=</span> <span class="kp">true</span>
+<span class="n">http</span><span class="p">.</span><span class="nf">verify_mode</span> <span class="o">=</span> <span class="no">OpenSSL</span><span class="o">::</span><span class="no">SSL</span><span class="o">::</span><span class="no">VERIFY_NONE</span>
+
+<span class="n">request</span> <span class="o">=</span> <span class="no">Net</span><span class="o">::</span><span class="no">HTTP</span><span class="o">::</span><span class="no">Get</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+<span class="n">request</span><span class="p">[</span><span class="s1">'Accept'</span><span class="p">]</span>        <span class="o">=</span> <span class="s1">'application/vnd.tito.v2'</span>
+<span class="n">request</span><span class="p">[</span><span class="s1">'Authorization'</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'Token token=secret-api-key'</span>
+<span class="n">request</span><span class="p">[</span><span class="s1">'Content-Type'</span><span class="p">]</span>  <span class="o">=</span> <span class="s1">'application/json'</span>
+
+<span class="n">response</span> <span class="o">=</span> <span class="n">http</span><span class="p">.</span><span class="nf">request</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
+<span class="nb">puts</span> <span class="n">response</span><span class="p">.</span><span class="nf">read_body</span>
+</code></pre>
+
 <pre class="highlight shell"><code>curl --request GET <span class="se">\</span>
   --url <span class="s1">'https://api.tito.io/v2/an-account/awesome-conf/discount_codes/1000001'</span> <span class="se">\</span>
-  --header <span class="s1">'Authorization: Token token=YOUR-API-KEY'</span> <span class="se">\</span>
-  --header <span class="s1">'Accept: application/vnd.api+json'</span> <span class="se">\</span>
+  --header <span class="s1">'Authorization: Token token=secret-api-key'</span> <span class="se">\</span>
+  --header <span class="s1">'Accept: application/json,application/vnd.tito.v2'</span> <span class="se">\</span>
 </code></pre>
 
 <blockquote>
@@ -223,12 +276,35 @@ Note. The attributes for each Discount Code have been removed from the example J
 
 <h2 id="creating-a-new-discount-code">Creating a new Discount Code</h2>
 
+<pre class="highlight ruby"><code><span class="nb">require</span> <span class="s1">'json'</span>
+<span class="nb">require</span> <span class="s1">'net/http'</span>
+<span class="nb">require</span> <span class="s1">'uri'</span>
+
+<span class="n">url</span> <span class="o">=</span> <span class="no">URI</span><span class="p">(</span><span class="s2">"https://api.tito.io/v2/an-account/awesome-conf/discount_codes"</span><span class="p">)</span>
+
+<span class="n">http</span> <span class="o">=</span> <span class="no">Net</span><span class="o">::</span><span class="no">HTTP</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">url</span><span class="p">.</span><span class="nf">host</span><span class="p">,</span> <span class="n">url</span><span class="p">.</span><span class="nf">port</span><span class="p">)</span>
+<span class="n">http</span><span class="p">.</span><span class="nf">use_ssl</span> <span class="o">=</span> <span class="kp">true</span>
+<span class="n">http</span><span class="p">.</span><span class="nf">verify_mode</span> <span class="o">=</span> <span class="no">OpenSSL</span><span class="o">::</span><span class="no">SSL</span><span class="o">::</span><span class="no">VERIFY_NONE</span>
+
+<span class="n">request</span> <span class="o">=</span> <span class="no">Net</span><span class="o">::</span><span class="no">HTTP</span><span class="o">::</span><span class="no">Post</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+<span class="n">request</span><span class="p">[</span><span class="s1">'Accept'</span><span class="p">]</span>        <span class="o">=</span> <span class="s1">'application/vnd.tito.v2'</span>
+<span class="n">request</span><span class="p">[</span><span class="s1">'Authorization'</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'Token token=secret-api-key'</span>
+<span class="n">request</span><span class="p">[</span><span class="s1">'Content-Type'</span><span class="p">]</span>  <span class="o">=</span> <span class="s1">'application/json'</span>
+<span class="n">request</span><span class="p">.</span><span class="nf">body</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s2">"code"</span><span class="p">:</span> <span class="s2">"DISCOUNTDRACULA"</span><span class="p">,</span>
+  <span class="s2">"discount_code_type"</span><span class="p">:</span> <span class="s2">"PercentOffDiscountCode"</span><span class="p">,</span>
+  <span class="s2">"value"</span><span class="p">:</span> <span class="s2">"25.00"</span>
+<span class="p">}</span>
+
+<span class="n">response</span> <span class="o">=</span> <span class="n">http</span><span class="p">.</span><span class="nf">request</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
+<span class="nb">puts</span> <span class="n">response</span><span class="p">.</span><span class="nf">read_body</span>
+</code></pre>
+
 <pre class="highlight shell"><code>curl --request POST <span class="se">\</span>
   --url <span class="s1">'https://api.tito.io/v2/an-account/awesome-conf/discount_codes'</span> <span class="se">\</span>
-  --header <span class="s1">'Authorization: Token token=YOUR-API-KEY'</span> <span class="se">\</span>
-  --header <span class="s1">'Accept: application/vnd.api+json'</span> <span class="se">\</span>
-  --header <span class="s1">'Content-Type: application/json'</span>
-  --data <span class="s1">'{"code":"DISCOUNTDRACULA","discount_code_type":"PercentOffDiscountCode","value":"25.00"}'</span>
+  --header <span class="s1">'Authorization: Token token=secret-api-key'</span> <span class="se">\</span>
+  --header <span class="s1">'Accept: application/json,application/vnd.tito.v2'</span> <span class="se">\</span>
+  --data <span class="s1">'code=DISCOUNTDRACULA&amp;discount_code_type=PercentOffDiscountCode&amp;value=25.00'</span>
 </code></pre>
 
 <p>This endpoint creates a <code class="prettyprint">Discount Code</code> on the given <code class="prettyprint">Event</code>.</p>
@@ -300,12 +376,39 @@ Note. The attributes for each Discount Code have been removed from the example J
 
 <h2 id="updating-a-discount-code">Updating a Discount Code</h2>
 
+<pre class="highlight ruby"><code><span class="nb">require</span> <span class="s1">'json'</span>
+<span class="nb">require</span> <span class="s1">'net/http'</span>
+<span class="nb">require</span> <span class="s1">'uri'</span>
+
+<span class="n">url</span> <span class="o">=</span> <span class="no">URI</span><span class="p">(</span><span class="s2">"https://api.tito.io/v2/an-account/awesome-conf/discount_codes/1000001"</span><span class="p">)</span>
+
+<span class="n">http</span> <span class="o">=</span> <span class="no">Net</span><span class="o">::</span><span class="no">HTTP</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">url</span><span class="p">.</span><span class="nf">host</span><span class="p">,</span> <span class="n">url</span><span class="p">.</span><span class="nf">port</span><span class="p">)</span>
+<span class="n">http</span><span class="p">.</span><span class="nf">use_ssl</span> <span class="o">=</span> <span class="kp">true</span>
+<span class="n">http</span><span class="p">.</span><span class="nf">verify_mode</span> <span class="o">=</span> <span class="no">OpenSSL</span><span class="o">::</span><span class="no">SSL</span><span class="o">::</span><span class="no">VERIFY_NONE</span>
+
+<span class="n">request</span> <span class="o">=</span> <span class="no">Net</span><span class="o">::</span><span class="no">HTTP</span><span class="o">::</span><span class="no">Patch</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+<span class="n">request</span><span class="p">[</span><span class="s1">'Accept'</span><span class="p">]</span>        <span class="o">=</span> <span class="s1">'application/vnd.tito.v2'</span>
+<span class="n">request</span><span class="p">[</span><span class="s1">'Authorization'</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'Token token=secret-api-key'</span>
+<span class="n">request</span><span class="p">[</span><span class="s1">'Content-Type'</span><span class="p">]</span>  <span class="o">=</span> <span class="s1">'application/json'</span>
+<span class="n">request</span><span class="p">.</span><span class="nf">body</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s2">"data"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"discount-codes"</span><span class="p">,</span>
+    <span class="s2">"id"</span><span class="p">:</span> <span class="s2">"1000001"</span><span class="p">,</span>
+    <span class="s2">"attributes"</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">"quantity"</span><span class="p">:</span> <span class="mi">25</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="n">response</span> <span class="o">=</span> <span class="n">http</span><span class="p">.</span><span class="nf">request</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
+<span class="nb">puts</span> <span class="n">response</span><span class="p">.</span><span class="nf">read_body</span>
+</code></pre>
+
 <pre class="highlight shell"><code>curl --request PATCH <span class="se">\</span>
   --url <span class="s1">'https://api.tito.io/v2/an-account/awesome-conf/discount_codes/1000001'</span> <span class="se">\</span>
-  --header <span class="s1">'Authorization: Token token=YOUR-API-KEY'</span> <span class="se">\</span>
-  --header <span class="s1">'Accept: application/vnd.api+json'</span> <span class="se">\</span>
-  --header <span class="s1">'Content-type: application/json'</span>
-  --data <span class="s1">'{"data":{"type":"discount-codes","id":"1000001","attributes":{"quantity":25}}}'</span>
+  --header <span class="s1">'Authorization: Token token=secret-api-key'</span> <span class="se">\</span>
+  --header <span class="s1">'Accept: application/json,application/vnd.tito.v2'</span> <span class="se">\</span>
+  --data <span class="s1">'data%5Battributes%5D%5Bquantity%5D=25&amp;data%5Bid%5D=1000001&amp;data%5Btype%5D=discount-codes'</span>
 </code></pre>
 
 <p>This endpoint updates a <code class="prettyprint">Discount Code</code> on the given <code class="prettyprint">Event</code>.</p>
@@ -377,10 +480,29 @@ Note. The attributes for each Discount Code have been removed from the example J
 
 <h2 id="deleting-a-discount-code">Deleting a Discount Code</h2>
 
+<pre class="highlight ruby"><code><span class="nb">require</span> <span class="s1">'json'</span>
+<span class="nb">require</span> <span class="s1">'net/http'</span>
+<span class="nb">require</span> <span class="s1">'uri'</span>
+
+<span class="n">url</span> <span class="o">=</span> <span class="no">URI</span><span class="p">(</span><span class="s2">"https://api.tito.io/v2/an-account/awesome-conf/discount_codes/1000001"</span><span class="p">)</span>
+
+<span class="n">http</span> <span class="o">=</span> <span class="no">Net</span><span class="o">::</span><span class="no">HTTP</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">url</span><span class="p">.</span><span class="nf">host</span><span class="p">,</span> <span class="n">url</span><span class="p">.</span><span class="nf">port</span><span class="p">)</span>
+<span class="n">http</span><span class="p">.</span><span class="nf">use_ssl</span> <span class="o">=</span> <span class="kp">true</span>
+<span class="n">http</span><span class="p">.</span><span class="nf">verify_mode</span> <span class="o">=</span> <span class="no">OpenSSL</span><span class="o">::</span><span class="no">SSL</span><span class="o">::</span><span class="no">VERIFY_NONE</span>
+
+<span class="n">request</span> <span class="o">=</span> <span class="no">Net</span><span class="o">::</span><span class="no">HTTP</span><span class="o">::</span><span class="no">Delete</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+<span class="n">request</span><span class="p">[</span><span class="s1">'Accept'</span><span class="p">]</span>        <span class="o">=</span> <span class="s1">'application/vnd.tito.v2'</span>
+<span class="n">request</span><span class="p">[</span><span class="s1">'Authorization'</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'Token token=secret-api-key'</span>
+<span class="n">request</span><span class="p">[</span><span class="s1">'Content-Type'</span><span class="p">]</span>  <span class="o">=</span> <span class="s1">'application/json'</span>
+
+<span class="n">response</span> <span class="o">=</span> <span class="n">http</span><span class="p">.</span><span class="nf">request</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
+<span class="nb">puts</span> <span class="n">response</span><span class="p">.</span><span class="nf">read_body</span>
+</code></pre>
+
 <pre class="highlight shell"><code>curl --request DELETE <span class="se">\</span>
   --url <span class="s1">'https://api.tito.io/v2/an-account/awesome-conf/discount_codes/1000001'</span> <span class="se">\</span>
-  --header <span class="s1">'Authorization: Token token=YOUR-API-KEY'</span> <span class="se">\</span>
-  --header <span class="s1">'Accept: application/vnd.api+json'</span> <span class="se">\</span>
+  --header <span class="s1">'Authorization: Token token=secret-api-key'</span> <span class="se">\</span>
+  --header <span class="s1">'Accept: application/json,application/vnd.tito.v2'</span> <span class="se">\</span>
 </code></pre>
 
 <p>This endpoint deletes a <code class="prettyprint">Discount Code</code> on the given <code class="prettyprint">Event</code>.</p>
@@ -390,10 +512,6 @@ Note. The attributes for each Discount Code have been removed from the example J
 <p><code class="prettyprint">DELETE https://api.tito.io/v2/:account/:event/:discount_code</code></p>
 
           <h1 id="events">Events</h1>
-
-<p>Events are the primary object in Tito. An event is added to an <code class="prettyprint">Account</code>, and most other resources belong to an <code class="prettyprint">Event</code> object. An event URL is comprised of the combination of the <code class="prettyprint">Account</code>’s <code class="prettyprint">slug</code> and the &lsquo;Event&#39;’s <code class="prettyprint">slug</code>, for example <code class="prettyprint">https://ti.to/ultimateconf/2015</code> is composed of the base <code class="prettyprint">ti.to</code> URL, the Ultimateconf slug <code class="prettyprint">ultimateconf</code> and the specific <code class="prettyprint">Event</code> slug for the 2015 edition.</p>
-
-<p>The equivalent event can be looked up using a similar URL structure with the API base URL: <code class="prettyprint">https://api.tito.io/v2/ultimateconf/2015</code></p>
 
 <h2 id="attributes">Attributes</h2>
 
@@ -463,33 +581,32 @@ Note. The attributes for each Discount Code have been removed from the example J
 
 <h2 id="get-all-events">Get all Events</h2>
 
-<p>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD
-<code class="prettyprint">ruby
-Tito::Event.where(account_id: &#39;an-account&#39;).events
-</code></p>
+<pre class="highlight ruby"><code><span class="nb">require</span> <span class="s1">'json'</span>
+<span class="nb">require</span> <span class="s1">'net/http'</span>
+<span class="nb">require</span> <span class="s1">'uri'</span>
 
-<p>=======</p>
+<span class="n">url</span> <span class="o">=</span> <span class="no">URI</span><span class="p">(</span><span class="s2">"https://api.tito.io/v2/an-account/events"</span><span class="p">)</span>
+
+<span class="n">http</span> <span class="o">=</span> <span class="no">Net</span><span class="o">::</span><span class="no">HTTP</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">url</span><span class="p">.</span><span class="nf">host</span><span class="p">,</span> <span class="n">url</span><span class="p">.</span><span class="nf">port</span><span class="p">)</span>
+<span class="n">http</span><span class="p">.</span><span class="nf">use_ssl</span> <span class="o">=</span> <span class="kp">true</span>
+<span class="n">http</span><span class="p">.</span><span class="nf">verify_mode</span> <span class="o">=</span> <span class="no">OpenSSL</span><span class="o">::</span><span class="no">SSL</span><span class="o">::</span><span class="no">VERIFY_NONE</span>
+
+<span class="n">request</span> <span class="o">=</span> <span class="no">Net</span><span class="o">::</span><span class="no">HTTP</span><span class="o">::</span><span class="no">Get</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+<span class="n">request</span><span class="p">[</span><span class="s1">'Accept'</span><span class="p">]</span>        <span class="o">=</span> <span class="s1">'application/vnd.tito.v2'</span>
+<span class="n">request</span><span class="p">[</span><span class="s1">'Authorization'</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'Token token=secret-api-key'</span>
+<span class="n">request</span><span class="p">[</span><span class="s1">'Content-Type'</span><span class="p">]</span>  <span class="o">=</span> <span class="s1">'application/json'</span>
+
+<span class="n">response</span> <span class="o">=</span> <span class="n">http</span><span class="p">.</span><span class="nf">request</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
+<span class="nb">puts</span> <span class="n">response</span><span class="p">.</span><span class="nf">read_body</span>
+</code></pre>
+
+<pre class="highlight shell"><code>curl --request GET <span class="se">\</span>
+  --url <span class="s1">'https://api.tito.io/v2/an-account/events'</span> <span class="se">\</span>
+  --header <span class="s1">'Authorization: Token token=secret-api-key'</span> <span class="se">\</span>
+  --header <span class="s1">'Accept: application/json,application/vnd.tito.v2'</span> <span class="se">\</span>
+</code></pre>
 
 <blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<p>ed8e5bf3780c3da9bc37fbe880f35f77fbc66d5a
-<pre class="highlight shell"><code>curl --request GET <span class="se">&lt;/span&gt;
-  --url <span class="s1">&#39;https://api.tito.io/v2/an-account/events&#39;</span> <span class="se">&lt;/span&gt;
-  --header <span class="s1">&#39;Authorization: Token token=YOUR-API-KEY&#39;</span> <span class="se">&lt;/span&gt;
-  --header <span class="s1">&#39;Accept: application/vnd.api+json&#39;</span> <span class="se">&lt;/span&gt;
-</code></pre></p>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
-
 <p>The above command returns JSON structured like this:</p>
 </blockquote>
 
@@ -557,33 +674,32 @@ Note. The attributes for each Event have been removed from the example JSON resp
 
 <h2 id="get-a-specific-event">Get a specific Event</h2>
 
-<p>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD
-<code class="prettyprint">ruby
-Tito::Event.get(&#39;an-account/awesome-conf&#39;)
-</code></p>
+<pre class="highlight ruby"><code><span class="nb">require</span> <span class="s1">'json'</span>
+<span class="nb">require</span> <span class="s1">'net/http'</span>
+<span class="nb">require</span> <span class="s1">'uri'</span>
 
-<p>=======</p>
+<span class="n">url</span> <span class="o">=</span> <span class="no">URI</span><span class="p">(</span><span class="s2">"https://api.tito.io/v2/an-account/awesome-conf"</span><span class="p">)</span>
+
+<span class="n">http</span> <span class="o">=</span> <span class="no">Net</span><span class="o">::</span><span class="no">HTTP</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">url</span><span class="p">.</span><span class="nf">host</span><span class="p">,</span> <span class="n">url</span><span class="p">.</span><span class="nf">port</span><span class="p">)</span>
+<span class="n">http</span><span class="p">.</span><span class="nf">use_ssl</span> <span class="o">=</span> <span class="kp">true</span>
+<span class="n">http</span><span class="p">.</span><span class="nf">verify_mode</span> <span class="o">=</span> <span class="no">OpenSSL</span><span class="o">::</span><span class="no">SSL</span><span class="o">::</span><span class="no">VERIFY_NONE</span>
+
+<span class="n">request</span> <span class="o">=</span> <span class="no">Net</span><span class="o">::</span><span class="no">HTTP</span><span class="o">::</span><span class="no">Get</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+<span class="n">request</span><span class="p">[</span><span class="s1">'Accept'</span><span class="p">]</span>        <span class="o">=</span> <span class="s1">'application/vnd.tito.v2'</span>
+<span class="n">request</span><span class="p">[</span><span class="s1">'Authorization'</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'Token token=secret-api-key'</span>
+<span class="n">request</span><span class="p">[</span><span class="s1">'Content-Type'</span><span class="p">]</span>  <span class="o">=</span> <span class="s1">'application/json'</span>
+
+<span class="n">response</span> <span class="o">=</span> <span class="n">http</span><span class="p">.</span><span class="nf">request</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
+<span class="nb">puts</span> <span class="n">response</span><span class="p">.</span><span class="nf">read_body</span>
+</code></pre>
+
+<pre class="highlight shell"><code>curl --request GET <span class="se">\</span>
+  --url <span class="s1">'https://api.tito.io/v2/an-account/awesome-conf'</span> <span class="se">\</span>
+  --header <span class="s1">'Authorization: Token token=secret-api-key'</span> <span class="se">\</span>
+  --header <span class="s1">'Accept: application/json,application/vnd.tito.v2'</span> <span class="se">\</span>
+</code></pre>
 
 <blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<p>ed8e5bf3780c3da9bc37fbe880f35f77fbc66d5a
-<pre class="highlight shell"><code>curl --request GET <span class="se">&lt;/span&gt;
-  --url <span class="s1">&#39;https://api.tito.io/v2/an-account/awesome-conf&#39;</span> <span class="se">&lt;/span&gt;
-  --header <span class="s1">&#39;Authorization: Token token=YOUR-API-KEY&#39;</span> <span class="se">&lt;/span&gt;
-  --header <span class="s1">&#39;Accept: application/vnd.api+json&#39;</span> <span class="se">&lt;/span&gt;
-</code></pre></p>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
-
 <p>The above command returns JSON structured like this:</p>
 </blockquote>
 
@@ -625,15 +741,40 @@ Tito::Event.get(&#39;an-account/awesome-conf&#39;)
 <p><code class="prettyprint">GET https://api.tito.io/v2/:account/:event</code></p>
 
 <h2 id="creating-a-new-event">Creating a new Event</h2>
-<pre class="highlight ruby"><code><span class="no">Tito</span><span class="o">::</span><span class="no">Event</span><span class="p">.</span><span class="nf">create</span><span class="p">(</span><span class="ss">account_id: </span><span class="s1">'an-account'</span><span class="p">,</span> <span class="ss">title: </span><span class="s1">'My New Event'</span><span class="p">)</span>
+
+<pre class="highlight ruby"><code><span class="nb">require</span> <span class="s1">'json'</span>
+<span class="nb">require</span> <span class="s1">'net/http'</span>
+<span class="nb">require</span> <span class="s1">'uri'</span>
+
+<span class="n">url</span> <span class="o">=</span> <span class="no">URI</span><span class="p">(</span><span class="s2">"https://api.tito.io/v2/an-account/events"</span><span class="p">)</span>
+
+<span class="n">http</span> <span class="o">=</span> <span class="no">Net</span><span class="o">::</span><span class="no">HTTP</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">url</span><span class="p">.</span><span class="nf">host</span><span class="p">,</span> <span class="n">url</span><span class="p">.</span><span class="nf">port</span><span class="p">)</span>
+<span class="n">http</span><span class="p">.</span><span class="nf">use_ssl</span> <span class="o">=</span> <span class="kp">true</span>
+<span class="n">http</span><span class="p">.</span><span class="nf">verify_mode</span> <span class="o">=</span> <span class="no">OpenSSL</span><span class="o">::</span><span class="no">SSL</span><span class="o">::</span><span class="no">VERIFY_NONE</span>
+
+<span class="n">request</span> <span class="o">=</span> <span class="no">Net</span><span class="o">::</span><span class="no">HTTP</span><span class="o">::</span><span class="no">Post</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+<span class="n">request</span><span class="p">[</span><span class="s1">'Accept'</span><span class="p">]</span>        <span class="o">=</span> <span class="s1">'application/vnd.tito.v2'</span>
+<span class="n">request</span><span class="p">[</span><span class="s1">'Authorization'</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'Token token=secret-api-key'</span>
+<span class="n">request</span><span class="p">[</span><span class="s1">'Content-Type'</span><span class="p">]</span>  <span class="o">=</span> <span class="s1">'application/json'</span>
+<span class="n">request</span><span class="p">.</span><span class="nf">body</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s2">"data"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"events"</span><span class="p">,</span>
+    <span class="s2">"attributes"</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">"slug"</span><span class="p">:</span> <span class="s2">"Awesome-conf"</span><span class="p">,</span>
+      <span class="s2">"title"</span><span class="p">:</span> <span class="s2">"Awesome Conf"</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="n">response</span> <span class="o">=</span> <span class="n">http</span><span class="p">.</span><span class="nf">request</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
+<span class="nb">puts</span> <span class="n">response</span><span class="p">.</span><span class="nf">read_body</span>
 </code></pre>
 
 <pre class="highlight shell"><code>curl --request POST <span class="se">\</span>
   --url <span class="s1">'https://api.tito.io/v2/an-account/events'</span> <span class="se">\</span>
-  --header <span class="s1">'Authorization: Token token=YOUR-API-KEY'</span> <span class="se">\</span>
-  --header <span class="s1">'Accept: application/vnd.api+json'</span> <span class="se">\</span>
-  --header <span class="s1">'Content-Type: application/json'</span>
-  --data <span class="s1">'{"data":{"type":"events","attributes":{"slug":"Awesome-conf","title":"Awesome Conf"}}}'</span>
+  --header <span class="s1">'Authorization: Token token=secret-api-key'</span> <span class="se">\</span>
+  --header <span class="s1">'Accept: application/json,application/vnd.tito.v2'</span> <span class="se">\</span>
+  --data <span class="s1">'data%5Battributes%5D%5Bslug%5D=Awesome-conf&amp;data%5Battributes%5D%5Btitle%5D=Awesome+Conf&amp;data%5Btype%5D=events'</span>
 </code></pre>
 
 <p>This endpoint creates an <code class="prettyprint">Event</code> on the given <code class="prettyprint">Account</code>.</p>
@@ -699,18 +840,40 @@ Tito::Event.get(&#39;an-account/awesome-conf&#39;)
 </tbody></table>
 
 <h2 id="updating-an-event">Updating an Event</h2>
-<pre class="highlight ruby"><code><span class="n">event</span> <span class="o">=</span> <span class="no">Tito</span><span class="o">::</span><span class="no">Event</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="s1">'an-account/awesome-conf'</span><span class="p">)</span>
-<span class="n">event</span><span class="p">.</span><span class="nf">start_date</span> <span class="o">=</span> <span class="s1">'tomorrow'</span>
-<span class="n">event</span><span class="p">.</span><span class="nf">end_date</span> <span class="o">=</span> <span class="s1">'today'</span>
-<span class="n">event</span><span class="p">.</span><span class="nf">save</span>
+
+<pre class="highlight ruby"><code><span class="nb">require</span> <span class="s1">'json'</span>
+<span class="nb">require</span> <span class="s1">'net/http'</span>
+<span class="nb">require</span> <span class="s1">'uri'</span>
+
+<span class="n">url</span> <span class="o">=</span> <span class="no">URI</span><span class="p">(</span><span class="s2">"https://api.tito.io/v2/an-account/awesome-conf"</span><span class="p">)</span>
+
+<span class="n">http</span> <span class="o">=</span> <span class="no">Net</span><span class="o">::</span><span class="no">HTTP</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">url</span><span class="p">.</span><span class="nf">host</span><span class="p">,</span> <span class="n">url</span><span class="p">.</span><span class="nf">port</span><span class="p">)</span>
+<span class="n">http</span><span class="p">.</span><span class="nf">use_ssl</span> <span class="o">=</span> <span class="kp">true</span>
+<span class="n">http</span><span class="p">.</span><span class="nf">verify_mode</span> <span class="o">=</span> <span class="no">OpenSSL</span><span class="o">::</span><span class="no">SSL</span><span class="o">::</span><span class="no">VERIFY_NONE</span>
+
+<span class="n">request</span> <span class="o">=</span> <span class="no">Net</span><span class="o">::</span><span class="no">HTTP</span><span class="o">::</span><span class="no">Patch</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+<span class="n">request</span><span class="p">[</span><span class="s1">'Accept'</span><span class="p">]</span>        <span class="o">=</span> <span class="s1">'application/vnd.tito.v2'</span>
+<span class="n">request</span><span class="p">[</span><span class="s1">'Authorization'</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'Token token=secret-api-key'</span>
+<span class="n">request</span><span class="p">[</span><span class="s1">'Content-Type'</span><span class="p">]</span>  <span class="o">=</span> <span class="s1">'application/json'</span>
+<span class="n">request</span><span class="p">.</span><span class="nf">body</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s2">"data"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"events"</span><span class="p">,</span>
+    <span class="s2">"id"</span><span class="p">:</span> <span class="s2">"awesome-conf"</span><span class="p">,</span>
+    <span class="s2">"attributes"</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">"location"</span><span class="p">:</span> <span class="s2">"Dublin, Ireland"</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="n">response</span> <span class="o">=</span> <span class="n">http</span><span class="p">.</span><span class="nf">request</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
+<span class="nb">puts</span> <span class="n">response</span><span class="p">.</span><span class="nf">read_body</span>
 </code></pre>
 
 <pre class="highlight shell"><code>curl --request PATCH <span class="se">\</span>
   --url <span class="s1">'https://api.tito.io/v2/an-account/awesome-conf'</span> <span class="se">\</span>
-  --header <span class="s1">'Authorization: Token token=YOUR-API-KEY'</span> <span class="se">\</span>
-  --header <span class="s1">'Accept: application/vnd.api+json'</span> <span class="se">\</span>
-  --header <span class="s1">'Content-type: application/json'</span>
-  --data <span class="s1">'{"data":{"type":"events","id":"awesome-conf","attributes":{"location":"Dublin, Ireland"}}}'</span>
+  --header <span class="s1">'Authorization: Token token=secret-api-key'</span> <span class="se">\</span>
+  --header <span class="s1">'Accept: application/json,application/vnd.tito.v2'</span> <span class="se">\</span>
+  --data <span class="s1">'data%5Battributes%5D%5Blocation%5D=Dublin%2C+Ireland&amp;data%5Bid%5D=awesome-conf&amp;data%5Btype%5D=events'</span>
 </code></pre>
 
 <p>This endpoint updates an <code class="prettyprint">Event</code> on the given <code class="prettyprint">Account</code>.</p>
@@ -776,14 +939,30 @@ Tito::Event.get(&#39;an-account/awesome-conf&#39;)
 </tbody></table>
 
 <h2 id="deleting-an-event">Deleting an Event</h2>
-<pre class="highlight ruby"><code><span class="n">event</span> <span class="o">=</span> <span class="no">Tito</span><span class="o">::</span><span class="no">Event</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="s1">'an-account/awesome-conf'</span><span class="p">)</span>
-<span class="n">event</span><span class="p">.</span><span class="nf">destroy</span>
+
+<pre class="highlight ruby"><code><span class="nb">require</span> <span class="s1">'json'</span>
+<span class="nb">require</span> <span class="s1">'net/http'</span>
+<span class="nb">require</span> <span class="s1">'uri'</span>
+
+<span class="n">url</span> <span class="o">=</span> <span class="no">URI</span><span class="p">(</span><span class="s2">"https://api.tito.io/v2/an-account/awesome-conf"</span><span class="p">)</span>
+
+<span class="n">http</span> <span class="o">=</span> <span class="no">Net</span><span class="o">::</span><span class="no">HTTP</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">url</span><span class="p">.</span><span class="nf">host</span><span class="p">,</span> <span class="n">url</span><span class="p">.</span><span class="nf">port</span><span class="p">)</span>
+<span class="n">http</span><span class="p">.</span><span class="nf">use_ssl</span> <span class="o">=</span> <span class="kp">true</span>
+<span class="n">http</span><span class="p">.</span><span class="nf">verify_mode</span> <span class="o">=</span> <span class="no">OpenSSL</span><span class="o">::</span><span class="no">SSL</span><span class="o">::</span><span class="no">VERIFY_NONE</span>
+
+<span class="n">request</span> <span class="o">=</span> <span class="no">Net</span><span class="o">::</span><span class="no">HTTP</span><span class="o">::</span><span class="no">Delete</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+<span class="n">request</span><span class="p">[</span><span class="s1">'Accept'</span><span class="p">]</span>        <span class="o">=</span> <span class="s1">'application/vnd.tito.v2'</span>
+<span class="n">request</span><span class="p">[</span><span class="s1">'Authorization'</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'Token token=secret-api-key'</span>
+<span class="n">request</span><span class="p">[</span><span class="s1">'Content-Type'</span><span class="p">]</span>  <span class="o">=</span> <span class="s1">'application/json'</span>
+
+<span class="n">response</span> <span class="o">=</span> <span class="n">http</span><span class="p">.</span><span class="nf">request</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
+<span class="nb">puts</span> <span class="n">response</span><span class="p">.</span><span class="nf">read_body</span>
 </code></pre>
 
 <pre class="highlight shell"><code>curl --request DELETE <span class="se">\</span>
   --url <span class="s1">'https://api.tito.io/v2/an-account/awesome-conf'</span> <span class="se">\</span>
-  --header <span class="s1">'Authorization: Token token=YOUR-API-KEY'</span> <span class="se">\</span>
-  --header <span class="s1">'Accept: application/vnd.api+json'</span> <span class="se">\</span>
+  --header <span class="s1">'Authorization: Token token=secret-api-key'</span> <span class="se">\</span>
+  --header <span class="s1">'Accept: application/json,application/vnd.tito.v2'</span> <span class="se">\</span>
 </code></pre>
 
 <p>This endpoint deletes an <code class="prettyprint">Event</code> on the given <code class="prettyprint">Account</code>.</p>
@@ -791,25 +970,6 @@ Tito::Event.get(&#39;an-account/awesome-conf&#39;)
 <h3 id="http-request">HTTP Request</h3>
 
 <p><code class="prettyprint">DELETE https://api.tito.io/v2/:account/:event</code></p>
-
-<h2 id="duplicating-an-event">Duplicating an Event</h2>
-<pre class="highlight ruby"><code><span class="n">event</span> <span class="o">=</span> <span class="no">Tito</span><span class="o">::</span><span class="no">Event</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="s1">'an-account/awesome-conf'</span><span class="p">)</span>
-<span class="n">event</span><span class="p">.</span><span class="nf">duplicate</span>
-</code></pre>
-
-<pre class="highlight shell"><code>curl --request POST <span class="se">\</span>
-  --url <span class="s1">'https://api.tito.io/v2/an-account/awesome-conf/duplicate'</span> <span class="se">\</span>
-  --header <span class="s1">'Authorization: Token token=YOUR-API-KEY'</span> <span class="se">\</span>
-  --header <span class="s1">'Accept: application/vnd.api+json'</span> <span class="se">\</span>
-  --header <span class="s1">'Content-Type: application/json'</span>
-  --data <span class="s1">'{}'</span>
-</code></pre>
-
-<p>This endpoint duplicates an <code class="prettyprint">Event</code> on the given <code class="prettyprint">Account</code>.</p>
-
-<h3 id="http-request">HTTP Request</h3>
-
-<p><code class="prettyprint">POST https://api.tito.io/v2/:account/:event/duplicate</code></p>
 
           <h1 id="releases">Releases</h1>
 
@@ -941,10 +1101,29 @@ Tito::Event.get(&#39;an-account/awesome-conf&#39;)
 
 <h2 id="get-all-releases">Get all Releases</h2>
 
+<pre class="highlight ruby"><code><span class="nb">require</span> <span class="s1">'json'</span>
+<span class="nb">require</span> <span class="s1">'net/http'</span>
+<span class="nb">require</span> <span class="s1">'uri'</span>
+
+<span class="n">url</span> <span class="o">=</span> <span class="no">URI</span><span class="p">(</span><span class="s2">"https://api.tito.io/v2/an-account/awesome-conf/releases"</span><span class="p">)</span>
+
+<span class="n">http</span> <span class="o">=</span> <span class="no">Net</span><span class="o">::</span><span class="no">HTTP</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">url</span><span class="p">.</span><span class="nf">host</span><span class="p">,</span> <span class="n">url</span><span class="p">.</span><span class="nf">port</span><span class="p">)</span>
+<span class="n">http</span><span class="p">.</span><span class="nf">use_ssl</span> <span class="o">=</span> <span class="kp">true</span>
+<span class="n">http</span><span class="p">.</span><span class="nf">verify_mode</span> <span class="o">=</span> <span class="no">OpenSSL</span><span class="o">::</span><span class="no">SSL</span><span class="o">::</span><span class="no">VERIFY_NONE</span>
+
+<span class="n">request</span> <span class="o">=</span> <span class="no">Net</span><span class="o">::</span><span class="no">HTTP</span><span class="o">::</span><span class="no">Get</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+<span class="n">request</span><span class="p">[</span><span class="s1">'Accept'</span><span class="p">]</span>        <span class="o">=</span> <span class="s1">'application/vnd.tito.v2'</span>
+<span class="n">request</span><span class="p">[</span><span class="s1">'Authorization'</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'Token token=secret-api-key'</span>
+<span class="n">request</span><span class="p">[</span><span class="s1">'Content-Type'</span><span class="p">]</span>  <span class="o">=</span> <span class="s1">'application/json'</span>
+
+<span class="n">response</span> <span class="o">=</span> <span class="n">http</span><span class="p">.</span><span class="nf">request</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
+<span class="nb">puts</span> <span class="n">response</span><span class="p">.</span><span class="nf">read_body</span>
+</code></pre>
+
 <pre class="highlight shell"><code>curl --request GET <span class="se">\</span>
   --url <span class="s1">'https://api.tito.io/v2/an-account/awesome-conf/releases'</span> <span class="se">\</span>
-  --header <span class="s1">'Authorization: Token token=YOUR-API-KEY'</span> <span class="se">\</span>
-  --header <span class="s1">'Accept: application/vnd.api+json'</span> <span class="se">\</span>
+  --header <span class="s1">'Authorization: Token token=secret-api-key'</span> <span class="se">\</span>
+  --header <span class="s1">'Accept: application/json,application/vnd.tito.v2'</span> <span class="se">\</span>
 </code></pre>
 
 <blockquote>
@@ -985,10 +1164,29 @@ Note. The attributes for each Release have been removed from the example JSON re
 
 <h2 id="get-a-specific-release">Get a specific Release</h2>
 
+<pre class="highlight ruby"><code><span class="nb">require</span> <span class="s1">'json'</span>
+<span class="nb">require</span> <span class="s1">'net/http'</span>
+<span class="nb">require</span> <span class="s1">'uri'</span>
+
+<span class="n">url</span> <span class="o">=</span> <span class="no">URI</span><span class="p">(</span><span class="s2">"https://api.tito.io/v2/an-account/awesome-conf/releases/early-bird-ticket"</span><span class="p">)</span>
+
+<span class="n">http</span> <span class="o">=</span> <span class="no">Net</span><span class="o">::</span><span class="no">HTTP</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">url</span><span class="p">.</span><span class="nf">host</span><span class="p">,</span> <span class="n">url</span><span class="p">.</span><span class="nf">port</span><span class="p">)</span>
+<span class="n">http</span><span class="p">.</span><span class="nf">use_ssl</span> <span class="o">=</span> <span class="kp">true</span>
+<span class="n">http</span><span class="p">.</span><span class="nf">verify_mode</span> <span class="o">=</span> <span class="no">OpenSSL</span><span class="o">::</span><span class="no">SSL</span><span class="o">::</span><span class="no">VERIFY_NONE</span>
+
+<span class="n">request</span> <span class="o">=</span> <span class="no">Net</span><span class="o">::</span><span class="no">HTTP</span><span class="o">::</span><span class="no">Get</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+<span class="n">request</span><span class="p">[</span><span class="s1">'Accept'</span><span class="p">]</span>        <span class="o">=</span> <span class="s1">'application/vnd.tito.v2'</span>
+<span class="n">request</span><span class="p">[</span><span class="s1">'Authorization'</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'Token token=secret-api-key'</span>
+<span class="n">request</span><span class="p">[</span><span class="s1">'Content-Type'</span><span class="p">]</span>  <span class="o">=</span> <span class="s1">'application/json'</span>
+
+<span class="n">response</span> <span class="o">=</span> <span class="n">http</span><span class="p">.</span><span class="nf">request</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
+<span class="nb">puts</span> <span class="n">response</span><span class="p">.</span><span class="nf">read_body</span>
+</code></pre>
+
 <pre class="highlight shell"><code>curl --request GET <span class="se">\</span>
   --url <span class="s1">'https://api.tito.io/v2/an-account/awesome-conf/releases/early-bird-ticket'</span> <span class="se">\</span>
-  --header <span class="s1">'Authorization: Token token=YOUR-API-KEY'</span> <span class="se">\</span>
-  --header <span class="s1">'Accept: application/vnd.api+json'</span> <span class="se">\</span>
+  --header <span class="s1">'Authorization: Token token=secret-api-key'</span> <span class="se">\</span>
+  --header <span class="s1">'Accept: application/json,application/vnd.tito.v2'</span> <span class="se">\</span>
 </code></pre>
 
 <blockquote>
@@ -1039,12 +1237,34 @@ Note. The attributes for each Release have been removed from the example JSON re
 
 <h2 id="creating-a-new-release">Creating a new Release</h2>
 
+<pre class="highlight ruby"><code><span class="nb">require</span> <span class="s1">'json'</span>
+<span class="nb">require</span> <span class="s1">'net/http'</span>
+<span class="nb">require</span> <span class="s1">'uri'</span>
+
+<span class="n">url</span> <span class="o">=</span> <span class="no">URI</span><span class="p">(</span><span class="s2">"https://api.tito.io/v2/an-account/awesome-conf/releases"</span><span class="p">)</span>
+
+<span class="n">http</span> <span class="o">=</span> <span class="no">Net</span><span class="o">::</span><span class="no">HTTP</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">url</span><span class="p">.</span><span class="nf">host</span><span class="p">,</span> <span class="n">url</span><span class="p">.</span><span class="nf">port</span><span class="p">)</span>
+<span class="n">http</span><span class="p">.</span><span class="nf">use_ssl</span> <span class="o">=</span> <span class="kp">true</span>
+<span class="n">http</span><span class="p">.</span><span class="nf">verify_mode</span> <span class="o">=</span> <span class="no">OpenSSL</span><span class="o">::</span><span class="no">SSL</span><span class="o">::</span><span class="no">VERIFY_NONE</span>
+
+<span class="n">request</span> <span class="o">=</span> <span class="no">Net</span><span class="o">::</span><span class="no">HTTP</span><span class="o">::</span><span class="no">Post</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+<span class="n">request</span><span class="p">[</span><span class="s1">'Accept'</span><span class="p">]</span>        <span class="o">=</span> <span class="s1">'application/vnd.tito.v2'</span>
+<span class="n">request</span><span class="p">[</span><span class="s1">'Authorization'</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'Token token=secret-api-key'</span>
+<span class="n">request</span><span class="p">[</span><span class="s1">'Content-Type'</span><span class="p">]</span>  <span class="o">=</span> <span class="s1">'application/json'</span>
+<span class="n">request</span><span class="p">.</span><span class="nf">body</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s2">"slug"</span><span class="p">:</span> <span class="s2">"Awesome-conf"</span><span class="p">,</span>
+  <span class="s2">"title"</span><span class="p">:</span> <span class="s2">"Awesome Conf"</span>
+<span class="p">}</span>
+
+<span class="n">response</span> <span class="o">=</span> <span class="n">http</span><span class="p">.</span><span class="nf">request</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
+<span class="nb">puts</span> <span class="n">response</span><span class="p">.</span><span class="nf">read_body</span>
+</code></pre>
+
 <pre class="highlight shell"><code>curl --request POST <span class="se">\</span>
   --url <span class="s1">'https://api.tito.io/v2/an-account/awesome-conf/releases'</span> <span class="se">\</span>
-  --header <span class="s1">'Authorization: Token token=YOUR-API-KEY'</span> <span class="se">\</span>
-  --header <span class="s1">'Accept: application/vnd.api+json'</span> <span class="se">\</span>
-  --header <span class="s1">'Content-Type: application/json'</span>
-  --data <span class="s1">'{"slug":"Awesome-conf","title":"Awesome Conf"}'</span>
+  --header <span class="s1">'Authorization: Token token=secret-api-key'</span> <span class="se">\</span>
+  --header <span class="s1">'Accept: application/json,application/vnd.tito.v2'</span> <span class="se">\</span>
+  --data <span class="s1">'slug=Awesome-conf&amp;title=Awesome+Conf'</span>
 </code></pre>
 
 <p>This endpoint creates a <code class="prettyprint">Release</code> on the given <code class="prettyprint">Event</code>.</p>
@@ -1181,12 +1401,39 @@ Note. The attributes for each Release have been removed from the example JSON re
 
 <h2 id="updating-a-release">Updating a Release</h2>
 
+<pre class="highlight ruby"><code><span class="nb">require</span> <span class="s1">'json'</span>
+<span class="nb">require</span> <span class="s1">'net/http'</span>
+<span class="nb">require</span> <span class="s1">'uri'</span>
+
+<span class="n">url</span> <span class="o">=</span> <span class="no">URI</span><span class="p">(</span><span class="s2">"https://api.tito.io/v2/an-account/awesome-conf/workshop-ticket"</span><span class="p">)</span>
+
+<span class="n">http</span> <span class="o">=</span> <span class="no">Net</span><span class="o">::</span><span class="no">HTTP</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">url</span><span class="p">.</span><span class="nf">host</span><span class="p">,</span> <span class="n">url</span><span class="p">.</span><span class="nf">port</span><span class="p">)</span>
+<span class="n">http</span><span class="p">.</span><span class="nf">use_ssl</span> <span class="o">=</span> <span class="kp">true</span>
+<span class="n">http</span><span class="p">.</span><span class="nf">verify_mode</span> <span class="o">=</span> <span class="no">OpenSSL</span><span class="o">::</span><span class="no">SSL</span><span class="o">::</span><span class="no">VERIFY_NONE</span>
+
+<span class="n">request</span> <span class="o">=</span> <span class="no">Net</span><span class="o">::</span><span class="no">HTTP</span><span class="o">::</span><span class="no">Patch</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+<span class="n">request</span><span class="p">[</span><span class="s1">'Accept'</span><span class="p">]</span>        <span class="o">=</span> <span class="s1">'application/vnd.tito.v2'</span>
+<span class="n">request</span><span class="p">[</span><span class="s1">'Authorization'</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'Token token=secret-api-key'</span>
+<span class="n">request</span><span class="p">[</span><span class="s1">'Content-Type'</span><span class="p">]</span>  <span class="o">=</span> <span class="s1">'application/json'</span>
+<span class="n">request</span><span class="p">.</span><span class="nf">body</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s2">"data"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"releases"</span><span class="p">,</span>
+    <span class="s2">"id"</span><span class="p">:</span> <span class="s2">"workshop-ticket"</span><span class="p">,</span>
+    <span class="s2">"attributes"</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">"quantity"</span><span class="p">:</span> <span class="mi">25</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="n">response</span> <span class="o">=</span> <span class="n">http</span><span class="p">.</span><span class="nf">request</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
+<span class="nb">puts</span> <span class="n">response</span><span class="p">.</span><span class="nf">read_body</span>
+</code></pre>
+
 <pre class="highlight shell"><code>curl --request PATCH <span class="se">\</span>
   --url <span class="s1">'https://api.tito.io/v2/an-account/awesome-conf/workshop-ticket'</span> <span class="se">\</span>
-  --header <span class="s1">'Authorization: Token token=YOUR-API-KEY'</span> <span class="se">\</span>
-  --header <span class="s1">'Accept: application/vnd.api+json'</span> <span class="se">\</span>
-  --header <span class="s1">'Content-type: application/json'</span>
-  --data <span class="s1">'{"data":{"type":"releases","id":"workshop-ticket","attributes":{"quantity":25}}}'</span>
+  --header <span class="s1">'Authorization: Token token=secret-api-key'</span> <span class="se">\</span>
+  --header <span class="s1">'Accept: application/json,application/vnd.tito.v2'</span> <span class="se">\</span>
+  --data <span class="s1">'data%5Battributes%5D%5Bquantity%5D=25&amp;data%5Bid%5D=workshop-ticket&amp;data%5Btype%5D=releases'</span>
 </code></pre>
 
 <p>This endpoint updates a <code class="prettyprint">Release</code> on the given <code class="prettyprint">Event</code>.</p>
@@ -1323,10 +1570,29 @@ Note. The attributes for each Release have been removed from the example JSON re
 
 <h2 id="deleting-a-release">Deleting a Release</h2>
 
+<pre class="highlight ruby"><code><span class="nb">require</span> <span class="s1">'json'</span>
+<span class="nb">require</span> <span class="s1">'net/http'</span>
+<span class="nb">require</span> <span class="s1">'uri'</span>
+
+<span class="n">url</span> <span class="o">=</span> <span class="no">URI</span><span class="p">(</span><span class="s2">"https://api.tito.io/v2/an-account/awesome-conf/workshop-ticket"</span><span class="p">)</span>
+
+<span class="n">http</span> <span class="o">=</span> <span class="no">Net</span><span class="o">::</span><span class="no">HTTP</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">url</span><span class="p">.</span><span class="nf">host</span><span class="p">,</span> <span class="n">url</span><span class="p">.</span><span class="nf">port</span><span class="p">)</span>
+<span class="n">http</span><span class="p">.</span><span class="nf">use_ssl</span> <span class="o">=</span> <span class="kp">true</span>
+<span class="n">http</span><span class="p">.</span><span class="nf">verify_mode</span> <span class="o">=</span> <span class="no">OpenSSL</span><span class="o">::</span><span class="no">SSL</span><span class="o">::</span><span class="no">VERIFY_NONE</span>
+
+<span class="n">request</span> <span class="o">=</span> <span class="no">Net</span><span class="o">::</span><span class="no">HTTP</span><span class="o">::</span><span class="no">Delete</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+<span class="n">request</span><span class="p">[</span><span class="s1">'Accept'</span><span class="p">]</span>        <span class="o">=</span> <span class="s1">'application/vnd.tito.v2'</span>
+<span class="n">request</span><span class="p">[</span><span class="s1">'Authorization'</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'Token token=secret-api-key'</span>
+<span class="n">request</span><span class="p">[</span><span class="s1">'Content-Type'</span><span class="p">]</span>  <span class="o">=</span> <span class="s1">'application/json'</span>
+
+<span class="n">response</span> <span class="o">=</span> <span class="n">http</span><span class="p">.</span><span class="nf">request</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
+<span class="nb">puts</span> <span class="n">response</span><span class="p">.</span><span class="nf">read_body</span>
+</code></pre>
+
 <pre class="highlight shell"><code>curl --request DELETE <span class="se">\</span>
   --url <span class="s1">'https://api.tito.io/v2/an-account/awesome-conf/workshop-ticket'</span> <span class="se">\</span>
-  --header <span class="s1">'Authorization: Token token=YOUR-API-KEY'</span> <span class="se">\</span>
-  --header <span class="s1">'Accept: application/vnd.api+json'</span> <span class="se">\</span>
+  --header <span class="s1">'Authorization: Token token=secret-api-key'</span> <span class="se">\</span>
+  --header <span class="s1">'Accept: application/json,application/vnd.tito.v2'</span> <span class="se">\</span>
 </code></pre>
 
 <p>This endpoint deletes a <code class="prettyprint">Release</code> on the given <code class="prettyprint">Event</code>.</p>
