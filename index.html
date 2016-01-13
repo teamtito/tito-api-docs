@@ -538,34 +538,16 @@ Note. The attributes for each Event have been removed from the example JSON resp
 </aside>
 
 <h2 id="get-a-specific-event">Get a specific Event</h2>
+<pre class="highlight ruby"><code><span class="no">Tito</span><span class="o">::</span><span class="no">Event</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="s1">'an-account/awesome-conf'</span><span class="p">)</span>
+</code></pre>
 
-<p>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD
-<code class="prettyprint">ruby
-Tito::Event.get(&#39;an-account/awesome-conf&#39;)
-</code></p>
+<pre class="highlight shell"><code>curl --request GET <span class="se">\</span>
+  --url <span class="s1">'https://api.tito.io/v2/an-account/awesome-conf'</span> <span class="se">\</span>
+  --header <span class="s1">'Authorization: Token token=YOUR-API-KEY'</span> <span class="se">\</span>
+  --header <span class="s1">'Accept: application/vnd.api+json'</span> <span class="se">\</span>
+</code></pre>
 
-<p>=======</p>
-
 <blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<p>ed8e5bf3780c3da9bc37fbe880f35f77fbc66d5a
-<pre class="highlight shell"><code>curl --request GET <span class="se">&lt;/span&gt;
-  --url <span class="s1">&#39;https://api.tito.io/v2/an-account/awesome-conf&#39;</span> <span class="se">&lt;/span&gt;
-  --header <span class="s1">&#39;Authorization: Token token=YOUR-API-KEY&#39;</span> <span class="se">&lt;/span&gt;
-  --header <span class="s1">&#39;Accept: application/vnd.api+json&#39;</span> <span class="se">&lt;/span&gt;
-</code></pre></p>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
-
 <p>The above command returns JSON structured like this:</p>
 </blockquote>
 
