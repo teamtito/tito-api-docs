@@ -1,5 +1,9 @@
 # Events
 
+Events are the primary object in Tito. An event is added to an `Account`, and most other resources belong to an `Event` object. An event URL is comprised of the combination of the `Account`’s `slug` and the 'Event'’s `slug`, for example `https://ti.to/ultimateconf/<%= Date.today.year %>` is composed of the base `ti.to` URL, the Ultimateconf slug `ultimateconf` and the specific `Event` slug for the <%= Date.today.year %> edition.
+
+The equivalent event can be looked up using a similar URL structure with the API base URL: `https://api.tito.io/v2/ultimateconf/<%= Date.today.year %>`
+
 ## Attributes
 
 Attribute | Type | Description
@@ -9,6 +13,10 @@ Attribute | Type | Description
 <%- end -%>
 
 ## Get all Events
+
+```ruby
+Tito::Event.where(account_id: 'an-account').events
+```
 
 <%= partial "includes/requests/get", locals: { url: "https://api.tito.io/v2/an-account/events" } %>
 
@@ -34,6 +42,10 @@ Note. The attributes for each Event have been removed from the example JSON resp
 
 ## Get a specific Event
 
+```ruby
+Tito::Event.get('an-account/awesome-conf')
+```
+
 <%= partial "includes/requests/get", locals: { url: "https://api.tito.io/v2/an-account/awesome-conf" } %>
 
 > The above command returns JSON structured like this:
@@ -47,6 +59,10 @@ This endpoint retrieves a specific `Event` from the given `Account`.
 `GET https://api.tito.io/v2/:account/:event`
 
 ## Creating a new Event
+
+```ruby
+Tito::Event.create(account_id: 'an-account', title: 'My New Event')
+```
 
 <%= partial "includes/requests/post", locals: {
       url: "https://api.tito.io/v2/an-account/events",
@@ -77,6 +93,13 @@ Parameter | Type | Description
 
 ## Updating an Event
 
+```ruby
+event = Tito::Event.get('an-account/awesome-conf')
+event.start_date = 'tomorrow'
+event.end_date = 'today'
+event.save
+```
+
 <%= partial "includes/requests/patch", locals: {
       url: "https://api.tito.io/v2/an-account/awesome-conf",
       parameters: {
@@ -106,6 +129,11 @@ Parameter | Type | Description
 
 ## Deleting an Event
 
+```ruby
+event = Tito::Event.get('an-account/awesome-conf')
+event.destroy
+```
+
 <%= partial "includes/requests/delete", locals: {
       url: "https://api.tito.io/v2/an-account/awesome-conf"
     } %>
@@ -114,4 +142,19 @@ This endpoint deletes an `Event` on the given `Account`.
 
 ### HTTP Request
 
-`DELETE https://api.tito.io/v2/:account/:event`
+`DELETE https://api.tito.io/:account/:event`
+
+## Duplicating an Event
+
+```ruby
+event = Tito::Event.get('an-account/awesome-conf')
+event.duplicate
+```
+
+<%= partial "includes/requests/post", locals: { url: "https://api.tito.io/v2/an-account/awesome-conf/duplicate", parameters: {} } %>
+
+This endpoint duplicates an `Event` on the given `Account`.
+
+### HTTP Request
+
+`POST https://api.tito.io/v2/:account/:event/duplicate`

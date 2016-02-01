@@ -1,26 +1,6 @@
-```ruby
-require 'json'
-require 'net/http'
-require 'uri'
-
-url = URI("<%= url %>")
-
-http = Net::HTTP.new(url.host, url.port)
-http.use_ssl = true
-http.verify_mode = OpenSSL::SSL::VERIFY_NONE
-
-request = Net::HTTP::Get.new(url)
-request['Accept']        = 'application/vnd.tito.v2'
-request['Authorization'] = 'Token token=secret-api-key'
-request['Content-Type']  = 'application/json'
-
-response = http.request(request)
-puts response.read_body
-```
-
 ```shell
 curl --request GET \
   --url '<%= url %>' \
-  --header 'Authorization: Token token=secret-api-key' \
-  --header 'Accept: application/json,application/vnd.tito.v2' \
+  --header 'Authorization: Token token=YOUR-API-KEY' \
+  --header 'Accept: application/vnd.api+json' \
 ```
