@@ -44,7 +44,16 @@ This endpoint retrieves a specific `Discount Code`.
 
 <%= partial "includes/requests/post", locals: {
       url: "https://api.tito.io/v2/an-account/awesome-conf/discount_codes",
-      parameters: { code: 'DISCOUNTDRACULA', discount_code_type: 'PercentOffDiscountCode', value: '25.00' }
+      parameters: {
+        data: {
+          type: "discount-codes",
+          attributes: {
+            code: 'DISCOUNTDRACULA',
+            discount_code_type: 'PercentOffDiscountCode',
+            value: '25.00'
+          }
+        }
+      }
     } %>
 
 This endpoint creates a `Discount Code` on the given `Event`.

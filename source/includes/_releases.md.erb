@@ -46,7 +46,14 @@ This endpoint retrieves a specific `Release`.
 
 <%= partial "includes/requests/post", locals: {
       url: "https://api.tito.io/v2/an-account/awesome-conf/releases",
-      parameters: { slug: 'Awesome-conf', title: 'Awesome Conf' }
+      parameters: {
+        data: {
+          type: "releases",
+          attributes: {
+            title: 'Awesome Conf'
+          }
+        }
+      }
     } %>
 
 This endpoint creates a `Release` on the given `Event`.
