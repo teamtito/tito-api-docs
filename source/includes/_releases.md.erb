@@ -66,7 +66,7 @@ Parameter | Type | Description
 ## Updating a Release
 
 <%= partial "includes/requests/patch", locals: {
-      url: "https://api.tito.io/v2/an-account/awesome-conf/workshop-ticket",
+      url: "https://api.tito.io/v2/an-account/awesome-conf/releases/workshop-ticket",
       parameters: {
         data: {
           type: "releases",
@@ -82,7 +82,7 @@ This endpoint updates a `Release` on the given `Event`.
 
 ### HTTP Request
 
-`PATCH https://api.tito.io/v2/:account/:event/:release`
+`PATCH https://api.tito.io/v2/:account/:event/releases/:release`
 
 ### Parameters
 
@@ -95,11 +95,11 @@ Parameter | Type | Description
 ## Deleting a Release
 
 <%= partial "includes/requests/delete", locals: {
-      url: "https://api.tito.io/v2/an-account/awesome-conf/workshop-ticket"
+      url: "https://api.tito.io/v2/an-account/awesome-conf/releases/workshop-ticket"
     } %>
 
 This endpoint deletes a `Release` on the given `Event`.
 
 ### HTTP Request
 
-`DELETE https://api.tito.io/v2/:account/:event/:release`
+`DELETE https://api.tito.io/v2/:account/:event/releases/:release`
