@@ -48,6 +48,10 @@
       "description": "The number of tickets available.",
       "type": "integer"
     },
+    "question-ids": {
+      "description": "An array of the ids of `Questions` attached to the release. The order of the ids represents the order in which the questions will be asked.",
+      "type": "array"
+    },
     "request-company-name": {
       "description": "Do registrations which include this release requrie a company name.",
       "type": "boolean"

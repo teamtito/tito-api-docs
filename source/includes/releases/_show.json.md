@@ -16,6 +16,7 @@
       "position": 1,
       "price": null,
       "quantity": null,
+      "question-ids": [],
       "request-company-name": null,
       "request-vat-number": null,
       "require-billing-address": null,
