@@ -1,0 +1,36 @@
+{
+  "attributes": {
+    "description": {
+      "description": null,
+      "type": "string"
+    },
+    "field-type": {
+      "description": "`Checkboxes`, `Country`, `File`, `Select`, `Text` or `Textarea`.",
+      "type": "string"
+    },
+    "include-free-text-field": {
+      "description": "Should an 'Other' text field be included alongside this question or not. Only applies to `Checkboxes` or `Select` field questions. Default `false`",
+      "type": "boolean"
+    },
+    "options": {
+      "description": "A line separated list of options for this question e.g. `A\\nB\\nC`. Only applies to `Checkboxes` or `Select` field questions.",
+      "type": "text"
+    },
+    "options-free-text-field": {
+      "description": "A custom label for the 'Other' text field option if it's enabled. Only applies to `Checkboxes` or `Select` field questions.",
+      "type": "string"
+    },
+    "required": {
+      "description": "Does this question require a response or not. Default `false`",
+      "type": "boolean"
+    },
+    "slug": {
+      "description": null,
+      "type": "string"
+    },
+    "title": {
+      "description": null,
+      "type": "string"
+    }
+  }
+}

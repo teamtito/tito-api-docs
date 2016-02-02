@@ -1,0 +1,112 @@
+# Questions
+
+## Attributes
+
+Attribute | Type | Description
+--------- | ---- | -----------
+<%- data.questions.attributes.each do |name, attributes| -%>
+<%= name %> | `<%= attributes["type"] %>` | <%= attributes["description"] %>
+<%- end -%>
+
+## Get all Questions
+
+<%= partial "includes/requests/get", locals: { url: "https://api.tito.io/v2/an-account/awesome-conf/questions" } %>
+
+> The above command returns JSON structured like this:
+
+<%= partial 'includes/questions/index.json' %>
+
+This endpoint retrieves all `Questions` for the given `Event`.
+
+### HTTP Request
+
+`GET https://api.tito.io/v2/:account/:event/questions`
+
+<aside class="notice">
+Note. The attributes for each Question have been removed from the example JSON response for readability.
+</aside>
+
+## Get a specific Question
+
+<%= partial "includes/requests/get", locals: { url: "https://api.tito.io/v2/an-account/awesome-conf/questions/1000001" } %>
+
+> The above command returns JSON structured like this:
+
+<%= partial 'includes/questions/show.json' %>
+
+This endpoint retrieves a specific `Question`.
+
+### HTTP Request
+
+`GET https://api.tito.io/v2/:account/:event/questions/:question`
+
+## Creating a new Question
+
+<%= partial "includes/requests/post", locals: {
+      url: "https://api.tito.io/v2/an-account/awesome-conf/questions",
+      parameters: {
+        data: {
+          type: "questions",
+          attributes: {
+            field_type: 'Checkboxes',
+            options: "Small\nMedium\nLarge\nExtra Large",
+            title: 'T-Shirt Size'
+          }
+        }
+      }
+    } %>
+
+This endpoint creates a `Question` on the given `Event`.
+
+### HTTP Request
+
+`POST https://api.tito.io/v2/:account/:event/questions`
+
+### Parameters
+
+Parameter | Type | Description
+--------- | ------- | -----------
+<%- data.questions.attributes.reject { |name, attributes| name == 'slug' }.each do |name, attributes| -%>
+<%= name %> | `<%= attributes["type"] %>` | <%= attributes["description"] %>
+<%- end -%>
+
+## Updating a Question
+
+<%= partial "includes/requests/patch", locals: {
+      url: "https://api.tito.io/v2/an-account/awesome-conf/questions/1000001",
+      parameters: {
+        data: {
+          type: "questions",
+          id: "1000001",
+          attributes: {
+            required: true
+          }
+        }
+      }
+    } %>
+
+This endpoint updates a `Question` on the given `Event`.
+
+### HTTP Request
+
+`PATCH https://api.tito.io/v2/:account/:event/questions/:question`
+
+### Parameters
+
+Parameter | Type | Description
+--------- | ---- | -----------
+<%- data.questions.attributes.reject { |name, attributes| name == 'slug' }.each do |name, attributes| -%>
+<%= name %> | `<%= attributes["type"] %>` | <%= attributes["description"] %>
+<%- end -%>
+
+## Deleting a Question
+
+<%= partial "includes/requests/delete", locals: {
+      url: "https://api.tito.io/v2/an-account/awesome-conf/questions/1000001"
+    } %>
+
+This endpoint deletes a `Question` on the given `Event`.
+
+### HTTP Request
+
+`DELETE https://api.tito.io/v2/:account/:event/questions/:question`
