@@ -22,7 +22,7 @@ Tito::Event.where(account_id: 'an-account').events
 
 > The above command returns JSON structured like this:
 
-<%= partial "includes/events/index" %>
+<%= partial "includes/events/index.json" %>
 
 This endpoint retrieves all `Events` for the given `Account`.
 
@@ -50,7 +50,7 @@ Tito::Event.get('an-account/awesome-conf')
 
 > The above command returns JSON structured like this:
 
-<%= partial 'includes/events/show' %>
+<%= partial 'includes/events/show.json' %>
 
 This endpoint retrieves a specific `Event` from the given `Account`.
 
