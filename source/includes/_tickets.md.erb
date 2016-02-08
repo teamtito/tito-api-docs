@@ -1,0 +1,118 @@
+# Tickets
+
+## Attributes
+
+Attribute | Type | Description
+--------- | ---- | -----------
+<%- data.tickets.attributes.each do |name, attributes| -%>
+<%= name %> | `<%= attributes["type"] %>` | <%= attributes["description"] %>
+<%- end -%>
+
+## Get all Tickets
+
+<%= partial "includes/requests/get", locals: { url: "https://api.tito.io/v2/an-account/awesome-conf/tickets" } %>
+
+> The above command returns JSON structured like this:
+
+<%= partial 'includes/tickets/index.json' %>
+
+This endpoint retrieves all `Tickets` for the given `Event`.
+
+### HTTP Request
+
+`GET https://api.tito.io/v2/:account/:event/tickets`
+
+<aside class="notice">
+Note. The attributes for each Ticket have been removed from the example JSON response for readability.
+</aside>
+
+## Get a specific Ticket
+
+<%= partial "includes/requests/get", locals: { url: "https://api.tito.io/v2/an-account/awesome-conf/tickets/paul-awesomeconf-ticket" } %>
+
+> The above command returns JSON structured like this:
+
+<%= partial 'includes/tickets/show.json' %>
+
+This endpoint retrieves a specific `Ticket`.
+
+### HTTP Request
+
+`GET https://api.tito.io/v2/:account/:event/tickets/:ticket`
+
+## Creating a new Ticket
+
+<%= partial "includes/requests/post", locals: {
+      url: "https://api.tito.io/v2/an-account/awesome-conf/tickets",
+      parameters: {
+        data: {
+          type: "tickets",
+          attributes: {
+            email: 'joe.bloggs@example.com'
+          },
+          relationships: {
+            release: {
+              data: {
+                type: "releases",
+                id: "awesomeconf-ticket"
+              }
+            }
+          }
+        }
+      }
+    } %>
+
+This endpoint creates a `Ticket` on the given `Event`.
+
+### HTTP Request
+
+`POST https://api.tito.io/v2/:account/:event/tickets`
+
+### Parameters
+
+Parameter | Type | Description
+--------- | ------- | -----------
+<%- data.tickets.attributes.each do |name, attributes| -%>
+<%= name %> | `<%= attributes["type"] %>` | <%= attributes["description"] %>
+<%- end -%>
+
+## Updating a Ticket
+
+<%= partial "includes/requests/patch", locals: {
+      url: "https://api.tito.io/v2/an-account/awesome-conf/tickets/paul-awesomeconf-ticket",
+      parameters: {
+        data: {
+          type: "tickets",
+          id: "workshop-ticket",
+          attributes: {
+            company_name: 'Team Tito'
+          }
+        }
+      }
+    } %>
+
+This endpoint updates a `Ticket` on the given `Event`.
+
+### HTTP Request
+
+`PATCH https://api.tito.io/v2/:account/:event/tickets/:ticket`
+
+### Parameters
+
+Parameter | Type | Description
+--------- | ---- | -----------
+<%- data.tickets.attributes.each do |name, attributes| -%>
+<%= name %> | `<%= attributes["type"] %>` | <%= attributes["description"] %>
+<%- end -%>
+
+## Deleting a Ticket
+
+<%= partial "includes/requests/delete", locals: {
+      url: "https://api.tito.io/v2/an-account/awesome-conf/tickets/paul-awesomeconf-ticket"
+    } %>
+
+This endpoint deletes a `Ticket` on the given `Event`.
+
+### HTTP Request
+
+`DELETE https://api.tito.io/v2/:account/:event/tickets/:ticket`

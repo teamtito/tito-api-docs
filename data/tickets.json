@@ -1,0 +1,44 @@
+{
+  "attributes": {
+    "company-name": {
+      "description": null,
+      "type": "string"
+    },
+    "email": {
+      "description": null,
+      "type": "string"
+    },
+    "name": {
+      "description": null,
+      "type": "string"
+    },
+    "number": {
+      "description": "Default: Starts at 1 and counts up with each ticket registered.",
+      "type": "integer"
+    },
+    "phone-number": {
+      "description": null,
+      "type": "string"
+    },
+    "price": {
+      "description": null,
+      "type": "decimal"
+    },
+    "reference": {
+      "description": "Default: The order reference plus the index of the ticket in that order e.g. `AXBY-1`.",
+      "type": "string"
+    },
+    "state": {
+      "description": "`new`, `complete`, `incomplete`, `reminder`, `void`. Default: `new`",
+      "type": "integer"
+    },
+    "tags": {
+      "description": "A comma separated list of tags for the ticket.",
+      "type": "string"
+    },
+    "temporary": {
+      "description": "Is the ticket temporary or not. For example if a ticket needs to be assigned but is not yet confirmed e.g. a payment is pending. Default: `false`",
+      "type": "boolean"
+    }
+  }
+}
