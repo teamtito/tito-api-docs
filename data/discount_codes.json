@@ -28,6 +28,10 @@
       "description": "The number of tickets that can avail of this discount code.",
       "type": "integer"
     },
+    "release-ids": {
+      "description": "An array of the ids of `Releases` the discount code can be applied to.",
+      "type": "array"
+    },
     "reveal-secret": {
       "description": "Should secret tickets be revealed if this discount code is applied or not. Default `false`",
       "type": "boolean"

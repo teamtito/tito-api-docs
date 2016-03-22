@@ -11,6 +11,7 @@
       "min-quantity-per-release": null,
       "only-show-attached": false,
       "quantity": null,
+      "release-ids": ["early-bird-ticket"],
       "reveal-secret": false,
       "start_at": null,
       "value": "25.00"
