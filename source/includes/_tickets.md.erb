@@ -22,6 +22,12 @@ This endpoint retrieves all `Tickets` for the given `Event`.
 
 `GET https://api.tito.io/v2/:account/:event/tickets`
 
+### Query Parameters
+
+Parameter | Default | Description
+--------- | ------- | -----------
+include | | A comma separated list specify of related resources to include. Options: `release`
+
 <aside class="notice">
 Note. The attributes for each Ticket have been removed from the example JSON response for readability.
 </aside>
@@ -39,6 +45,12 @@ This endpoint retrieves a specific `Ticket`.
 ### HTTP Request
 
 `GET https://api.tito.io/v2/:account/:event/tickets/:ticket`
+
+### Query Parameters
+
+Parameter | Default | Description
+--------- | ------- | -----------
+include | | A comma separated list specify of related resources to include. Options: `release`
 
 ## Creating a new Ticket
 
