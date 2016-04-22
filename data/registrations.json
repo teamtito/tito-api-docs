@@ -1,0 +1,56 @@
+{
+  "attributes": {
+    "completed-at": {
+      "description": "The time at which the registration was completed and tickets were created for it.",
+      "type": "datetime"
+    },
+    "discount-code": {
+      "description": null,
+      "type": "string"
+    },
+    "email": {
+      "description": null,
+      "type": "string"
+    },
+    "expires-at": {
+      "description": "The time at which the registration will expire if it has not been completed. Only registrations containing tickets for *locked* releases can expire. A release is *locked* when all of its available tickets are in the process of being registered.",
+      "type": "datetime"
+    },
+    "ip-address": {
+      "description": null,
+      "type": "string"
+    },
+    "name": {
+      "description": null,
+      "type": "string"
+    },
+    "paid": {
+      "description": "Is the registration paid for or not.",
+      "type": "string"
+    },
+    "payment_reference": {
+      "description": null,
+      "type": "string"
+    },
+    "phone_number": {
+      "description": null,
+      "type": "string"
+    },
+    "registration_type": {
+      "description": "`standard`, `manual`, `imported`",
+      "type": "string"
+    },
+    "reference": {
+      "description": "A randomly generated 4 character string unique to the event.",
+      "type": "string"
+    },
+    "state": {
+      "description": "*It's new&hellip;*<br />`new`<br />`ready`<br />`filling`<br />`redirected`<br /><br />*It's being processed&hellip;*<br />`ready_to_process`<br />`processing`<br />`payment_details_stored`<br />`payment_charged`<br /><br />*It's finished&hellip;*<br />`complete`<br />`incomplete`<br />`cancelled`<br />`confirmed`<br />`customer_cancelled`<br /><br />*Something went wrong&hellip;*<br />`errored`<br />`payment_declined`<br />`not_fulfilled`",
+      "type": "integer"
+    },
+    "total": {
+      "description": null,
+      "type": "decimal"
+    }
+  }
+}

@@ -26,7 +26,8 @@ This endpoint retrieves all `Tickets` for the given `Event`.
 
 Parameter | Default | Description
 --------- | ------- | -----------
-include | | A comma separated list specify of related resources to include. Options: `registration`, `release`
+include | | A comma separated list of related resources to include. Options: `registration`, `release`
+filter[registration] | | To only return tickets associated with particular registrations. Format: A comma separated list of registration IDs.
 
 <aside class="notice">
 Note. The attributes for each Ticket have been removed from the example JSON response for readability.
@@ -50,7 +51,7 @@ This endpoint retrieves a specific `Ticket`.
 
 Parameter | Default | Description
 --------- | ------- | -----------
-include | | A comma separated list specify of related resources to include. Options: `release`
+include | | A comma separated list of related resources to include. Options: `release`
 
 ## Creating a new Ticket
 

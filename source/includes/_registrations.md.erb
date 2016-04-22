@@ -1,0 +1,29 @@
+# Registrations
+
+## Attributes
+
+Attribute | Type | Description
+--------- | ---- | -----------
+<%- data.registrations.attributes.each do |name, attributes| -%>
+<%= name %> | `<%= attributes["type"] %>` | <%= attributes["description"] %>
+<%- end -%>
+
+## Get a specific Registration
+
+<%= partial "includes/requests/get", locals: { url: "https://api.tito.io/v2/an-account/awesome-conf/registrations/paul-awesomeconf-registration" } %>
+
+> The above command returns JSON structured like this:
+
+<%= partial 'includes/registrations/show.json' %>
+
+This endpoint retrieves a specific `Registration`.
+
+### HTTP Request
+
+`GET https://api.tito.io/v2/:account/:event/registrations/:registration`
+
+### Query Parameters
+
+Parameter | Default | Description
+--------- | ------- | -----------
+include | | A comma separated list of related resources to include. Options: `tickets`
