@@ -618,7 +618,7 @@ Note. The attributes for each Discount Code have been removed from the example J
 <tr>
 <td>include</td>
 <td></td>
-<td>A comma separated list specify of related resources to include. Options: <code class="prettyprint">releases</code></td>
+<td>A comma separated list of related resources to include. Options: <code class="prettyprint">releases</code></td>
 </tr>
 </tbody></table>
 
@@ -1137,6 +1137,151 @@ Note. The attributes for each Question have been removed from the example JSON r
 <h3 id="http-request">HTTP Request</h3>
 
 <p><code class="prettyprint">DELETE https://api.tito.io/v2/:account/:event/questions/:question</code></p>
+
+          <h1 id="registrations">Registrations</h1>
+
+<h2 id="attributes">Attributes</h2>
+
+<table><thead>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>completed-at</td>
+<td><code class="prettyprint">datetime</code></td>
+<td>The time at which the registration was completed and tickets were created for it.</td>
+</tr>
+<tr>
+<td>discount-code</td>
+<td><code class="prettyprint">string</code></td>
+<td></td>
+</tr>
+<tr>
+<td>email</td>
+<td><code class="prettyprint">string</code></td>
+<td></td>
+</tr>
+<tr>
+<td>expires-at</td>
+<td><code class="prettyprint">datetime</code></td>
+<td>The time at which the registration will expire if it has not been completed. Only registrations containing tickets for <em>locked</em> releases can expire. A release is <em>locked</em> when all of its available tickets are in the process of being registered.</td>
+</tr>
+<tr>
+<td>ip-address</td>
+<td><code class="prettyprint">string</code></td>
+<td></td>
+</tr>
+<tr>
+<td>name</td>
+<td><code class="prettyprint">string</code></td>
+<td></td>
+</tr>
+<tr>
+<td>paid</td>
+<td><code class="prettyprint">string</code></td>
+<td>Is the registration paid for or not.</td>
+</tr>
+<tr>
+<td>payment_reference</td>
+<td><code class="prettyprint">string</code></td>
+<td></td>
+</tr>
+<tr>
+<td>phone_number</td>
+<td><code class="prettyprint">string</code></td>
+<td></td>
+</tr>
+<tr>
+<td>registration_type</td>
+<td><code class="prettyprint">string</code></td>
+<td><code class="prettyprint">standard</code>, <code class="prettyprint">manual</code>, <code class="prettyprint">imported</code></td>
+</tr>
+<tr>
+<td>reference</td>
+<td><code class="prettyprint">string</code></td>
+<td>A randomly generated 4 character string unique to the event.</td>
+</tr>
+<tr>
+<td>state</td>
+<td><code class="prettyprint">integer</code></td>
+<td><em>It&rsquo;s new&hellip;</em><br /><code class="prettyprint">new</code><br /><code class="prettyprint">ready</code><br /><code class="prettyprint">filling</code><br /><code class="prettyprint">redirected</code><br /><br /><em>It&rsquo;s being processed&hellip;</em><br /><code class="prettyprint">ready_to_process</code><br /><code class="prettyprint">processing</code><br /><code class="prettyprint">payment_details_stored</code><br /><code class="prettyprint">payment_charged</code><br /><br /><em>It&rsquo;s finished&hellip;</em><br /><code class="prettyprint">complete</code><br /><code class="prettyprint">incomplete</code><br /><code class="prettyprint">cancelled</code><br /><code class="prettyprint">confirmed</code><br /><code class="prettyprint">customer_cancelled</code><br /><br /><em>Something went wrong&hellip;</em><br /><code class="prettyprint">errored</code><br /><code class="prettyprint">payment_declined</code><br /><code class="prettyprint">not_fulfilled</code></td>
+</tr>
+<tr>
+<td>total</td>
+<td><code class="prettyprint">decimal</code></td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h2 id="get-a-specific-registration">Get a specific Registration</h2>
+
+<pre class="highlight shell"><code>curl --request GET <span class="se">\</span>
+  --url <span class="s1">'https://api.tito.io/v2/an-account/awesome-conf/registrations/paul-awesomeconf-registration'</span> <span class="se">\</span>
+  --header <span class="s1">'Authorization: Token token=YOUR-API-KEY'</span> <span class="se">\</span>
+  --header <span class="s1">'Accept: application/vnd.api+json'</span> <span class="se">\</span>
+</code></pre>
+
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"paul-awesomeconf-registration"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"registrations"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"attributes"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"completed-at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-04-18T15:53:31.000Z"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"discount-code"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"paul@tito.io"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"expires-at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-04-18T15:55:02.000Z"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"ip-address"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Paul Campbell"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"paid"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"payment-reference"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"phone-number"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"FREE"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"registration-type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"standard"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"complete"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"total"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"self"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.tito.io/v2/an-account/awesome-conf/registrations/paul-awesomeconf-registration"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"relationships"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"tickets"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"related"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://api.tito.io/v2/an-account/awesome-conf/tickets?filter[registration]=paul-awesomeconf-registration"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>This endpoint retrieves a specific <code class="prettyprint">Registration</code>.</p>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">GET https://api.tito.io/v2/:account/:event/registrations/:registration</code></p>
+
+<h3 id="query-parameters">Query Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>include</td>
+<td></td>
+<td>A comma separated list of related resources to include. Options: <code class="prettyprint">tickets</code></td>
+</tr>
+</tbody></table>
 
           <h1 id="releases">Releases</h1>
 
@@ -1765,9 +1910,14 @@ Note. The attributes for each Release have been removed from the example JSON re
         </span><span class="nt">"self"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.tito.io/v2/an-account/awesome-conf/tickets/paul-awesomeconf-ticket"</span><span class="w">
       </span><span class="p">},</span><span class="w">
       </span><span class="nt">"relationships"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"registration"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"related"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.tito.io/v2/an-account/awesome-conf/registrations/paul-awesomeconf-registration"</span><span class="w">
+          </span><span class="p">}</span><span class="w">
+        </span><span class="p">},</span><span class="w">
         </span><span class="nt">"release"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
           </span><span class="nt">"links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="nt">"related"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.tito.test/v2/an-account/awesome-conf/releases/awesomeconf-ticket"</span><span class="w">
+            </span><span class="nt">"related"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.tito.io/v2/an-account/awesome-conf/releases/awesomeconf-ticket"</span><span class="w">
           </span><span class="p">}</span><span class="w">
         </span><span class="p">}</span><span class="w">
       </span><span class="p">}</span><span class="w">
@@ -1780,9 +1930,14 @@ Note. The attributes for each Release have been removed from the example JSON re
         </span><span class="nt">"self"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.tito.io/v2/an-account/awesome-conf/tickets/doc-awesomeconf-ticket"</span><span class="w">
       </span><span class="p">},</span><span class="w">
       </span><span class="nt">"relationships"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"registration"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"related"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.tito.io/v2/an-account/awesome-conf/registrations/doc-awesomeconf-registration"</span><span class="w">
+          </span><span class="p">}</span><span class="w">
+        </span><span class="p">},</span><span class="w">
         </span><span class="nt">"release"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
           </span><span class="nt">"links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="nt">"related"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.tito.test/v2/an-account/awesome-conf/releases/awesomeconf-ticket"</span><span class="w">
+            </span><span class="nt">"related"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.tito.io/v2/an-account/awesome-conf/releases/awesomeconf-ticket"</span><span class="w">
           </span><span class="p">}</span><span class="w">
         </span><span class="p">}</span><span class="w">
       </span><span class="p">}</span><span class="w">
@@ -1809,7 +1964,12 @@ Note. The attributes for each Release have been removed from the example JSON re
 <tr>
 <td>include</td>
 <td></td>
-<td>A comma separated list specify of related resources to include. Options: <code class="prettyprint">release</code></td>
+<td>A comma separated list of related resources to include. Options: <code class="prettyprint">registration</code>, <code class="prettyprint">release</code></td>
+</tr>
+<tr>
+<td>filter[registration]</td>
+<td></td>
+<td>To only return tickets associated with particular registrations. Format: A comma separated list of registration IDs.</td>
 </tr>
 </tbody></table>
 
@@ -1848,9 +2008,14 @@ Note. The attributes for each Ticket have been removed from the example JSON res
       </span><span class="nt">"self"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.tito.io/v2/an-account/awesome-conf/tickets/paul-awesomeconf-ticket"</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="nt">"relationships"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"registration"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"related"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.tito.io/v2/an-account/awesome-conf/registrations/paul-awesomeconf-registration"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">},</span><span class="w">
       </span><span class="nt">"release"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
         </span><span class="nt">"links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-          </span><span class="nt">"related"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.tito.test/v2/an-account/awesome-conf/releases/awesomeconf-ticket"</span><span class="w">
+          </span><span class="nt">"related"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.tito.io/v2/an-account/awesome-conf/releases/awesomeconf-ticket"</span><span class="w">
         </span><span class="p">}</span><span class="w">
       </span><span class="p">}</span><span class="w">
     </span><span class="p">}</span><span class="w">
@@ -1876,7 +2041,7 @@ Note. The attributes for each Ticket have been removed from the example JSON res
 <tr>
 <td>include</td>
 <td></td>
-<td>A comma separated list specify of related resources to include. Options: <code class="prettyprint">release</code></td>
+<td>A comma separated list of related resources to include. Options: <code class="prettyprint">release</code></td>
 </tr>
 </tbody></table>
 
