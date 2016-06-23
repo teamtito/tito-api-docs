@@ -1150,6 +1150,31 @@ Note. The attributes for each Question have been removed from the example JSON r
 </tr>
 </thead><tbody>
 <tr>
+<td>billing-address[address]</td>
+<td><code class="prettyprint">String</code></td>
+<td></td>
+</tr>
+<tr>
+<td>billing-address[city]</td>
+<td><code class="prettyprint">String</code></td>
+<td></td>
+</tr>
+<tr>
+<td>billing-address[country]</td>
+<td><code class="prettyprint">String</code></td>
+<td>A two-letter <a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO_3611-1</a> country code e.g. <code class="prettyprint">IE</code></td>
+</tr>
+<tr>
+<td>billing-address[state-province-region]</td>
+<td><code class="prettyprint">String</code></td>
+<td></td>
+</tr>
+<tr>
+<td>billing-address[zip-postal-code]</td>
+<td><code class="prettyprint">String</code></td>
+<td></td>
+</tr>
+<tr>
 <td>completed-at</td>
 <td><code class="prettyprint">datetime</code></td>
 <td>The time at which the registration was completed and tickets were created for it.</td>
@@ -1185,17 +1210,17 @@ Note. The attributes for each Question have been removed from the example JSON r
 <td>Is the registration paid for or not.</td>
 </tr>
 <tr>
-<td>payment_reference</td>
+<td>payment-reference</td>
 <td><code class="prettyprint">string</code></td>
 <td></td>
 </tr>
 <tr>
-<td>phone_number</td>
+<td>phone-number</td>
 <td><code class="prettyprint">string</code></td>
 <td></td>
 </tr>
 <tr>
-<td>registration_type</td>
+<td>registration-type</td>
 <td><code class="prettyprint">string</code></td>
 <td><code class="prettyprint">standard</code>, <code class="prettyprint">manual</code>, <code class="prettyprint">imported</code></td>
 </tr>
@@ -1216,6 +1241,106 @@ Note. The attributes for each Question have been removed from the example JSON r
 </tr>
 </tbody></table>
 
+<h2 id="get-all-registrations">Get all Registrations</h2>
+
+<pre class="highlight shell"><code>curl --request GET <span class="se">\</span>
+  --url <span class="s1">'https://api.tito.io/v2/an-account/awesome-conf/registrations'</span> <span class="se">\</span>
+  --header <span class="s1">'Authorization: Token token=YOUR-API-KEY'</span> <span class="se">\</span>
+  --header <span class="s1">'Accept: application/vnd.api+json'</span> <span class="se">\</span>
+</code></pre>
+
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"paul-awesomeconf-registration"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"registrations"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"attributes"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="err">...</span><span class="w"> </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"self"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.tito.io/v2/an-account/awesome-conf/registrations/paul-awesomeconf-registration"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"relationships"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"tickets"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"related"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.tito.io/v2/an-account/awesome-conf/tickets?filter[registration]=paul-awesomeconf-registration"</span><span class="w">
+          </span><span class="p">}</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"meta"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"link"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://tito.io/an-account/awesome-conf/registrations/paul-awesomeconf-ticket"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"doc-awesomeconf-registration"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"registrations"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"attributes"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="err">...</span><span class="w"> </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"self"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.tito.io/v2/an-account/awesome-conf/registrations/doc-awesomeconf-registration"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"relationships"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"tickets"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"related"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.tito.io/v2/an-account/awesome-conf/tickets?filter[registration]=doc-awesomeconf-registration"</span><span class="w">
+          </span><span class="p">}</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"meta"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"link"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://tito.io/an-account/awesome-conf/registrations/doc-awesomeconf-ticket"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>This endpoint retrieves all <code class="prettyprint">Registrations</code> for the given <code class="prettyprint">Event</code>.</p>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">GET https://api.tito.io/v2/:account/:event/registrations</code></p>
+
+<h3 id="query-parameters">Query Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>include</td>
+<td></td>
+<td>A comma separated list of related resources to include. Options: <code class="prettyprint">tickets</code></td>
+</tr>
+<tr>
+<td>filter[direction]</td>
+<td><code class="prettyprint">desc</code></td>
+<td>The direction to sort results. Options: <code class="prettyprint">asc</code>, <code class="prettyprint">desc</code></td>
+</tr>
+<tr>
+<td>filter[q]</td>
+<td></td>
+<td>A search query, looks for matches on email, name, reference, discount code or slug.</td>
+</tr>
+<tr>
+<td>filter[sort]</td>
+<td><code class="prettyprint">created_at</code></td>
+<td>The attribute to sort results by. Options: <code class="prettyprint">created_at</code>, <code class="prettyprint">name</code>, <code class="prettyprint">reference</code>, <code class="prettyprint">total</code>, <code class="prettyprint">payment_provider</code></td>
+</tr>
+<tr>
+<td>filter[states]</td>
+<td>All states except <code class="prettyprint">cancelled</code></td>
+<td>A comma separated list of states to filter by. Options: <code class="prettyprint">paid</code>, <code class="prettyprint">unpaid</code>, <code class="prettyprint">complete</code>, <code class="prettyprint">confirmed</code>, <code class="prettyprint">incomplete</code>, <code class="prettyprint">cancelled</code></td>
+</tr>
+</tbody></table>
+
+<aside class="notice">
+Note. The attributes for each Registration have been removed from the example JSON response for readability.
+</aside>
+
 <h2 id="get-a-specific-registration">Get a specific Registration</h2>
 
 <pre class="highlight shell"><code>curl --request GET <span class="se">\</span>
@@ -1233,6 +1358,7 @@ Note. The attributes for each Question have been removed from the example JSON r
     </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"paul-awesomeconf-registration"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"registrations"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"attributes"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"billing-address"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
       </span><span class="nt">"completed-at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-04-18T15:53:31.000Z"</span><span class="p">,</span><span class="w">
       </span><span class="nt">"discount-code"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
       </span><span class="nt">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"paul@tito.io"</span><span class="p">,</span><span class="w">
@@ -1256,6 +1382,9 @@ Note. The attributes for each Question have been removed from the example JSON r
           </span><span class="nt">"related"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://api.tito.io/v2/an-account/awesome-conf/tickets?filter[registration]=paul-awesomeconf-registration"</span><span class="w">
         </span><span class="p">}</span><span class="w">
       </span><span class="p">}</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"meta"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"link"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://tito.io/an-account/awesome-conf/registrations/paul-awesomeconf-registration"</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
@@ -1280,6 +1409,130 @@ Note. The attributes for each Question have been removed from the example JSON r
 <td>include</td>
 <td></td>
 <td>A comma separated list of related resources to include. Options: <code class="prettyprint">tickets</code></td>
+</tr>
+</tbody></table>
+
+<h2 id="creating-a-new-registration">Creating a new Registration</h2>
+
+<pre class="highlight shell"><code>curl --request POST <span class="se">\</span>
+  --url <span class="s1">'https://api.tito.io/v2/an-account/awesome-conf/registrations'</span> <span class="se">\</span>
+  --header <span class="s1">'Authorization: Token token=YOUR-API-KEY'</span> <span class="se">\</span>
+  --header <span class="s1">'Accept: application/vnd.api+json'</span> <span class="se">\</span>
+  --header <span class="s1">'Content-Type: application/json'</span>
+  --data <span class="s1">'{"data":{"type":"registrations","attributes":{"quantities":{"awesomeconf-ticket":1}}}}'</span>
+</code></pre>
+
+<p>This endpoint creates a <code class="prettyprint">Registration</code> on the given <code class="prettyprint">Event</code>.</p>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">POST https://api.tito.io/v2/:account/:event/registrations</code></p>
+
+<h3 id="parameters">Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>donations</td>
+<td><code class="prettyprint">Hash</code></td>
+<td>The amount to donate for each <code class="prettyprint">Release</code>.<br>Format: A hash of amounts, keyed by <code class="prettyprint">Release</code> ID e.g.<br><code class="prettyprint">{ &quot;workshop-ticket&quot; =&gt; 25.00 }</code></td>
+</tr>
+<tr>
+<td>discount-code</td>
+<td><code class="prettyprint">String</code></td>
+<td></td>
+</tr>
+<tr>
+<td>quantities</td>
+<td><code class="prettyprint">Hash</code></td>
+<td>The quantity required for each <code class="prettyprint">Release</code>.<br>Format: A hash of quantities, keyed by <code class="prettyprint">Release</code> ID e.g.<br><code class="prettyprint">{ &quot;awesomeconf-ticket&quot; =&gt; 2, &quot;workshop-ticket&quot; =&gt; 1 }</code></td>
+</tr>
+</tbody></table>
+
+<h2 id="updating-a-registration">Updating a Registration</h2>
+
+<pre class="highlight shell"><code>curl --request PATCH <span class="se">\</span>
+  --url <span class="s1">'https://api.tito.io/v2/an-account/awesome-conf/registrations/paul-awesomeconf-registration'</span> <span class="se">\</span>
+  --header <span class="s1">'Authorization: Token token=YOUR-API-KEY'</span> <span class="se">\</span>
+  --header <span class="s1">'Accept: application/vnd.api+json'</span> <span class="se">\</span>
+  --header <span class="s1">'Content-type: application/json'</span>
+  --data <span class="s1">'{"data":{"type":"registrations","id":"paul-awesomeconf-registration","attributes":{"email":"paul@tito.io"}}}'</span>
+</code></pre>
+
+<p>This endpoint updates a <code class="prettyprint">Registration</code> on the given <code class="prettyprint">Event</code>.</p>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">PATCH https://api.tito.io/v2/:account/:event/registrations/:registration</code></p>
+
+<h3 id="parameters">Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>billing-address[address]</td>
+<td><code class="prettyprint">String</code></td>
+<td></td>
+</tr>
+<tr>
+<td>billing-address[city]</td>
+<td><code class="prettyprint">String</code></td>
+<td></td>
+</tr>
+<tr>
+<td>billing-address[country]</td>
+<td><code class="prettyprint">String</code></td>
+<td>A two-letter <a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO_3611-1</a> country code e.g. <code class="prettyprint">IE</code></td>
+</tr>
+<tr>
+<td>billing-address[state-province-region]</td>
+<td><code class="prettyprint">String</code></td>
+<td></td>
+</tr>
+<tr>
+<td>billing-address[zip-postal-code]</td>
+<td><code class="prettyprint">String</code></td>
+<td></td>
+</tr>
+<tr>
+<td>card[token]</td>
+<td><code class="prettyprint">String</code></td>
+<td>A single-use token used to reference a credit/debit card without exposing senistive car data. These tokens are requested from payment processors e.g. via <a href="https://stripe.com/docs/stripe.js">Stripe.js</a>. <em>Only required when payment is required.</em></td>
+</tr>
+<tr>
+<td>company-name</td>
+<td><code class="prettyprint">String</code></td>
+<td></td>
+</tr>
+<tr>
+<td>email</td>
+<td><code class="prettyprint">String</code></td>
+<td></td>
+</tr>
+<tr>
+<td>name</td>
+<td><code class="prettyprint">String</code></td>
+<td></td>
+</tr>
+<tr>
+<td>payment[method]</td>
+<td><code class="prettyprint">String</code></td>
+<td>The method of payment for this <code class="prettyprint">Registration</code>. Options: <code class="prettyprint">credit_card</code>, <code class="prettyprint">paypal</code>. <em>Only required when payment is required.</em></td>
+</tr>
+<tr>
+<td>phone-number</td>
+<td><code class="prettyprint">String</code></td>
+<td></td>
 </tr>
 </tbody></table>
 
