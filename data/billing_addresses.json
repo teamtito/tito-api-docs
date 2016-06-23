@@ -1,0 +1,24 @@
+{
+  "attributes": {
+    "address": {
+      "description": "",
+      "type": "String"
+    },
+    "city": {
+      "description": "",
+      "type": "String"
+    },
+    "country": {
+      "description": "A two-letter [ISO_3611-1](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) country code e.g. `IE`",
+      "type": "String"
+    },
+    "state-province-region": {
+      "description": "",
+      "type": "String"
+    },
+    "zip-postal-code": {
+      "description": "",
+      "type": "String"
+    }
+  }
+}

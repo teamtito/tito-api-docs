@@ -4,9 +4,40 @@
 
 Attribute | Type | Description
 --------- | ---- | -----------
+<%- data.billing_addresses.attributes.each do |name, attributes| -%>
+billing-address[<%= name %>] | `<%= attributes["type"] %>` | <%= attributes["description"] %>
+<%- end -%>
 <%- data.registrations.attributes.each do |name, attributes| -%>
 <%= name %> | `<%= attributes["type"] %>` | <%= attributes["description"] %>
 <%- end -%>
+
+## Get all Registrations
+
+<%= partial "includes/requests/get", locals: { url: "https://api.tito.io/v2/an-account/awesome-conf/registrations" } %>
+
+> The above command returns JSON structured like this:
+
+<%= partial 'includes/registrations/index.json' %>
+
+This endpoint retrieves all `Registrations` for the given `Event`.
+
+### HTTP Request
+
+`GET https://api.tito.io/v2/:account/:event/registrations`
+
+### Query Parameters
+
+Parameter | Default | Description
+--------- | ------- | -----------
+include | | A comma separated list of related resources to include. Options: `tickets`
+filter[direction] | `desc` | The direction to sort results. Options: `asc`, `desc`
+filter[q] | | A search query, looks for matches on email, name, reference, discount code or slug.
+filter[sort] | `created_at` | The attribute to sort results by. Options: `created_at`, `name`, `reference`, `total`, `payment_provider`
+filter[states] | All states except `cancelled` | A comma separated list of states to filter by. Options: `paid`, `unpaid`, `complete`, `confirmed`, `incomplete`, `cancelled`
+
+<aside class="notice">
+Note. The attributes for each Registration have been removed from the example JSON response for readability.
+</aside>
 
 ## Get a specific Registration
 
@@ -27,3 +58,66 @@ This endpoint retrieves a specific `Registration`.
 Parameter | Default | Description
 --------- | ------- | -----------
 include | | A comma separated list of related resources to include. Options: `tickets`
+
+## Creating a new Registration
+
+<%= partial "includes/requests/post", locals: {
+      url: "https://api.tito.io/v2/an-account/awesome-conf/registrations",
+      parameters: {
+        data: {
+          type: "registrations",
+          attributes: {
+            quantities: { "awesomeconf-ticket" => 1 }
+          }
+        }
+      }
+    } %>
+
+This endpoint creates a `Registration` on the given `Event`.
+
+### HTTP Request
+
+`POST https://api.tito.io/v2/:account/:event/registrations`
+
+### Parameters
+
+Parameter | Type | Description
+--------- | ------- | -----------
+donations | `Hash` | The amount to donate for each `Release`.<br>Format: A hash of amounts, keyed by `Release` ID e.g.<br>`{ "workshop-ticket" => 25.00 }`
+discount-code | `String` |
+quantities | `Hash` | The quantity required for each `Release`.<br>Format: A hash of quantities, keyed by `Release` ID e.g.<br>`{ "awesomeconf-ticket" => 2, "workshop-ticket" => 1 }`
+
+## Updating a Registration
+
+<%= partial "includes/requests/patch", locals: {
+      url: "https://api.tito.io/v2/an-account/awesome-conf/registrations/paul-awesomeconf-registration",
+      parameters: {
+        data: {
+          type: "registrations",
+          id: "paul-awesomeconf-registration",
+          attributes: {
+            email: "paul@tito.io"
+          }
+        }
+      }
+    } %>
+
+This endpoint updates a `Registration` on the given `Event`.
+
+### HTTP Request
+
+`PATCH https://api.tito.io/v2/:account/:event/registrations/:registration`
+
+### Parameters
+
+Parameter | Type | Description
+--------- | ---- | -----------
+<%- data.billing_addresses.attributes.each do |name, attributes| -%>
+billing-address[<%= name %>] | `<%= attributes["type"] %>` | <%= attributes["description"] %>
+<%- end -%>
+card[token] | `String` | A single-use token used to reference a credit/debit card without exposing senistive car data. These tokens are requested from payment processors e.g. via [Stripe.js](https://stripe.com/docs/stripe.js). *Only required when payment is required.*
+company-name | `String` |
+email        | `String` |
+name         | `String` |
+payment[method] | `String` | The method of payment for this `Registration`. Options: `credit_card`, `paypal`. *Only required when payment is required.*
+phone-number | `String` |

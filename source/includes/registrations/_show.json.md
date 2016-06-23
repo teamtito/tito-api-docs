@@ -4,6 +4,7 @@
     "id": "paul-awesomeconf-registration",
     "type": "registrations",
     "attributes": {
+      "billing-address": null,
       "completed-at": "2016-04-18T15:53:31.000Z",
       "discount-code": null,
       "email": "paul@tito.io",
@@ -27,6 +28,9 @@
           "related": "http://api.tito.io/v2/an-account/awesome-conf/tickets?filter[registration]=paul-awesomeconf-registration"
         }
       }
+    },
+    "meta": {
+      "link": "https://tito.io/an-account/awesome-conf/registrations/paul-awesomeconf-registration"
     }
   }
 }

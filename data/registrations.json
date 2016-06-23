@@ -28,15 +28,15 @@
       "description": "Is the registration paid for or not.",
       "type": "string"
     },
-    "payment_reference": {
+    "payment-reference": {
       "description": null,
       "type": "string"
     },
-    "phone_number": {
+    "phone-number": {
       "description": null,
       "type": "string"
     },
-    "registration_type": {
+    "registration-type": {
       "description": "`standard`, `manual`, `imported`",
       "type": "string"
     },
