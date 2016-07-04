@@ -193,6 +193,11 @@
 <td>The number of tickets that can avail of this discount code.</td>
 </tr>
 <tr>
+<td>quantity-used</td>
+<td><code class="prettyprint">integer</code></td>
+<td>The number of tickets this discount code has been applied to. <em>Readonly</em>.</td>
+</tr>
+<tr>
 <td>release-ids</td>
 <td><code class="prettyprint">array</code></td>
 <td>An array of the ids of <code class="prettyprint">Releases</code> the discount code can be applied to.</td>
@@ -282,6 +287,7 @@ Note. The attributes for each Discount Code have been removed from the example J
       </span><span class="nt">"min-quantity-per-release"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
       </span><span class="nt">"only-show-attached"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
       </span><span class="nt">"quantity"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"quantity-used"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
       </span><span class="nt">"release-ids"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"early-bird-ticket"</span><span class="p">],</span><span class="w">
       </span><span class="nt">"reveal-secret"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
       </span><span class="nt">"start_at"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
@@ -496,7 +502,7 @@ Note. The attributes for each Discount Code have been removed from the example J
 <tr>
 <td>banner-url</td>
 <td><code class="prettyprint">url</code></td>
-<td>A link to the event&rsquo;s banner image.</td>
+<td>A link to the event&rsquo;s banner image. <em>Readonly</em>.</td>
 </tr>
 <tr>
 <td>currency</td>
@@ -526,7 +532,7 @@ Note. The attributes for each Discount Code have been removed from the example J
 <tr>
 <td>logo-url</td>
 <td><code class="prettyprint">url</code></td>
-<td>A link to the event&rsquo;s logo image.</td>
+<td>A link to the event&rsquo;s logo image. <em>Readonly</em>.</td>
 </tr>
 <tr>
 <td>private</td>
@@ -908,7 +914,7 @@ Note. The attributes for each Event have been removed from the example JSON resp
 <tr>
 <td>slug</td>
 <td><code class="prettyprint">string</code></td>
-<td></td>
+<td><em>Readonly</em>.</td>
 </tr>
 <tr>
 <td>title</td>
