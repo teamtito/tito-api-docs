@@ -1,7 +1,7 @@
 {
   "attributes": {
     "banner-url": {
-      "description": "A link to the event's banner image.",
+      "description": "A link to the event's banner image. *Readonly*.",
       "type": "url"
     },
     "currency": {
@@ -25,7 +25,7 @@
       "type": "string"
     },
     "logo-url": {
-      "description": "A link to the event's logo image.",
+      "description": "A link to the event's logo image. *Readonly*.",
       "type": "url"
     },
     "private": {

@@ -28,6 +28,10 @@
       "description": "The number of tickets that can avail of this discount code.",
       "type": "integer"
     },
+    "quantity-used": {
+      "description": "The number of tickets this discount code has been applied to. *Readonly*.",
+      "type": "integer"
+    },
     "release-ids": {
       "description": "An array of the ids of `Releases` the discount code can be applied to.",
       "type": "array"

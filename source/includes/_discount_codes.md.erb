@@ -66,7 +66,7 @@ This endpoint creates a `Discount Code` on the given `Event`.
 
 Parameter | Type | Description
 --------- | ------- | -----------
-<%- data.discount_codes.attributes.each do |name, attributes| -%>
+<%- data.discount_codes.attributes.reject { |name, attributes| name == 'quantity-used' }.each do |name, attributes| -%>
 <%= name %> | `<%= attributes["type"] %>` | <%= attributes["description"] %>
 <%- end -%>
 
@@ -95,7 +95,7 @@ This endpoint updates a `Discount Code` on the given `Event`.
 
 Parameter | Type | Description
 --------- | ---- | -----------
-<%- data.discount_codes.attributes.each do |name, attributes| -%>
+<%- data.discount_codes.attributes.reject { |name, attributes| name == 'quantity-used' }.each do |name, attributes| -%>
 <%= name %> | `<%= attributes["type"] %>` | <%= attributes["description"] %>
 <%- end -%>
 

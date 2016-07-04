@@ -25,7 +25,7 @@
       "type": "boolean"
     },
     "slug": {
-      "description": null,
+      "description": "*Readonly*.",
       "type": "string"
     },
     "title": {
