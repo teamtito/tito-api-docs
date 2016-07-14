@@ -2096,6 +2096,11 @@ Note. The attributes for each Release have been removed from the example JSON re
 </tr>
 </thead><tbody>
 <tr>
+<td>answers</td>
+<td><code class="prettyprint">hash</code></td>
+<td>The answer to each <code class="prettyprint">Question</code> attached to the ticket. Format: A hash of answers, keyed by <code class="prettyprint">Question</code> slug e.g.<br><code class="prettyprint">{ &quot;t-shirt-size&quot;: &quot;Medium&quot;, &quot;skills&quot;: [&quot;HTML&quot;, &quot;JavaScript&quot;] }</code></td>
+</tr>
+<tr>
 <td>company-name</td>
 <td><code class="prettyprint">string</code></td>
 <td></td>
@@ -2253,6 +2258,10 @@ Note. The attributes for each Ticket have been removed from the example JSON res
     </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"paul-awesomeconf-ticket"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"tickets"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"attributes"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"answers"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"skills"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"JavaScript"</span><span class="p">,</span><span class="w"> </span><span class="s2">"HTML"</span><span class="p">],</span><span class="w">
+        </span><span class="nt">"t-shirt-size"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Medium"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
       </span><span class="nt">"company-name"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
       </span><span class="nt">"email"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
       </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
@@ -2329,6 +2338,11 @@ Note. The attributes for each Ticket have been removed from the example JSON res
 <th>Description</th>
 </tr>
 </thead><tbody>
+<tr>
+<td>answers</td>
+<td><code class="prettyprint">hash</code></td>
+<td>The answer to each <code class="prettyprint">Question</code> attached to the ticket. Format: A hash of answers, keyed by <code class="prettyprint">Question</code> slug e.g.<br><code class="prettyprint">{ &quot;t-shirt-size&quot;: &quot;Medium&quot;, &quot;skills&quot;: [&quot;HTML&quot;, &quot;JavaScript&quot;] }</code></td>
+</tr>
 <tr>
 <td>company-name</td>
 <td><code class="prettyprint">string</code></td>
@@ -2407,6 +2421,11 @@ Note. The attributes for each Ticket have been removed from the example JSON res
 </tr>
 </thead><tbody>
 <tr>
+<td>answers</td>
+<td><code class="prettyprint">hash</code></td>
+<td>The answer to each <code class="prettyprint">Question</code> attached to the ticket. Format: A hash of answers, keyed by <code class="prettyprint">Question</code> slug e.g.<br><code class="prettyprint">{ &quot;t-shirt-size&quot;: &quot;Medium&quot;, &quot;skills&quot;: [&quot;HTML&quot;, &quot;JavaScript&quot;] }</code></td>
+</tr>
+<tr>
 <td>company-name</td>
 <td><code class="prettyprint">string</code></td>
 <td></td>
@@ -2457,20 +2476,6 @@ Note. The attributes for each Ticket have been removed from the example JSON res
 <td>Is the ticket temporary or not. For example if a ticket needs to be assigned but is not yet confirmed e.g. a payment is pending. Default: <code class="prettyprint">false</code></td>
 </tr>
 </tbody></table>
-
-<h2 id="deleting-a-ticket">Deleting a Ticket</h2>
-
-<pre class="highlight shell"><code>curl --request DELETE <span class="se">\</span>
-  --url <span class="s1">'https://api.tito.io/v2/an-account/awesome-conf/tickets/paul-awesomeconf-ticket'</span> <span class="se">\</span>
-  --header <span class="s1">'Authorization: Token token=YOUR-API-KEY'</span> <span class="se">\</span>
-  --header <span class="s1">'Accept: application/vnd.api+json'</span> <span class="se">\</span>
-</code></pre>
-
-<p>This endpoint deletes a <code class="prettyprint">Ticket</code> on the given <code class="prettyprint">Event</code>.</p>
-
-<h3 id="http-request">HTTP Request</h3>
-
-<p><code class="prettyprint">DELETE https://api.tito.io/v2/:account/:event/tickets/:ticket</code></p>
 
       </div>
       <div class="dark-box">
