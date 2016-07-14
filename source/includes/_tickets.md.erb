@@ -117,15 +117,3 @@ Parameter | Type | Description
 <%- data.tickets.attributes.each do |name, attributes| -%>
 <%= name %> | `<%= attributes["type"] %>` | <%= attributes["description"] %>
 <%- end -%>
-
-## Deleting a Ticket
-
-<%= partial "includes/requests/delete", locals: {
-      url: "https://api.tito.io/v2/an-account/awesome-conf/tickets/paul-awesomeconf-ticket"
-    } %>
-
-This endpoint deletes a `Ticket` on the given `Event`.
-
-### HTTP Request
-
-`DELETE https://api.tito.io/v2/:account/:event/tickets/:ticket`

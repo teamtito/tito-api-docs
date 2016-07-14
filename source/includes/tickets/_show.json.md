@@ -4,6 +4,10 @@
     "id": "paul-awesomeconf-ticket",
     "type": "tickets",
     "attributes": {
+      "answers": {
+        "skills": ["JavaScript", "HTML"],
+        "t-shirt-size": "Medium"
+      },
       "company-name": null,
       "email": null,
       "name": "",
