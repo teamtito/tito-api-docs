@@ -1,0 +1,110 @@
+# Check-in Lists
+
+## Attributes
+
+Attribute | Type | Description
+--------- | ---- | -----------
+<%- data.checkin_lists.attributes.each do |name, attributes| -%>
+<%= name %> | `<%= attributes["type"] %>` | <%= attributes["description"] %>
+<%- end -%>
+
+## Get all Check-in Lists
+
+<%= partial "includes/requests/get", locals: { url: "https://api.tito.io/v2/an-account/awesome-conf/checkin_lists" } %>
+
+> The above command returns JSON structured like this:
+
+<%= partial 'includes/checkin_lists/index.json' %>
+
+This endpoint retrieves all `Check-in Lists` for the given `Event`.
+
+### HTTP Request
+
+`GET https://api.tito.io/v2/:account/:event/checkin_lists`
+
+<aside class="notice">
+Note. The attributes for each Check-in List have been removed from the example JSON response for readability.
+</aside>
+
+## Get a specific Check-in List
+
+<%= partial "includes/requests/get", locals: { url: "https://api.tito.io/v2/an-account/awesome-conf/checkin_lists/awesomeconf-check-in-list" } %>
+
+> The above command returns JSON structured like this:
+
+<%= partial 'includes/checkin_lists/show.json' %>
+
+This endpoint retrieves a specific `Check-in List`.
+
+### HTTP Request
+
+`GET https://api.tito.io/v2/:account/:event/checkin_lists/:checkin_list_id`
+
+## Creating a new Check-in List
+
+<%= partial "includes/requests/post", locals: {
+      url: "https://api.tito.io/v2/an-account/awesome-conf/checkin_lists",
+      parameters: {
+        data: {
+          type: "checkin-lists",
+          attributes: {
+            title: 'Day 2 Check-in List'
+          }
+        }
+      }
+    } %>
+
+This endpoint creates a `Check-in List` on the given `Event`.
+
+### HTTP Request
+
+`POST https://api.tito.io/v2/:account/:event/checkin_lists`
+
+### Parameters
+
+Parameter | Type | Description
+--------- | ------- | -----------
+<%- data.checkin_lists.attributes.each do |name, attributes| -%>
+<%= name %> | `<%= attributes["type"] %>` | <%= attributes["description"] %>
+<%- end -%>
+
+## Updating a Check-in List
+
+<%= partial "includes/requests/patch", locals: {
+      url: "https://api.tito.io/v2/an-account/awesome-conf/checkin_lists/awesomeconf-check-in-list",
+      parameters: {
+        data: {
+          type: "checkin-lists",
+          id: "awesomeconf-check-in-list",
+          attributes: {
+            release_ids: ["day-2-workshop-ticket", "day-2-after-party-ticket"],
+          }
+        }
+      }
+    } %>
+
+This endpoint updates a `Check-in List` on the given `Event`.
+
+### HTTP Request
+
+`PATCH https://api.tito.io/v2/:account/:event/checkin_lists/:checkin_list_id`
+
+### Parameters
+
+Parameter | Type | Description
+--------- | ---- | -----------
+<%- data.checkin_lists.attributes.each do |name, attributes| -%>
+<%= name %> | `<%= attributes["type"] %>` | <%= attributes["description"] %>
+<%- end -%>
+
+## Deleting a Check-in List
+
+<%= partial "includes/requests/delete", locals: {
+      url: "https://api.tito.io/v2/an-account/awesome-conf/checkin_lists/awesomeconf-check-in-list"
+    } %>
+
+This endpoint deletes a `Check-in List` on the given `Event`.
+
+### HTTP Request
+
+`DELETE https://api.tito.io/v2/:account/:event/checkin_lists/:checkin_list_id`

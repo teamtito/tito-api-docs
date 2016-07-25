@@ -1,0 +1,36 @@
+{
+  "attributes": {
+    "activity-ids": {
+      "description": "The `Activities` the check-in list is for. Format: An array of `Activity` IDs.",
+      "type": "array"
+    },
+    "expires-at": {
+      "description": "The time at which the check-in list should no longer be accessible or null for no expiry.",
+      "type": "datetime"
+    },
+    "question-ids": {
+      "description": "The `Questions` to show attendees' answers to on the check-in list. Format: An array of `Question` IDs.",
+      "type": "array"
+    },
+    "release-ids": {
+      "description": "The `Releases` the check-in list is for. Format: An array of `Release` IDs.",
+      "type": "array"
+    },
+    "show-company-name": {
+      "description": "Show the attendees' company name on the check-in list.",
+      "type": "boolean"
+    },
+    "show-email": {
+      "description": "Show the attendees' email address on the check-in list.",
+      "type": "boolean"
+    },
+    "show-phone-number": {
+      "description": "Show the attendees' phone number on the check-in list.",
+      "type": "boolean"
+    },
+    "title": {
+      "description": null,
+      "type": "string"
+    }
+  }
+}

@@ -33,7 +33,7 @@
       "type": "integer"
     },
     "release-ids": {
-      "description": "An array of the ids of `Releases` the discount code can be applied to.",
+      "description": "An array of the IDs of `Releases` the discount code can be applied to.",
       "type": "array"
     },
     "reveal-secret": {
