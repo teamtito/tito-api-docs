@@ -146,6 +146,371 @@
 
 <p>Your API key needs to included in the <code class="prettyprint">Authorization</code> header so your requests can be authenticated, see the examples to the right:</p>
 
+          <h1 id="check-in-lists">Check-in Lists</h1>
+
+<h2 id="attributes">Attributes</h2>
+
+<table><thead>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>activity-ids</td>
+<td><code class="prettyprint">array</code></td>
+<td>The <code class="prettyprint">Activities</code> the check-in list is for. Format: An array of <code class="prettyprint">Activity</code> IDs.</td>
+</tr>
+<tr>
+<td>expires-at</td>
+<td><code class="prettyprint">datetime</code></td>
+<td>The time at which the check-in list should no longer be accessible or null for no expiry.</td>
+</tr>
+<tr>
+<td>question-ids</td>
+<td><code class="prettyprint">array</code></td>
+<td>The <code class="prettyprint">Questions</code> to show attendees&rsquo; answers to on the check-in list. Format: An array of <code class="prettyprint">Question</code> IDs.</td>
+</tr>
+<tr>
+<td>release-ids</td>
+<td><code class="prettyprint">array</code></td>
+<td>The <code class="prettyprint">Releases</code> the check-in list is for. Format: An array of <code class="prettyprint">Release</code> IDs.</td>
+</tr>
+<tr>
+<td>show-company-name</td>
+<td><code class="prettyprint">boolean</code></td>
+<td>Show the attendees&rsquo; company name on the check-in list.</td>
+</tr>
+<tr>
+<td>show-email</td>
+<td><code class="prettyprint">boolean</code></td>
+<td>Show the attendees&rsquo; email address on the check-in list.</td>
+</tr>
+<tr>
+<td>show-phone-number</td>
+<td><code class="prettyprint">boolean</code></td>
+<td>Show the attendees&rsquo; phone number on the check-in list.</td>
+</tr>
+<tr>
+<td>title</td>
+<td><code class="prettyprint">string</code></td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h2 id="get-all-check-in-lists">Get all Check-in Lists</h2>
+
+<pre class="highlight shell"><code>curl --request GET <span class="se">\</span>
+  --url <span class="s1">'https://api.tito.io/v2/an-account/awesome-conf/checkin_lists'</span> <span class="se">\</span>
+  --header <span class="s1">'Authorization: Token token=YOUR-API-KEY'</span> <span class="se">\</span>
+  --header <span class="s1">'Accept: application/vnd.api+json'</span> <span class="se">\</span>
+</code></pre>
+
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"awesomeconf-check-in-list"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"checkin-lists"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"attributes"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="err">...</span><span class="w"> </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"self"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.tito.io/v2/an-account/awesome-conf/checkin_lists/awesomeconf-check-in-list"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"relationships"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"activities"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"related"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.tito.io/v2/an-account/awesomeconf/activities?filter[checkin_list]=awesomeconf-check-in-list"</span><span class="w">
+          </span><span class="p">}</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="nt">"checkins"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"related"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.tito.io/v2/an-account/awesomeconf/checkin_lists/awesomeconf-check-in-list/checkins"</span><span class="w">
+          </span><span class="p">}</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="nt">"questions"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"related"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.tito.io/v2/an-account/awesomeconf/questions?filter[checkin_list]=awesomeconf-check-in-list"</span><span class="w">
+          </span><span class="p">}</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="nt">"releases"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"related"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.tito.io/v2/an-account/awesomeconf/releases?filter[checkin_list]=awesomeconf-check-in-list"</span><span class="w">
+          </span><span class="p">}</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="nt">"tickets"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"related"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.tito.io/v2/an-account/awesomeconf/tickets?filter[checkin_list]=awesomeconf-check-in-list"</span><span class="w">
+          </span><span class="p">}</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"workshop-check-in-list"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"checkin-lists"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"attributes"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="err">...</span><span class="w"> </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"self"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.tito.io/v2/an-account/awesome-conf/checkin_lists/workshop-check-in-list"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"relationships"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"activities"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"related"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.tito.io/v2/an-account/awesomeconf/activities?filter[checkin_list]=workshop-check-in-list"</span><span class="w">
+          </span><span class="p">}</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="nt">"checkins"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"related"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.tito.io/v2/an-account/awesomeconf/checkin_lists/workshop-check-in-list/checkins"</span><span class="w">
+          </span><span class="p">}</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="nt">"questions"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"related"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.tito.io/v2/an-account/awesomeconf/questions?filter[checkin_list]=workshop-check-in-list"</span><span class="w">
+          </span><span class="p">}</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="nt">"releases"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"related"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.tito.io/v2/an-account/awesomeconf/releases?filter[checkin_list]=workshop-check-in-list"</span><span class="w">
+          </span><span class="p">}</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="nt">"tickets"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"related"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.tito.io/v2/an-account/awesomeconf/tickets?filter[checkin_list]=workshop-check-in-list"</span><span class="w">
+          </span><span class="p">}</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>This endpoint retrieves all <code class="prettyprint">Check-in Lists</code> for the given <code class="prettyprint">Event</code>.</p>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">GET https://api.tito.io/v2/:account/:event/checkin_lists</code></p>
+
+<aside class="notice">
+Note. The attributes for each Check-in List have been removed from the example JSON response for readability.
+</aside>
+
+<h2 id="get-a-specific-check-in-list">Get a specific Check-in List</h2>
+
+<pre class="highlight shell"><code>curl --request GET <span class="se">\</span>
+  --url <span class="s1">'https://api.tito.io/v2/an-account/awesome-conf/checkin_lists/awesomeconf-check-in-list'</span> <span class="se">\</span>
+  --header <span class="s1">'Authorization: Token token=YOUR-API-KEY'</span> <span class="se">\</span>
+  --header <span class="s1">'Accept: application/vnd.api+json'</span> <span class="se">\</span>
+</code></pre>
+
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"awesomeconf-check-in-list"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"checkin-lists"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"attributes"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"activity-ids"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+      </span><span class="nt">"expires-at"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"question-ids"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+      </span><span class="nt">"release-ids"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+      </span><span class="nt">"show-company-name"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"show-email"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"show-phone-number"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Awesomeconf Check-in List"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"self"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.tito.io/v2/an-account/awesomeconf/checkin_lists/awesomeconf-check-in-list"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"relationships"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"activities"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"related"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.tito.io/v2/an-account/awesomeconf/activities?filter[checkin_list]=awesomeconf-check-in-list"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"checkins"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"related"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.tito.io/v2/an-account/awesomeconf/checkin_lists/awesomeconf-check-in-list/checkins"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"questions"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"related"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.tito.io/v2/an-account/awesomeconf/questions?filter[checkin_list]=awesomeconf-check-in-list"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"releases"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"related"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.tito.io/v2/an-account/awesomeconf/releases?filter[checkin_list]=awesomeconf-check-in-list"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"tickets"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"related"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.tito.io/v2/an-account/awesomeconf/tickets?filter[checkin_list]=awesomeconf-check-in-list"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>This endpoint retrieves a specific <code class="prettyprint">Check-in List</code>.</p>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">GET https://api.tito.io/v2/:account/:event/checkin_lists/:checkin_list_id</code></p>
+
+<h2 id="creating-a-new-check-in-list">Creating a new Check-in List</h2>
+
+<pre class="highlight shell"><code>curl --request POST <span class="se">\</span>
+  --url <span class="s1">'https://api.tito.io/v2/an-account/awesome-conf/checkin_lists'</span> <span class="se">\</span>
+  --header <span class="s1">'Authorization: Token token=YOUR-API-KEY'</span> <span class="se">\</span>
+  --header <span class="s1">'Accept: application/vnd.api+json'</span> <span class="se">\</span>
+  --header <span class="s1">'Content-Type: application/json'</span>
+  --data <span class="s1">'{"data":{"type":"checkin-lists","attributes":{"title":"Day 2 Check-in List"}}}'</span>
+</code></pre>
+
+<p>This endpoint creates a <code class="prettyprint">Check-in List</code> on the given <code class="prettyprint">Event</code>.</p>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">POST https://api.tito.io/v2/:account/:event/checkin_lists</code></p>
+
+<h3 id="parameters">Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>activity-ids</td>
+<td><code class="prettyprint">array</code></td>
+<td>The <code class="prettyprint">Activities</code> the check-in list is for. Format: An array of <code class="prettyprint">Activity</code> IDs.</td>
+</tr>
+<tr>
+<td>expires-at</td>
+<td><code class="prettyprint">datetime</code></td>
+<td>The time at which the check-in list should no longer be accessible or null for no expiry.</td>
+</tr>
+<tr>
+<td>question-ids</td>
+<td><code class="prettyprint">array</code></td>
+<td>The <code class="prettyprint">Questions</code> to show attendees&rsquo; answers to on the check-in list. Format: An array of <code class="prettyprint">Question</code> IDs.</td>
+</tr>
+<tr>
+<td>release-ids</td>
+<td><code class="prettyprint">array</code></td>
+<td>The <code class="prettyprint">Releases</code> the check-in list is for. Format: An array of <code class="prettyprint">Release</code> IDs.</td>
+</tr>
+<tr>
+<td>show-company-name</td>
+<td><code class="prettyprint">boolean</code></td>
+<td>Show the attendees&rsquo; company name on the check-in list.</td>
+</tr>
+<tr>
+<td>show-email</td>
+<td><code class="prettyprint">boolean</code></td>
+<td>Show the attendees&rsquo; email address on the check-in list.</td>
+</tr>
+<tr>
+<td>show-phone-number</td>
+<td><code class="prettyprint">boolean</code></td>
+<td>Show the attendees&rsquo; phone number on the check-in list.</td>
+</tr>
+<tr>
+<td>title</td>
+<td><code class="prettyprint">string</code></td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h2 id="updating-a-check-in-list">Updating a Check-in List</h2>
+
+<pre class="highlight shell"><code>curl --request PATCH <span class="se">\</span>
+  --url <span class="s1">'https://api.tito.io/v2/an-account/awesome-conf/checkin_lists/awesomeconf-check-in-list'</span> <span class="se">\</span>
+  --header <span class="s1">'Authorization: Token token=YOUR-API-KEY'</span> <span class="se">\</span>
+  --header <span class="s1">'Accept: application/vnd.api+json'</span> <span class="se">\</span>
+  --header <span class="s1">'Content-type: application/json'</span>
+  --data <span class="s1">'{"data":{"type":"checkin-lists","id":"awesomeconf-check-in-list","attributes":{"release_ids":["day-2-workshop-ticket","day-2-after-party-ticket"]}}}'</span>
+</code></pre>
+
+<p>This endpoint updates a <code class="prettyprint">Check-in List</code> on the given <code class="prettyprint">Event</code>.</p>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">PATCH https://api.tito.io/v2/:account/:event/checkin_lists/:checkin_list_id</code></p>
+
+<h3 id="parameters">Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>activity-ids</td>
+<td><code class="prettyprint">array</code></td>
+<td>The <code class="prettyprint">Activities</code> the check-in list is for. Format: An array of <code class="prettyprint">Activity</code> IDs.</td>
+</tr>
+<tr>
+<td>expires-at</td>
+<td><code class="prettyprint">datetime</code></td>
+<td>The time at which the check-in list should no longer be accessible or null for no expiry.</td>
+</tr>
+<tr>
+<td>question-ids</td>
+<td><code class="prettyprint">array</code></td>
+<td>The <code class="prettyprint">Questions</code> to show attendees&rsquo; answers to on the check-in list. Format: An array of <code class="prettyprint">Question</code> IDs.</td>
+</tr>
+<tr>
+<td>release-ids</td>
+<td><code class="prettyprint">array</code></td>
+<td>The <code class="prettyprint">Releases</code> the check-in list is for. Format: An array of <code class="prettyprint">Release</code> IDs.</td>
+</tr>
+<tr>
+<td>show-company-name</td>
+<td><code class="prettyprint">boolean</code></td>
+<td>Show the attendees&rsquo; company name on the check-in list.</td>
+</tr>
+<tr>
+<td>show-email</td>
+<td><code class="prettyprint">boolean</code></td>
+<td>Show the attendees&rsquo; email address on the check-in list.</td>
+</tr>
+<tr>
+<td>show-phone-number</td>
+<td><code class="prettyprint">boolean</code></td>
+<td>Show the attendees&rsquo; phone number on the check-in list.</td>
+</tr>
+<tr>
+<td>title</td>
+<td><code class="prettyprint">string</code></td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h2 id="deleting-a-check-in-list">Deleting a Check-in List</h2>
+
+<pre class="highlight shell"><code>curl --request DELETE <span class="se">\</span>
+  --url <span class="s1">'https://api.tito.io/v2/an-account/awesome-conf/checkin_lists/awesomeconf-check-in-list'</span> <span class="se">\</span>
+  --header <span class="s1">'Authorization: Token token=YOUR-API-KEY'</span> <span class="se">\</span>
+  --header <span class="s1">'Accept: application/vnd.api+json'</span> <span class="se">\</span>
+</code></pre>
+
+<p>This endpoint deletes a <code class="prettyprint">Check-in List</code> on the given <code class="prettyprint">Event</code>.</p>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">DELETE https://api.tito.io/v2/:account/:event/checkin_lists/:checkin_list_id</code></p>
+
           <h1 id="discount-codes">Discount Codes</h1>
 
 <h2 id="attributes">Attributes</h2>
@@ -200,7 +565,7 @@
 <tr>
 <td>release-ids</td>
 <td><code class="prettyprint">array</code></td>
-<td>An array of the ids of <code class="prettyprint">Releases</code> the discount code can be applied to.</td>
+<td>An array of the IDs of <code class="prettyprint">Releases</code> the discount code can be applied to.</td>
 </tr>
 <tr>
 <td>reveal-secret</td>
@@ -369,7 +734,7 @@ Note. The attributes for each Discount Code have been removed from the example J
 <tr>
 <td>release-ids</td>
 <td><code class="prettyprint">array</code></td>
-<td>An array of the ids of <code class="prettyprint">Releases</code> the discount code can be applied to.</td>
+<td>An array of the IDs of <code class="prettyprint">Releases</code> the discount code can be applied to.</td>
 </tr>
 <tr>
 <td>reveal-secret</td>
@@ -451,7 +816,7 @@ Note. The attributes for each Discount Code have been removed from the example J
 <tr>
 <td>release-ids</td>
 <td><code class="prettyprint">array</code></td>
-<td>An array of the ids of <code class="prettyprint">Releases</code> the discount code can be applied to.</td>
+<td>An array of the IDs of <code class="prettyprint">Releases</code> the discount code can be applied to.</td>
 </tr>
 <tr>
 <td>reveal-secret</td>
@@ -1618,7 +1983,7 @@ Note. The attributes for each Registration have been removed from the example JS
 <tr>
 <td>question-ids</td>
 <td><code class="prettyprint">array</code></td>
-<td>An array of the ids of <code class="prettyprint">Questions</code> attached to the release. The order of the ids represents the order in which the questions will be asked.</td>
+<td>An array of the IDs of <code class="prettyprint">Questions</code> attached to the release. The order of the IDs represents the order in which the questions will be asked.</td>
 </tr>
 <tr>
 <td>request-company-name</td>
@@ -1864,7 +2229,7 @@ Note. The attributes for each Release have been removed from the example JSON re
 <tr>
 <td>question-ids</td>
 <td><code class="prettyprint">array</code></td>
-<td>An array of the ids of <code class="prettyprint">Questions</code> attached to the release. The order of the ids represents the order in which the questions will be asked.</td>
+<td>An array of the IDs of <code class="prettyprint">Questions</code> attached to the release. The order of the IDs represents the order in which the questions will be asked.</td>
 </tr>
 <tr>
 <td>request-company-name</td>
@@ -2011,7 +2376,7 @@ Note. The attributes for each Release have been removed from the example JSON re
 <tr>
 <td>question-ids</td>
 <td><code class="prettyprint">array</code></td>
-<td>An array of the ids of <code class="prettyprint">Questions</code> attached to the release. The order of the ids represents the order in which the questions will be asked.</td>
+<td>An array of the IDs of <code class="prettyprint">Questions</code> attached to the release. The order of the IDs represents the order in which the questions will be asked.</td>
 </tr>
 <tr>
 <td>request-company-name</td>
