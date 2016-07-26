@@ -1,0 +1,40 @@
+{
+  "attributes": {
+    "capacity": {
+      "description": null,
+      "type": "integer"
+    },
+    "date": {
+      "description": null,
+      "type": "date"
+    },
+    "description": {
+      "description": null,
+      "type": "text"
+    },
+    "end-time": {
+      "description": null,
+      "type": "time"
+    },
+    "name": {
+      "description": null,
+      "type": "string"
+    },
+    "private": {
+      "description": "Is it to be hidden on the event homepage and tickets or not. Default: `false`",
+      "type": "boolean"
+    },
+    "question-ids": {
+      "description": "The `Questions` to be asked to those who register for this activity. Format: An array of `Question` IDs.",
+      "type": "array"
+    },
+    "release-ids": {
+      "description": "The `Releases` that are part of the activity. Format: An array of `Release` IDs.",
+      "type": "array"
+    },
+    "start-time": {
+      "description": null,
+      "type": "time"
+    }
+  }
+}

@@ -1,0 +1,112 @@
+# Activities
+
+## Attributes
+
+Attribute | Type | Description
+--------- | ---- | -----------
+<%- data.activities.attributes.each do |name, attributes| -%>
+<%= name %> | `<%= attributes["type"] %>` | <%= attributes["description"] %>
+<%- end -%>
+
+## Get all Activities
+
+<%= partial "includes/requests/get", locals: { url: "https://api.tito.io/v2/an-account/awesome-conf/activities" } %>
+
+> The above command returns JSON structured like this:
+
+<%= partial 'includes/activities/index.json' %>
+
+This endpoint retrieves all `Activities` for the given `Event`.
+
+### HTTP Request
+
+`GET https://api.tito.io/v2/:account/:event/activities`
+
+<aside class="notice">
+Note. The attributes for each Activity have been removed from the example JSON response for readability.
+</aside>
+
+## Get a specific Activity
+
+<%= partial "includes/requests/get", locals: { url: "https://api.tito.io/v2/an-account/awesome-conf/activities/1000001" } %>
+
+> The above command returns JSON structured like this:
+
+<%= partial 'includes/activities/show.json' %>
+
+This endpoint retrieves a specific `Activity`.
+
+### HTTP Request
+
+`GET https://api.tito.io/v2/:account/:event/activities/:activity`
+
+## Creating a new Activity
+
+<%= partial "includes/requests/post", locals: {
+      url: "https://api.tito.io/v2/an-account/awesome-conf/activities",
+      parameters: {
+        data: {
+          type: "activities",
+          attributes: {
+            capactity: 100,
+            name: "Day 2 Dinner",
+            release_ids: ["conf-ticket", "workshop-ticket"]
+          }
+        }
+      }
+    } %>
+
+This endpoint creates a `Activity` on the given `Event`.
+
+### HTTP Request
+
+`POST https://api.tito.io/v2/:account/:event/activities`
+
+### Parameters
+
+Parameter | Type | Description
+--------- | ------- | -----------
+<%- data.activities.attributes.each do |name, attributes| -%>
+<%= name %> | `<%= attributes["type"] %>` | <%= attributes["description"] %>
+<%- end -%>
+
+## Updating a Activity
+
+<%= partial "includes/requests/patch", locals: {
+      url: "https://api.tito.io/v2/an-account/awesome-conf/activities/1000001",
+      parameters: {
+        data: {
+          type: "activities",
+          id: "1000001",
+          attributes: {
+            capacity: 115
+          }
+        }
+      }
+    } %>
+
+This endpoint updates a `Activity` on the given `Event`.
+
+### HTTP Request
+
+`PATCH https://api.tito.io/v2/:account/:event/activities/:activity`
+
+### Parameters
+
+Parameter | Type | Description
+--------- | ---- | -----------
+<%- data.activities.attributes.each do |name, attributes| -%>
+<%= name %> | `<%= attributes["type"] %>` | <%= attributes["description"] %>
+<%- end -%>
+
+## Deleting a Activity
+
+<%= partial "includes/requests/delete", locals: {
+      url: "https://api.tito.io/v2/an-account/awesome-conf/activities/1000001"
+    } %>
+
+This endpoint deletes a `Activity` on the given `Event`.
+
+### HTTP Request
+
+`DELETE https://api.tito.io/v2/:account/:event/activities/:activity`
