@@ -1,0 +1,92 @@
+# Check-ins
+
+## Attributes
+
+Attribute | Type | Description
+--------- | ---- | -----------
+<%- data.checkins.attributes.each do |name, attributes| -%>
+<%= name %> | `<%= attributes["type"] %>` | <%= attributes["description"] %>
+<%- end -%>
+
+## Get all Check-ins
+
+<%= partial "includes/requests/get", locals: { url: "https://api.tito.io/v2/an-account/awesome-conf/checkins" } %>
+
+> The above command returns JSON structured like this:
+
+<%= partial 'includes/checkins/index.json' %>
+
+This endpoint retrieves all `Checkins` on the given `Check-in List` and `Event`.
+
+### HTTP Request
+
+`GET https://api.tito.io/v2/:account/:event/checkin_lists/:checkin_list/checkins`
+
+<aside class="notice">
+Note. The attributes for each Checkin have been removed from the example JSON response for readability.
+</aside>
+
+## Creating a new Check-in
+
+<%= partial "includes/requests/post", locals: {
+      url: "https://api.tito.io/v2/an-account/awesome-conf/checkin_lists/awesome-conf-check-in-lists/checkins",
+      parameters: {
+        data: {
+          type: "checkins",
+          attributes: {
+            "created-at" => "2016-12-01T08:30:00"
+          },
+          relationships: {
+            "checkin-list" => {
+              data: { type: "checkin-lists", id: "awesomeconf-check-in-list" }
+            },
+            ticket: {
+              data: { type: "tickets", id: "paul-awesomeconf-ticket" }
+            }
+          }
+        }
+      }
+    } %>
+
+This endpoint creates a `Checkin` on the given `Check-in List` and `Event`.
+
+### HTTP Request
+
+`POST https://api.tito.io/v2/:account/:event/checkin_lists/:checkin_list/checkins`
+
+### Parameters
+
+Parameter | Type | Description
+--------- | ------- | -----------
+<%- data.checkins.attributes.reject { |name, attributes| name == 'quantity-used' }.each do |name, attributes| -%>
+<%= name %> | `<%= attributes["type"] %>` | <%= attributes["description"] %>
+<%- end -%>
+
+### Synchronising Check-ins with other systems
+
+> To create a `Checkin` with a given ID pass it in like with a `PATCH` request e.g.
+
+```json
+{
+  "data": {
+    "id": "12345678-f279-449f-9146-8a22214d5909",
+    "type": "checkins",
+    "attributes": { ... },
+    "relationships": { ...}
+  }
+}
+```
+
+You can also keep `Checkins` synchronised with other systems by specifying the ID they should have when creating them. The ID must be a universally unique identifier (UUID) based on the [RFC 4122](http://www.ietf.org/rfc/rfc4122.txt) standard.
+
+## Deleting a Check-in
+
+<%= partial "includes/requests/delete", locals: {
+      url: "https://api.tito.io/v2/an-account/awesome-conf/checkin_lists/awesome-conf-check-in-list/checkins/0489139c-f279-449f-9146-8a22214d5909"
+    } %>
+
+This endpoint deletes a `Checkin` on the given `Check-in List` and `Event`.
+
+### HTTP Request
+
+`DELETE https://api.tito.io/v2/:account/:event/checkin_lists/:checkin_list/checkins/:checkin`

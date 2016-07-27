@@ -1,0 +1,8 @@
+{
+  "attributes": {
+    "created-at": {
+      "description": null,
+      "type": "datetime"
+    }
+  }
+}
