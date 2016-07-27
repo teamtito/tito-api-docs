@@ -832,6 +832,155 @@ Note. The attributes for each Check-in List have been removed from the example J
 
 <p><code class="prettyprint">DELETE https://api.tito.io/v2/:account/:event/checkin_lists/:checkin_list</code></p>
 
+          <h1 id="check-ins">Check-ins</h1>
+
+<h2 id="attributes">Attributes</h2>
+
+<table><thead>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>created-at</td>
+<td><code class="prettyprint">datetime</code></td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h2 id="get-all-check-ins">Get all Check-ins</h2>
+
+<pre class="highlight shell"><code>curl --request GET <span class="se">\</span>
+  --url <span class="s1">'https://api.tito.io/v2/an-account/awesome-conf/checkins'</span> <span class="se">\</span>
+  --header <span class="s1">'Authorization: Token token=YOUR-API-KEY'</span> <span class="se">\</span>
+  --header <span class="s1">'Accept: application/vnd.api+json'</span> <span class="se">\</span>
+</code></pre>
+
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0489139c-f279-449f-9146-8a22214d5909"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"checkins"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"attributes"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="err">...</span><span class="w"> </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"self"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.tito.io/v2/an-account/awesome-conf/checkin_lists/awesome-conf-check-in-list/checkins/0489139c-f279-449f-9146-8a22214d5909"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"relationships"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"checkin-list"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"related"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.tito.io/v2/an-account/awesomeconf/checkin_lists/awesomeconf-check-in-list"</span><span class="w">
+          </span><span class="p">}</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="nt">"ticket"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"related"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.tito.io/v2/an-account/awesomeconf/tickets/paul-awesomeconf-ticket"</span><span class="w">
+          </span><span class="p">}</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"12345678-f279-449f-9146-8a22214d5909"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"checkins"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"attributes"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="err">...</span><span class="w"> </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"self"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.tito.io/v2/an-account/awesome-conf/checkin_lists/awesome-conf-check-in-list/checkins/12345678-f279-449f-9146-8a22214d5909"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"relationships"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"checkin-list"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"related"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.tito.io/v2/an-account/awesomeconf/checkin_lists/awesomeconf-check-in-list"</span><span class="w">
+          </span><span class="p">}</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="nt">"ticket"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"related"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.tito.io/v2/an-account/awesomeconf/tickets/doc-awesomeconf-ticket"</span><span class="w">
+          </span><span class="p">}</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>This endpoint retrieves all <code class="prettyprint">Checkins</code> on the given <code class="prettyprint">Check-in List</code> and <code class="prettyprint">Event</code>.</p>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">GET https://api.tito.io/v2/:account/:event/checkin_lists/:checkin_list/checkins</code></p>
+
+<aside class="notice">
+Note. The attributes for each Checkin have been removed from the example JSON response for readability.
+</aside>
+
+<h2 id="creating-a-new-check-in">Creating a new Check-in</h2>
+
+<pre class="highlight shell"><code>curl --request POST <span class="se">\</span>
+  --url <span class="s1">'https://api.tito.io/v2/an-account/awesome-conf/checkin_lists/awesome-conf-check-in-lists/checkins'</span> <span class="se">\</span>
+  --header <span class="s1">'Authorization: Token token=YOUR-API-KEY'</span> <span class="se">\</span>
+  --header <span class="s1">'Accept: application/vnd.api+json'</span> <span class="se">\</span>
+  --header <span class="s1">'Content-Type: application/json'</span>
+  --data <span class="s1">'{"data":{"type":"checkins","attributes":{"created-at":"2016-12-01T08:30:00"},"relationships":{"checkin-list":{"data":{"type":"checkin-lists","id":"awesomeconf-check-in-list"}},"ticket":{"data":{"type":"tickets","id":"paul-awesomeconf-ticket"}}}}}'</span>
+</code></pre>
+
+<p>This endpoint creates a <code class="prettyprint">Checkin</code> on the given <code class="prettyprint">Check-in List</code> and <code class="prettyprint">Event</code>.</p>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">POST https://api.tito.io/v2/:account/:event/checkin_lists/:checkin_list/checkins</code></p>
+
+<h3 id="parameters">Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>created-at</td>
+<td><code class="prettyprint">datetime</code></td>
+<td></td>
+</tr>
+</tbody></table>
+
+<h3 id="synchronising-check-ins-with-other-systems">Synchronising Check-ins with other systems</h3>
+
+<blockquote>
+<p>To create a <code class="prettyprint">Checkin</code> with a given ID pass it in like with a <code class="prettyprint">PATCH</code> request e.g.</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"12345678-f279-449f-9146-8a22214d5909"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"checkins"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"attributes"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="err">...</span><span class="w"> </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"relationships"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="err">...</span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>You can also keep <code class="prettyprint">Checkins</code> synchronised with other systems by specifying the ID they should have when creating them. The ID must be a universally unique identifier (UUID) based on the <a href="http://www.ietf.org/rfc/rfc4122.txt">RFC 4122</a> standard.</p>
+
+<h2 id="deleting-a-check-in">Deleting a Check-in</h2>
+
+<pre class="highlight shell"><code>curl --request DELETE <span class="se">\</span>
+  --url <span class="s1">'https://api.tito.io/v2/an-account/awesome-conf/checkin_lists/awesome-conf-check-in-list/checkins/0489139c-f279-449f-9146-8a22214d5909'</span> <span class="se">\</span>
+  --header <span class="s1">'Authorization: Token token=YOUR-API-KEY'</span> <span class="se">\</span>
+  --header <span class="s1">'Accept: application/vnd.api+json'</span> <span class="se">\</span>
+</code></pre>
+
+<p>This endpoint deletes a <code class="prettyprint">Checkin</code> on the given <code class="prettyprint">Check-in List</code> and <code class="prettyprint">Event</code>.</p>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">DELETE https://api.tito.io/v2/:account/:event/checkin_lists/:checkin_list/checkins/:checkin</code></p>
+
           <h1 id="discount-codes">Discount Codes</h1>
 
 <h2 id="attributes">Attributes</h2>
