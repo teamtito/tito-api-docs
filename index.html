@@ -2047,13 +2047,18 @@ Note. The attributes for each Question have been removed from the example JSON r
 </tr>
 <tr>
 <td>paid</td>
-<td><code class="prettyprint">string</code></td>
+<td><code class="prettyprint">boolean</code></td>
 <td>Is the registration paid for or not.</td>
 </tr>
 <tr>
-<td>payment-reference</td>
+<td>payment[reference]</td>
 <td><code class="prettyprint">string</code></td>
 <td></td>
+</tr>
+<tr>
+<td>payment[type]</td>
+<td><code class="prettyprint">string</code></td>
+<td><code class="prettyprint">credit_card</code>, <code class="prettyprint">manual</code> or <code class="prettyprint">redirect</code>.</td>
 </tr>
 <tr>
 <td>phone-number</td>
@@ -2063,7 +2068,7 @@ Note. The attributes for each Question have been removed from the example JSON r
 <tr>
 <td>registration-type</td>
 <td><code class="prettyprint">string</code></td>
-<td><code class="prettyprint">standard</code>, <code class="prettyprint">manual</code>, <code class="prettyprint">imported</code></td>
+<td><code class="prettyprint">standard</code>, <code class="prettyprint">manual</code> or <code class="prettyprint">imported</code>.</td>
 </tr>
 <tr>
 <td>reference</td>
@@ -2207,7 +2212,7 @@ Note. The attributes for each Registration have been removed from the example JS
       </span><span class="nt">"ip-address"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
       </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Paul Campbell"</span><span class="p">,</span><span class="w">
       </span><span class="nt">"paid"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"payment-reference"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"payment"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
       </span><span class="nt">"phone-number"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
       </span><span class="nt">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"FREE"</span><span class="p">,</span><span class="w">
       </span><span class="nt">"registration-type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"standard"</span><span class="p">,</span><span class="w">
@@ -2366,9 +2371,9 @@ Note. The attributes for each Registration have been removed from the example JS
 <td></td>
 </tr>
 <tr>
-<td>payment[method]</td>
+<td>payment[type]</td>
 <td><code class="prettyprint">String</code></td>
-<td>The method of payment for this <code class="prettyprint">Registration</code>. Options: <code class="prettyprint">credit_card</code>, <code class="prettyprint">paypal</code>. <em>Only required when payment is required.</em></td>
+<td>The method of payment for this <code class="prettyprint">Registration</code>. Options: <code class="prettyprint">credit_card</code>, <code class="prettyprint">redirect</code>. <em>Only required when payment is required.</em></td>
 </tr>
 <tr>
 <td>phone-number</td>
