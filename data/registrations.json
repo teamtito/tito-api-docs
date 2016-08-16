@@ -26,10 +26,14 @@
     },
     "paid": {
       "description": "Is the registration paid for or not.",
+      "type": "boolean"
+    },
+    "payment[reference]": {
+      "description": null,
       "type": "string"
     },
-    "payment-reference": {
-      "description": null,
+    "payment[type]": {
+      "description": "`credit_card`, `manual` or `redirect`.",
       "type": "string"
     },
     "phone-number": {
@@ -37,7 +41,7 @@
       "type": "string"
     },
     "registration-type": {
-      "description": "`standard`, `manual`, `imported`",
+      "description": "`standard`, `manual` or `imported`.",
       "type": "string"
     },
     "reference": {

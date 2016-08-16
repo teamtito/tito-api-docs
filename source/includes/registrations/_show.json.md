@@ -12,7 +12,7 @@
       "ip-address": null,
       "name": "Paul Campbell",
       "paid": null,
-      "payment-reference": null,
+      "payment": null,
       "phone-number": null,
       "reference": "FREE",
       "registration-type": "standard",
