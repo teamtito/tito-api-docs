@@ -2081,6 +2081,11 @@ Note. The attributes for each Question have been removed from the example JSON r
 <td><em>It&rsquo;s new&hellip;</em><br /><code class="prettyprint">new</code><br /><code class="prettyprint">ready</code><br /><code class="prettyprint">filling</code><br /><code class="prettyprint">redirected</code><br /><br /><em>It&rsquo;s being processed&hellip;</em><br /><code class="prettyprint">ready_to_process</code><br /><code class="prettyprint">processing</code><br /><code class="prettyprint">payment_details_stored</code><br /><code class="prettyprint">payment_charged</code><br /><br /><em>It&rsquo;s finished&hellip;</em><br /><code class="prettyprint">complete</code><br /><code class="prettyprint">incomplete</code><br /><code class="prettyprint">cancelled</code><br /><code class="prettyprint">confirmed</code><br /><code class="prettyprint">customer_cancelled</code><br /><br /><em>Something went wrong&hellip;</em><br /><code class="prettyprint">errored</code><br /><code class="prettyprint">payment_declined</code><br /><code class="prettyprint">not_fulfilled</code></td>
 </tr>
 <tr>
+<td>test-mode</td>
+<td><code class="prettyprint">boolean</code></td>
+<td>Default: <code class="prettyprint">true</code> if test mode is enabled for you or for your entire event, otherwise <code class="prettyprint">false</code>.</td>
+</tr>
+<tr>
 <td>total</td>
 <td><code class="prettyprint">decimal</code></td>
 <td></td>
@@ -2142,6 +2147,10 @@ Note. The attributes for each Question have been removed from the example JSON r
 </span></code></pre>
 
 <p>This endpoint retrieves all <code class="prettyprint">Registrations</code> for the given <code class="prettyprint">Event</code>.</p>
+
+<aside class="notice">
+Note. If test mode is enabled for you or for your entire event only <code class="prettyprint">Registrations</code> created in test mode will be retrieved.
+</aside>
 
 <h3 id="http-request">HTTP Request</h3>
 
@@ -2217,6 +2226,7 @@ Note. The attributes for each Registration have been removed from the example JS
       </span><span class="nt">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"FREE"</span><span class="p">,</span><span class="w">
       </span><span class="nt">"registration-type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"standard"</span><span class="p">,</span><span class="w">
       </span><span class="nt">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"complete"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"test-mode"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
       </span><span class="nt">"total"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="nt">"links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -2237,6 +2247,10 @@ Note. The attributes for each Registration have been removed from the example JS
 </span></code></pre>
 
 <p>This endpoint retrieves a specific <code class="prettyprint">Registration</code>.</p>
+
+<aside class="notice">
+Note. If test mode is enabled for you or for your entire event only <code class="prettyprint">Registrations</code> created in test mode will be retrieved.
+</aside>
 
 <h3 id="http-request">HTTP Request</h3>
 
@@ -2297,6 +2311,11 @@ Note. The attributes for each Registration have been removed from the example JS
 <td>quantities</td>
 <td><code class="prettyprint">Hash</code></td>
 <td>The quantity required for each <code class="prettyprint">Release</code>.<br>Format: A hash of quantities, keyed by <code class="prettyprint">Release</code> ID e.g.<br><code class="prettyprint">{ &quot;awesomeconf-ticket&quot; =&gt; 2, &quot;workshop-ticket&quot; =&gt; 1 }</code></td>
+</tr>
+<tr>
+<td>test-mode</td>
+<td><code class="prettyprint">Boolean</code></td>
+<td>Default: <code class="prettyprint">true</code> if test mode is enabled for you or for your entire event, otherwise <code class="prettyprint">false</code>.</td>
 </tr>
 </tbody></table>
 
@@ -2990,6 +3009,11 @@ Note. The attributes for each Release have been removed from the example JSON re
 <td><code class="prettyprint">boolean</code></td>
 <td>Is the ticket temporary or not. For example if a ticket needs to be assigned but is not yet confirmed e.g. a payment is pending. Default: <code class="prettyprint">false</code></td>
 </tr>
+<tr>
+<td>test-mode</td>
+<td><code class="prettyprint">boolean</code></td>
+<td>Default: <code class="prettyprint">true</code> if test mode is enabled for you or for your entire event, otherwise <code class="prettyprint">false</code>.</td>
+</tr>
 </tbody></table>
 
 <h2 id="get-all-tickets">Get all Tickets</h2>
@@ -3052,6 +3076,10 @@ Note. The attributes for each Release have been removed from the example JSON re
 
 <p>This endpoint retrieves all <code class="prettyprint">Tickets</code> for the given <code class="prettyprint">Event</code>.</p>
 
+<aside class="notice">
+Note. If test mode is enabled for you or for your entire event only <code class="prettyprint">Tickets</code> created in test mode will be retrieved.
+</aside>
+
 <h3 id="http-request">HTTP Request</h3>
 
 <p><code class="prettyprint">GET https://api.tito.io/v2/:account/:event/tickets</code></p>
@@ -3110,7 +3138,8 @@ Note. The attributes for each Ticket have been removed from the example JSON res
       </span><span class="nt">"price"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00"</span><span class="p">,</span><span class="w">
       </span><span class="nt">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"PAUL-1"</span><span class="p">,</span><span class="w">
       </span><span class="nt">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"complete"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"tags"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+      </span><span class="nt">"tags"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"test-mode"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="nt">"links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="nt">"self"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.tito.io/v2/an-account/awesome-conf/tickets/paul-awesomeconf-ticket"</span><span class="w">
@@ -3132,6 +3161,10 @@ Note. The attributes for each Ticket have been removed from the example JSON res
 </span></code></pre>
 
 <p>This endpoint retrieves a specific <code class="prettyprint">Ticket</code>.</p>
+
+<aside class="notice">
+Note. If test mode is enabled for you or for your entire event only <code class="prettyprint">Tickets</code> created in test mode will be retrieved.
+</aside>
 
 <h3 id="http-request">HTTP Request</h3>
 
@@ -3232,6 +3265,11 @@ Note. The attributes for each Ticket have been removed from the example JSON res
 <td>temporary</td>
 <td><code class="prettyprint">boolean</code></td>
 <td>Is the ticket temporary or not. For example if a ticket needs to be assigned but is not yet confirmed e.g. a payment is pending. Default: <code class="prettyprint">false</code></td>
+</tr>
+<tr>
+<td>test-mode</td>
+<td><code class="prettyprint">boolean</code></td>
+<td>Default: <code class="prettyprint">true</code> if test mode is enabled for you or for your entire event, otherwise <code class="prettyprint">false</code>.</td>
 </tr>
 </tbody></table>
 
