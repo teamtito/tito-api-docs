@@ -2148,10 +2148,6 @@ Note. The attributes for each Question have been removed from the example JSON r
 
 <p>This endpoint retrieves all <code class="prettyprint">Registrations</code> for the given <code class="prettyprint">Event</code>.</p>
 
-<aside class="notice">
-Note. If test mode is enabled for you or for your entire event only <code class="prettyprint">Registrations</code> created in test mode will be retrieved.
-</aside>
-
 <h3 id="http-request">HTTP Request</h3>
 
 <p><code class="prettyprint">GET https://api.tito.io/v2/:account/:event/registrations</code></p>
@@ -2189,6 +2185,11 @@ Note. If test mode is enabled for you or for your entire event only <code class=
 <td>filter[states]</td>
 <td>All states except <code class="prettyprint">cancelled</code></td>
 <td>A comma separated list of states to filter by. Options: <code class="prettyprint">paid</code>, <code class="prettyprint">unpaid</code>, <code class="prettyprint">complete</code>, <code class="prettyprint">confirmed</code>, <code class="prettyprint">incomplete</code>, <code class="prettyprint">cancelled</code></td>
+</tr>
+<tr>
+<td>filter[test-mode]</td>
+<td>If test mode is enabled for you or for your entire event this defaults to <code class="prettyprint">true</code>, otherwise <code class="prettyprint">false</code>.</td>
+<td>Whether to return Registrations created in test mode or not. Options: <code class="prettyprint">true</code>, <code class="prettyprint">false</code></td>
 </tr>
 </tbody></table>
 
@@ -2247,10 +2248,6 @@ Note. The attributes for each Registration have been removed from the example JS
 </span></code></pre>
 
 <p>This endpoint retrieves a specific <code class="prettyprint">Registration</code>.</p>
-
-<aside class="notice">
-Note. If test mode is enabled for you or for your entire event only <code class="prettyprint">Registrations</code> created in test mode will be retrieved.
-</aside>
 
 <h3 id="http-request">HTTP Request</h3>
 
@@ -3076,10 +3073,6 @@ Note. The attributes for each Release have been removed from the example JSON re
 
 <p>This endpoint retrieves all <code class="prettyprint">Tickets</code> for the given <code class="prettyprint">Event</code>.</p>
 
-<aside class="notice">
-Note. If test mode is enabled for you or for your entire event only <code class="prettyprint">Tickets</code> created in test mode will be retrieved.
-</aside>
-
 <h3 id="http-request">HTTP Request</h3>
 
 <p><code class="prettyprint">GET https://api.tito.io/v2/:account/:event/tickets</code></p>
@@ -3102,6 +3095,11 @@ Note. If test mode is enabled for you or for your entire event only <code class=
 <td>filter[registration]</td>
 <td></td>
 <td>To only return tickets associated with particular registrations. Format: A comma separated list of registration IDs.</td>
+</tr>
+<tr>
+<td>filter[test-mode]</td>
+<td>If test mode is enabled for you or for your entire event this defaults to <code class="prettyprint">true</code>, otherwise <code class="prettyprint">false</code>.</td>
+<td>Whether to return Tickets created in test mode or not. Options: <code class="prettyprint">true</code>, <code class="prettyprint">false</code></td>
 </tr>
 </tbody></table>
 
@@ -3161,10 +3159,6 @@ Note. The attributes for each Ticket have been removed from the example JSON res
 </span></code></pre>
 
 <p>This endpoint retrieves a specific <code class="prettyprint">Ticket</code>.</p>
-
-<aside class="notice">
-Note. If test mode is enabled for you or for your entire event only <code class="prettyprint">Tickets</code> created in test mode will be retrieved.
-</aside>
 
 <h3 id="http-request">HTTP Request</h3>
 
