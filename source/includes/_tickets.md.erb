@@ -18,6 +18,10 @@ Attribute | Type | Description
 
 This endpoint retrieves all `Tickets` for the given `Event`.
 
+<aside class="notice">
+Note. If test mode is enabled for you or for your entire event only <code class="prettyprint">Tickets</code> created in test mode will be retrieved.
+</aside>
+
 ### HTTP Request
 
 `GET https://api.tito.io/v2/:account/:event/tickets`
@@ -42,6 +46,10 @@ Note. The attributes for each Ticket have been removed from the example JSON res
 <%= partial 'includes/tickets/show.json' %>
 
 This endpoint retrieves a specific `Ticket`.
+
+<aside class="notice">
+Note. If test mode is enabled for you or for your entire event only <code class="prettyprint">Tickets</code> created in test mode will be retrieved.
+</aside>
 
 ### HTTP Request
 
@@ -114,6 +122,6 @@ This endpoint updates a `Ticket` on the given `Event`.
 
 Parameter | Type | Description
 --------- | ---- | -----------
-<%- data.tickets.attributes.each do |name, attributes| -%>
+<%- data.tickets.attributes.reject { |name, attributes| name == "test-mode" }.each do |name, attributes| -%>
 <%= name %> | `<%= attributes["type"] %>` | <%= attributes["description"] %>
 <%- end -%>

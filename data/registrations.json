@@ -52,6 +52,10 @@
       "description": "*It's new&hellip;*<br />`new`<br />`ready`<br />`filling`<br />`redirected`<br /><br />*It's being processed&hellip;*<br />`ready_to_process`<br />`processing`<br />`payment_details_stored`<br />`payment_charged`<br /><br />*It's finished&hellip;*<br />`complete`<br />`incomplete`<br />`cancelled`<br />`confirmed`<br />`customer_cancelled`<br /><br />*Something went wrong&hellip;*<br />`errored`<br />`payment_declined`<br />`not_fulfilled`",
       "type": "integer"
     },
+    "test-mode": {
+      "description": "Default: `true` if test mode is enabled for you or for your entire event, otherwise `false`.",
+      "type": "boolean"
+    },
     "total": {
       "description": null,
       "type": "decimal"

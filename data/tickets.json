@@ -43,6 +43,10 @@
     "temporary": {
       "description": "Is the ticket temporary or not. For example if a ticket needs to be assigned but is not yet confirmed e.g. a payment is pending. Default: `false`",
       "type": "boolean"
+    },
+    "test-mode": {
+      "description": "Default: `true` if test mode is enabled for you or for your entire event, otherwise `false`.",
+      "type": "boolean"
     }
   }
 }

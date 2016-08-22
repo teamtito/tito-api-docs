@@ -21,6 +21,10 @@ billing-address[<%= name %>] | `<%= attributes["type"] %>` | <%= attributes["des
 
 This endpoint retrieves all `Registrations` for the given `Event`.
 
+<aside class="notice">
+Note. If test mode is enabled for you or for your entire event only <code class="prettyprint">Registrations</code> created in test mode will be retrieved.
+</aside>
+
 ### HTTP Request
 
 `GET https://api.tito.io/v2/:account/:event/registrations`
@@ -48,6 +52,10 @@ Note. The attributes for each Registration have been removed from the example JS
 <%= partial 'includes/registrations/show.json' %>
 
 This endpoint retrieves a specific `Registration`.
+
+<aside class="notice">
+Note. If test mode is enabled for you or for your entire event only <code class="prettyprint">Registrations</code> created in test mode will be retrieved.
+</aside>
 
 ### HTTP Request
 
@@ -86,6 +94,7 @@ Parameter | Type | Description
 donations | `Hash` | The amount to donate for each `Release`.<br>Format: A hash of amounts, keyed by `Release` ID e.g.<br>`{ "workshop-ticket" => 25.00 }`
 discount-code | `String` |
 quantities | `Hash` | The quantity required for each `Release`.<br>Format: A hash of quantities, keyed by `Release` ID e.g.<br>`{ "awesomeconf-ticket" => 2, "workshop-ticket" => 1 }`
+test-mode | `Boolean` | Default: `true` if test mode is enabled for you or for your entire event, otherwise `false`.
 
 ## Updating a Registration
 

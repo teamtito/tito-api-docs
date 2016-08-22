@@ -17,6 +17,7 @@
       "reference": "FREE",
       "registration-type": "standard",
       "state": "complete",
+      "test-mode": false,
       "total": null
     },
     "links": {

@@ -16,7 +16,8 @@
       "price": "0.00",
       "reference": "PAUL-1",
       "state": "complete",
-      "tags": null
+      "tags": null,
+      "test-mode": false
     },
     "links": {
       "self": "https://api.tito.io/v2/an-account/awesome-conf/tickets/paul-awesomeconf-ticket"
