@@ -21,10 +21,6 @@ billing-address[<%= name %>] | `<%= attributes["type"] %>` | <%= attributes["des
 
 This endpoint retrieves all `Registrations` for the given `Event`.
 
-<aside class="notice">
-Note. If test mode is enabled for you or for your entire event only <code class="prettyprint">Registrations</code> created in test mode will be retrieved.
-</aside>
-
 ### HTTP Request
 
 `GET https://api.tito.io/v2/:account/:event/registrations`
@@ -38,6 +34,7 @@ filter[direction] | `desc` | The direction to sort results. Options: `asc`, `des
 filter[q] | | A search query, looks for matches on email, name, reference, discount code or slug.
 filter[sort] | `created_at` | The attribute to sort results by. Options: `created_at`, `name`, `reference`, `total`, `payment_provider`
 filter[states] | All states except `cancelled` | A comma separated list of states to filter by. Options: `paid`, `unpaid`, `complete`, `confirmed`, `incomplete`, `cancelled`
+filter[test-mode] | If test mode is enabled for you or for your entire event this defaults to `true`, otherwise `false`. | Whether to return Registrations created in test mode or not. Options: `true`, `false`
 
 <aside class="notice">
 Note. The attributes for each Registration have been removed from the example JSON response for readability.
@@ -52,10 +49,6 @@ Note. The attributes for each Registration have been removed from the example JS
 <%= partial 'includes/registrations/show.json' %>
 
 This endpoint retrieves a specific `Registration`.
-
-<aside class="notice">
-Note. If test mode is enabled for you or for your entire event only <code class="prettyprint">Registrations</code> created in test mode will be retrieved.
-</aside>
 
 ### HTTP Request
 

@@ -18,10 +18,6 @@ Attribute | Type | Description
 
 This endpoint retrieves all `Tickets` for the given `Event`.
 
-<aside class="notice">
-Note. If test mode is enabled for you or for your entire event only <code class="prettyprint">Tickets</code> created in test mode will be retrieved.
-</aside>
-
 ### HTTP Request
 
 `GET https://api.tito.io/v2/:account/:event/tickets`
@@ -32,6 +28,7 @@ Parameter | Default | Description
 --------- | ------- | -----------
 include | | A comma separated list of related resources to include. Options: `registration`, `release`
 filter[registration] | | To only return tickets associated with particular registrations. Format: A comma separated list of registration IDs.
+filter[test-mode] | If test mode is enabled for you or for your entire event this defaults to `true`, otherwise `false`. | Whether to return Tickets created in test mode or not. Options: `true`, `false`
 
 <aside class="notice">
 Note. The attributes for each Ticket have been removed from the example JSON response for readability.
@@ -46,10 +43,6 @@ Note. The attributes for each Ticket have been removed from the example JSON res
 <%= partial 'includes/tickets/show.json' %>
 
 This endpoint retrieves a specific `Ticket`.
-
-<aside class="notice">
-Note. If test mode is enabled for you or for your entire event only <code class="prettyprint">Tickets</code> created in test mode will be retrieved.
-</aside>
 
 ### HTTP Request
 
