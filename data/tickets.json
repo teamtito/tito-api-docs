@@ -29,11 +29,11 @@
       "type": "decimal"
     },
     "reference": {
-      "description": "Default: The order reference plus the index of the ticket in that order e.g. `AXBY-1`.",
+      "description": "Default: The order reference plus the index of the ticket in that order e.g. `AXBY-1`. *Readonly*.",
       "type": "string"
     },
     "state": {
-      "description": "`new`, `complete`, `incomplete`, `reminder`, `void`. Default: `new`",
+      "description": "`new`, `complete`, `incomplete`, `reminder`, `void`. Default: `new`. *Readonly*.",
       "type": "integer"
     },
     "tags": {
@@ -41,7 +41,7 @@
       "type": "string"
     },
     "temporary": {
-      "description": "Is the ticket temporary or not. For example if a ticket needs to be assigned but is not yet confirmed e.g. a payment is pending. Default: `false`",
+      "description": "Is the ticket temporary or not. For example if a ticket needs to be assigned but is not yet confirmed e.g. a payment is pending. Default: `false`. *Readonly*.",
       "type": "boolean"
     },
     "test-mode": {
