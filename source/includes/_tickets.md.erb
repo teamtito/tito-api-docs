@@ -86,7 +86,7 @@ This endpoint creates a `Ticket` on the given `Event`.
 
 Parameter | Type | Description
 --------- | ------- | -----------
-<%- data.tickets.attributes.reject { |name, attributes| ["reference", "state", "temporary"].include?(name) }.each do |name, attributes| -%>
+<%- data.tickets.attributes.reject { |name, attributes| ["number", "reference", "state", "temporary"].include?(name) }.each do |name, attributes| -%>
 <%= name %> | `<%= attributes["type"] %>` | <%= attributes["description"] %>
 <%- end -%>
 
@@ -115,6 +115,6 @@ This endpoint updates a `Ticket` on the given `Event`.
 
 Parameter | Type | Description
 --------- | ---- | -----------
-<%- data.tickets.attributes.reject { |name, attributes| ["reference", "state", "temporary", "test-mode"].include?(name) }.each do |name, attributes| -%>
+<%- data.tickets.attributes.reject { |name, attributes| ["number", "reference", "state", "temporary", "test-mode"].include?(name) }.each do |name, attributes| -%>
 <%= name %> | `<%= attributes["type"] %>` | <%= attributes["description"] %>
 <%- end -%>

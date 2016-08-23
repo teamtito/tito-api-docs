@@ -17,7 +17,7 @@
       "type": "string"
     },
     "number": {
-      "description": "Default: Starts at 1 and counts up with each ticket registered.",
+      "description": "Default: Starts at 1 and counts up with each ticket registered. *Readonly*.",
       "type": "integer"
     },
     "phone-number": {
