@@ -29,7 +29,7 @@ This endpoint retrieves all `Registrations` for the given `Event`.
 
 Parameter | Default | Description
 --------- | ------- | -----------
-include | | A comma separated list of related resources to include. Options: `tickets`
+include | | A comma separated list of related resources to include. Options: `refunds`, `tickets`
 filter[direction] | `desc` | The direction to sort results. Options: `asc`, `desc`
 filter[q] | | A search query, looks for matches on email, name, reference, discount code or slug.
 filter[sort] | `created_at` | The attribute to sort results by. Options: `created_at`, `name`, `reference`, `total`, `payment_provider`
@@ -58,7 +58,7 @@ This endpoint retrieves a specific `Registration`.
 
 Parameter | Default | Description
 --------- | ------- | -----------
-include | | A comma separated list of related resources to include. Options: `tickets`
+include | | A comma separated list of related resources to include. Options: `refunds`, `tickets`
 
 ## Creating a new Registration
 

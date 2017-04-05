@@ -40,6 +40,10 @@
       "description": null,
       "type": "string"
     },
+    "refunded": {
+      "description": "Has the registration been refunded or not. Returns `false` if it has only been partially refunded.",
+      "type": "boolean"
+    },
     "registration-type": {
       "description": "`standard`, `manual` or `imported`.",
       "type": "string"

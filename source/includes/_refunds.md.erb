@@ -1,0 +1,55 @@
+# Refunds
+
+## Attributes
+
+Attribute | Type | Description
+--------- | ---- | -----------
+<%- data.refunds.attributes.each do |name, attributes| -%>
+<%= name %> | `<%= attributes["type"] %>` | <%= attributes["description"] %>
+<%- end -%>
+
+## Get all Refunds
+
+<%= partial "includes/requests/get", locals: { url: "https://api.tito.io/v2/an-account/awesome-conf/refunds" } %>
+
+> The above command returns JSON structured like this:
+
+<%= partial 'includes/refunds/index.json' %>
+
+This endpoint retrieves all `Refunds` for the given `Event`.
+
+### HTTP Request
+
+`GET https://api.tito.io/v2/:account/:event/refunds`
+
+### Query Parameters
+
+Parameter | Default | Description
+--------- | ------- | -----------
+include | | A comma separated list of related resources to include. Options: `registration`
+filter[registration] | | To only return refunds associated with particular registrations. Format: A comma separated list of registration IDs.
+filter[test-mode] | If test mode is enabled for you or for your entire event this defaults to `true`, otherwise `false`. | Whether to return Refunds created in test mode or not. Options: `true`, `false`
+
+<aside class="notice">
+Note. The attributes for each Refund have been removed from the example JSON response for readability.
+</aside>
+
+## Get a specific Refund
+
+<%= partial "includes/requests/get", locals: { url: "https://api.tito.io/v2/an-account/awesome-conf/refunds/1001" } %>
+
+> The above command returns JSON structured like this:
+
+<%= partial 'includes/refunds/show.json' %>
+
+This endpoint retrieves a specific `Refund`.
+
+### HTTP Request
+
+`GET https://api.tito.io/v2/:account/:event/refunds/:refund`
+
+### Query Parameters
+
+Parameter | Default | Description
+--------- | ------- | -----------
+include | | A comma separated list of related resources to include. Options: `registration`
