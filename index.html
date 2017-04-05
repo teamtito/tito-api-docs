@@ -1321,9 +1321,9 @@ Note. The attributes for each Discount Code have been removed from the example J
 
           <h1 id="events">Events</h1>
 
-<p>Events are the primary object in Tito. An event is added to an <code class="prettyprint">Account</code>, and most other resources belong to an <code class="prettyprint">Event</code> object. An event URL is comprised of the combination of the <code class="prettyprint">Account</code>’s <code class="prettyprint">slug</code> and the &lsquo;Event&#39;’s <code class="prettyprint">slug</code>, for example <code class="prettyprint">https://ti.to/ultimateconf/2016</code> is composed of the base <code class="prettyprint">ti.to</code> URL, the Ultimateconf slug <code class="prettyprint">ultimateconf</code> and the specific <code class="prettyprint">Event</code> slug for the 2016 edition.</p>
+<p>Events are the primary object in Tito. An event is added to an <code class="prettyprint">Account</code>, and most other resources belong to an <code class="prettyprint">Event</code> object. An event URL is comprised of the combination of the <code class="prettyprint">Account</code>’s <code class="prettyprint">slug</code> and the &lsquo;Event&#39;’s <code class="prettyprint">slug</code>, for example <code class="prettyprint">https://ti.to/ultimateconf/2017</code> is composed of the base <code class="prettyprint">ti.to</code> URL, the Ultimateconf slug <code class="prettyprint">ultimateconf</code> and the specific <code class="prettyprint">Event</code> slug for the 2017 edition.</p>
 
-<p>The equivalent event can be looked up using a similar URL structure with the API base URL: <code class="prettyprint">https://api.tito.io/v2/ultimateconf/2016</code></p>
+<p>The equivalent event can be looked up using a similar URL structure with the API base URL: <code class="prettyprint">https://api.tito.io/v2/ultimateconf/2017</code></p>
 
 <h2 id="attributes">Attributes</h2>
 
@@ -1979,6 +1979,169 @@ Note. The attributes for each Question have been removed from the example JSON r
 
 <p><code class="prettyprint">DELETE https://api.tito.io/v2/:account/:event/questions/:question</code></p>
 
+          <h1 id="refunds">Refunds</h1>
+
+<h2 id="attributes">Attributes</h2>
+
+<table><thead>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>amount</td>
+<td><code class="prettyprint">decimal</code></td>
+<td></td>
+</tr>
+<tr>
+<td>manual</td>
+<td><code class="prettyprint">boolean</code></td>
+<td><code class="prettyprint">true</code> if it was logged in Tito after it was already processed. Default <code class="prettyprint">false</code></td>
+</tr>
+</tbody></table>
+
+<h2 id="get-all-refunds">Get all Refunds</h2>
+
+<pre class="highlight shell"><code>curl --request GET <span class="se">\</span>
+  --url <span class="s1">'https://api.tito.io/v2/an-account/awesome-conf/refunds'</span> <span class="se">\</span>
+  --header <span class="s1">'Authorization: Token token=YOUR-API-KEY'</span> <span class="se">\</span>
+  --header <span class="s1">'Accept: application/vnd.api+json'</span> <span class="se">\</span>
+</code></pre>
+
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1001"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"refunds"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"attributes"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="err">...</span><span class="w"> </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"self"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.tito.io/v2/an-account/awesome-conf/refunds/1001"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"relationships"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"registration"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"related"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.tito.io/v2/an-account/awesome-conf/registrations/paul-awesomeconf-registration"</span><span class="w">
+          </span><span class="p">}</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1002"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"refunds"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"attributes"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="err">...</span><span class="w"> </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"self"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.tito.io/v2/an-account/awesome-conf/refunds/1002"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"relationships"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"registration"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"related"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.tito.io/v2/an-account/awesome-conf/registrations/doc-awesomeconf-registration"</span><span class="w">
+          </span><span class="p">}</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>This endpoint retrieves all <code class="prettyprint">Refunds</code> for the given <code class="prettyprint">Event</code>.</p>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">GET https://api.tito.io/v2/:account/:event/refunds</code></p>
+
+<h3 id="query-parameters">Query Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>include</td>
+<td></td>
+<td>A comma separated list of related resources to include. Options: <code class="prettyprint">registration</code></td>
+</tr>
+<tr>
+<td>filter[registration]</td>
+<td></td>
+<td>To only return refunds associated with particular registrations. Format: A comma separated list of registration IDs.</td>
+</tr>
+<tr>
+<td>filter[test-mode]</td>
+<td>If test mode is enabled for you or for your entire event this defaults to <code class="prettyprint">true</code>, otherwise <code class="prettyprint">false</code>.</td>
+<td>Whether to return Refunds created in test mode or not. Options: <code class="prettyprint">true</code>, <code class="prettyprint">false</code></td>
+</tr>
+</tbody></table>
+
+<aside class="notice">
+Note. The attributes for each Refund have been removed from the example JSON response for readability.
+</aside>
+
+<h2 id="get-a-specific-refund">Get a specific Refund</h2>
+
+<pre class="highlight shell"><code>curl --request GET <span class="se">\</span>
+  --url <span class="s1">'https://api.tito.io/v2/an-account/awesome-conf/refunds/1001'</span> <span class="se">\</span>
+  --header <span class="s1">'Authorization: Token token=YOUR-API-KEY'</span> <span class="se">\</span>
+  --header <span class="s1">'Accept: application/vnd.api+json'</span> <span class="se">\</span>
+</code></pre>
+
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1001"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"refunds"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"attributes"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"amount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"99.00"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"manual"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"self"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://api.tito.io/v2/an-account/awesome-conf/refunds/1001"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"relationships"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"registration"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"related"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://api.tito.io/v2/an-account/awesome-conf/registrations/paul-awesomeconf-registration"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>This endpoint retrieves a specific <code class="prettyprint">Refund</code>.</p>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">GET https://api.tito.io/v2/:account/:event/refunds/:refund</code></p>
+
+<h3 id="query-parameters">Query Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>include</td>
+<td></td>
+<td>A comma separated list of related resources to include. Options: <code class="prettyprint">registration</code></td>
+</tr>
+</tbody></table>
+
           <h1 id="registrations">Registrations</h1>
 
 <h2 id="attributes">Attributes</h2>
@@ -2064,6 +2227,11 @@ Note. The attributes for each Question have been removed from the example JSON r
 <td>phone-number</td>
 <td><code class="prettyprint">string</code></td>
 <td></td>
+</tr>
+<tr>
+<td>refunded</td>
+<td><code class="prettyprint">boolean</code></td>
+<td>Has the registration been refunded or not. Returns <code class="prettyprint">false</code> if it has only been partially refunded.</td>
 </tr>
 <tr>
 <td>registration-type</td>
@@ -2164,7 +2332,7 @@ Note. The attributes for each Question have been removed from the example JSON r
 <tr>
 <td>include</td>
 <td></td>
-<td>A comma separated list of related resources to include. Options: <code class="prettyprint">tickets</code></td>
+<td>A comma separated list of related resources to include. Options: <code class="prettyprint">refunds</code>, <code class="prettyprint">tickets</code></td>
 </tr>
 <tr>
 <td>filter[direction]</td>
@@ -2265,7 +2433,7 @@ Note. The attributes for each Registration have been removed from the example JS
 <tr>
 <td>include</td>
 <td></td>
-<td>A comma separated list of related resources to include. Options: <code class="prettyprint">tickets</code></td>
+<td>A comma separated list of related resources to include. Options: <code class="prettyprint">refunds</code>, <code class="prettyprint">tickets</code></td>
 </tr>
 </tbody></table>
 
