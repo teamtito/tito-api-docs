@@ -4,6 +4,10 @@
       "description": "",
       "type": "decimal"
     },
+    "created-at": {
+      "description": "",
+      "type": "datetime"
+    },
     "manual": {
       "description": "`true` if it was logged in Tito after it was already processed. Default `false`",
       "type": "boolean"

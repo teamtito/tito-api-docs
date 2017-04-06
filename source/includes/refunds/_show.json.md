@@ -5,6 +5,7 @@
     "type": "refunds",
     "attributes": {
       "amount": "99.00",
+      "created-at": "2017-04-06T09:06:07.000Z",
       "manual": false
     },
     "links": {
