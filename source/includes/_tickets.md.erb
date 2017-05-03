@@ -89,6 +89,7 @@ Parameter | Type | Description
 <%- data.tickets.attributes.reject { |name, attributes| ["number", "reference", "state", "temporary"].include?(name) }.each do |name, attributes| -%>
 <%= name %> | `<%= attributes["type"] %>` | <%= attributes["description"] %>
 <%- end -%>
+notify | `boolean` | Email the ticket or not. Default `false`.
 
 ## Updating a Ticket
 
