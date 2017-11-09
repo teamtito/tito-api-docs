@@ -40,6 +40,10 @@
       "description": null,
       "type": "date"
     },
+    "test-mode": {
+      "description": "Is the event in test mode or not.",
+      "type": "boolean"
+    },
     "title": {
       "description": null,
       "type": "string"

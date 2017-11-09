@@ -14,6 +14,7 @@
       "private": false,
       "slug": null,
       "start-date": null,
+      "test-mode": false,
       "title": null
     },
     "links": {
