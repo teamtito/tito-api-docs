@@ -48,6 +48,10 @@
       "description": "The number of tickets available.",
       "type": "integer"
     },
+    "quantity-sold": {
+      "description": "The number of tickets registered.",
+      "type": "integer"
+    },
     "question-ids": {
       "description": "An array of the IDs of `Questions` attached to the release. The order of the IDs represents the order in which the questions will be asked.",
       "type": "array"
