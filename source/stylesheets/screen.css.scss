@@ -626,3 +626,29 @@ html, body {
 .highlight, .highlight .w {
   background-color: $code-bg;
 }
+
+.api-warning {
+  align-items: center;
+  background: #e32822;
+  color: #fff;
+  display: flex;
+  font-size: 16px;
+  justify-content: center;
+  line-height: 1.4;
+  padding: 20px 0;
+  position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  width: 100%;
+  z-index: 99;
+  p {
+    margin: 0;
+    padding: 10px;
+    text-align: center;
+  }
+  a {
+    color: #fff;
+    white-space: nowrap;
+  }
+}
